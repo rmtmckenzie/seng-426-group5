@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -60,20 +61,32 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
         try {
 //            runMethod(getMethod(c, "loadUserInfo"), frame);
             
-            assertNull("Registration information should not be null.",
-                    getAttrDef("registeredUser"));
-            
-            assertTrue("Login Button should be enabled.",
-                    ((JButton)getAttrDef("loadUserInfo")).isEnabled());
-            
             assertFalse("Password field should not be enabled.", 
                     ((JPasswordField)getAttrDef("jTPassword")).isEnabled());
             
             assertFalse("Username field should not be enabled.", 
                     ((JTextField)getAttrDef("jTUserName")).isEnabled());
+                        
+            assertFalse("Login Button should not be enabled.",
+                    ((JButton)getAttrDef("loadUserInfo")).isEnabled());
             
             assertTrue("Configure button should be enabled.",
                     ((JButton)getAttrDef("jBConfigure")).isEnabled());
+            
+            assertFalse("Send Cheque button should not be enabled.",
+                    ((JButton)getAttrDef("jBSendCheque")).isEnabled());
+            
+            assertFalse("E-Banking button should not be enabled.",
+                    ((JButton)getAttrDef("jBEBanking")).isEnabled());
+            
+            assertFalse("Received Cheque button should not be enabled.",
+                    ((JButton)getAttrDef("jBReceivedCheque")).isEnabled());
+            
+            assertFalse("Draw Cheque button should not be enabled.",
+                    ((JButton)getAttrDef("jBDrawCheque")).isEnabled());
+            
+            assertNull("Registration information should not be null.",
+                    getAttrDef("registeredUser"));
             
             assertTrue("ActivationNeed should be true.", 
                     (Boolean)getAttrDef("activationNeed"));
