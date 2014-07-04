@@ -1,4 +1,10 @@
+# Class Files #
 *.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -12,6 +18,23 @@
 hs_err_pid*
 
 */build/*
+*.epc
 *.edc
-*/nbproject/*
+
+# NetBeans specific #
+The\ e-Cheque\ Client/nbproject/private/
+The\ e-Cheque\ Client/build/
+The\ e-Cheque\ Client/nbbuild/
+The\ e-Cheque\ Client/dist/
+The\ e-Cheque\ Client/nbdist/
+The\ e-Cheque\ Client/nbactions.xml
+The\ e-Cheque\ Client/nb-configuration.xml
+
+e-Cheque\ Bank\ Side/nbproject/private/
+e-Cheque\ Bank\ Side/build/
+e-Cheque\ Bank\ Side/nbbuild/
+e-Cheque\ Bank\ Side/dist/
+e-Cheque\ Bank\ Side/nbdist/
+e-Cheque\ Bank\ Side/nbactions.xml
+e-Cheque\ Bank\ Side/nb-configuration.xml
 
