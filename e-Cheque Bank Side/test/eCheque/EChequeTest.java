@@ -190,16 +190,16 @@ public class EChequeTest {
 		assertNull(eCheque.getbanksignature());
 		
 		eCheque.setbanksignature(nullByte);
-		assertEquals(nullByte, eCheque.getbanksignature());
+		assertArrayEquals(nullByte, eCheque.getbanksignature());
 
 		eCheque.setbanksignature(zeroByte);
-		assertEquals(zeroByte, eCheque.getbanksignature());
+		assertArrayEquals(zeroByte, eCheque.getbanksignature());
 		
 		eCheque.setbanksignature(maxByte);
-		assertEquals(maxByte, eCheque.getbanksignature());
+		assertArrayEquals(maxByte, eCheque.getbanksignature());
 
 		eCheque.setbanksignature(zeroAndMaxBytes);
-		assertEquals(zeroAndMaxBytes, eCheque.getbanksignature());
+		assertArrayEquals(zeroAndMaxBytes, eCheque.getbanksignature());
 	}
 
 	/**
@@ -211,15 +211,15 @@ public class EChequeTest {
 		assertNull(eCheque.getdrawersiganure());
 		
 		eCheque.setdrawersiganure(nullByte);
-		assertEquals(nullByte, eCheque.getdrawersiganure());
+		assertArrayEquals(nullByte, eCheque.getdrawersiganure());
 
 		eCheque.setdrawersiganure(zeroByte);
-		assertEquals(zeroByte, eCheque.getdrawersiganure());
+		assertArrayEquals(zeroByte, eCheque.getdrawersiganure());
 		
 		eCheque.setdrawersiganure(maxByte);
-		assertEquals(maxByte, eCheque.getdrawersiganure());
+		assertArrayEquals(maxByte, eCheque.getdrawersiganure());
 
 		eCheque.setdrawersiganure(zeroAndMaxBytes);
-		assertEquals(zeroAndMaxBytes, eCheque.getdrawersiganure());
+		assertArrayEquals(zeroAndMaxBytes, eCheque.getdrawersiganure());
 	}
 }
