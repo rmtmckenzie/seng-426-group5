@@ -45,6 +45,8 @@ public class EChequeIOTest {
 		eChequeToSave.setearnday(earndayVariable);
 		eChequeToSave.setbanksignature(banksignatureVariable);
 		eChequeToSave.setdrawersiganure(drawersiganureVariable);
+
+		eChequeIO.savecheque(eChequeToSave, eChequeFileName);
 	}
 
 	@Test
