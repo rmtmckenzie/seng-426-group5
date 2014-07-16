@@ -112,7 +112,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
             
             f = c.getDeclaredField("registeredUser");
             f.setAccessible(true);
-            EChequeRegisteration reg = (EChequeRegisteration) f.get(frame);
+            EChequeRegistration reg = (EChequeRegistration) f.get(frame);
             assertNotNull("Registration information should not be null.",reg);
             
             f = c.getDeclaredField("jBActivation");

@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class EChequeRegisterationTest {
 
-	static EChequeRegisteration eChequeRegisteration;
+	static EChequeRegistration eChequeRegisteration;
 
 	final String nullString = null;
 	final String emptyString = "";
@@ -33,11 +33,11 @@ public class EChequeRegisterationTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		eChequeRegisteration = new EChequeRegisteration();
+		eChequeRegisteration = new EChequeRegistration();
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#EChequeRegisteration()}.
+	 * Test method for {@link eCheque.EChequeRegistration#EChequeRegisteration()}.
 	 */
 	@Test
 	public void testEChequeRegisteration() {
@@ -45,8 +45,8 @@ public class EChequeRegisterationTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#getBankName()}.
-	 * Test method for {@link eCheque.EChequeRegisteration#setBankName(java.lang.String)}.
+	 * Test method for {@link eCheque.EChequeRegistration#getBankName()}.
+	 * Test method for {@link eCheque.EChequeRegistration#setBankName(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetBankName() {
@@ -60,8 +60,8 @@ public class EChequeRegisterationTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#getBankAddress()}.
-	 * Test method for {@link eCheque.EChequeRegisteration#setBankAddress(java.lang.String)}.
+	 * Test method for {@link eCheque.EChequeRegistration#getBankAddress()}.
+	 * Test method for {@link eCheque.EChequeRegistration#setBankAddress(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetBankAddress() {
@@ -75,8 +75,8 @@ public class EChequeRegisterationTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#getAccountNumber()}.
-	 * Test method for {@link eCheque.EChequeRegisteration#setAccountNumber(java.lang.String)}.
+	 * Test method for {@link eCheque.EChequeRegistration#getAccountNumber()}.
+	 * Test method for {@link eCheque.EChequeRegistration#setAccountNumber(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetAccountNumber() {
@@ -90,8 +90,8 @@ public class EChequeRegisterationTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#getClientName()}.
-	 * Test method for {@link eCheque.EChequeRegisteration#setClientName(java.lang.String)}.
+	 * Test method for {@link eCheque.EChequeRegistration#getClientName()}.
+	 * Test method for {@link eCheque.EChequeRegistration#setClientName(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetClientName() {
@@ -105,8 +105,8 @@ public class EChequeRegisterationTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#getEWalletLoaction()}.
-	 * Test method for {@link eCheque.EChequeRegisteration#setEWalletLoaction(java.lang.String)}.
+	 * Test method for {@link eCheque.EChequeRegistration#getEWalletLoaction()}.
+	 * Test method for {@link eCheque.EChequeRegistration#setEWalletLoaction(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetEWalletLoaction() {
@@ -120,8 +120,8 @@ public class EChequeRegisterationTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#getUsername()}.
-	 * Test method for {@link eCheque.EChequeRegisteration#setUsername(int)}.
+	 * Test method for {@link eCheque.EChequeRegistration#getUsername()}.
+	 * Test method for {@link eCheque.EChequeRegistration#setUsername(int)}.
 	 */
 	@Test
 	public void testGetAndSetUsername() {
@@ -144,8 +144,8 @@ public class EChequeRegisterationTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.EChequeRegisteration#getPasword()}.
-	 * Test method for {@link eCheque.EChequeRegisteration#setPasword(int)}.
+	 * Test method for {@link eCheque.EChequeRegistration#getPasword()}.
+	 * Test method for {@link eCheque.EChequeRegistration#setPasword(int)}.
 	 */
 	@Test
 	public void testGetAndSetPasword() {

@@ -21,10 +21,10 @@ public class EBankingJFrame extends javax.swing.JFrame {
     
     private String chequePath;
     private boolean selectChequeFlag;
-    private EChequeRegisteration registerData;
+    private EChequeRegistration registerData;
     private ECheque depositCheque;
     /** Creates new form EBankingJFrame */
-    public EBankingJFrame(EChequeRegisteration registerdUser) {
+    public EBankingJFrame(EChequeRegistration registerdUser) {
          try{
             //TrendyLookAndFeel tlf = new TrendyLookAndFeel();
             //tlf.setCurrentTheme( new com.Trendy.swing.plaf.Themes.TrendyOrangeTheme());

@@ -35,7 +35,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 	private SendChequeJFrame sendChequeWindow;
 	private ReceiveChequeJFrame receiveChequeWindow;
 	// private variables
-	private EChequeRegisteration registeredUser;
+	private EChequeRegistration registeredUser;
 	private String userName;
 	private String passTemp;
 	//private key
@@ -428,11 +428,11 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 		try {
 			// Set a default blank user, so that when we create the othe JFrames
 			// we still have a user to pass to them.
-			registeredUser = new EChequeRegisteration();
+			registeredUser = new EChequeRegistration();
 
 			// Try to read in the registeredUser from "Config.epc"
 			ObjectInputStream readObj = new ObjectInputStream(new FileInputStream("Config.epc"));
-			registeredUser = (EChequeRegisteration) readObj.readObject();
+			registeredUser = (EChequeRegistration) readObj.readObject();
 
 			// If all goes well, then enable the login section.			
 			enableLoginSection(true);

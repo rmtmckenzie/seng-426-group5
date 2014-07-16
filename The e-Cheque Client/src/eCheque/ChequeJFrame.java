@@ -34,13 +34,13 @@ import javax.swing.JFileChooser;
 public class ChequeJFrame extends javax.swing.JFrame {
     
     /** Creates new form ChequeJFrame */
-    private EChequeRegisteration eChequeReg;
+    private EChequeRegistration eChequeReg;
     private boolean newChequeFlag;
     private boolean loadChequeFlag = false;
     private String signPass;
     private ECheque oldCheque;
     
-    public ChequeJFrame(EChequeRegisteration registerUser) {
+    public ChequeJFrame(EChequeRegistration registerUser) {
         try{
             //TrendyLookAndFeel tlf = new TrendyLookAndFeel();
             //tlf.setCurrentTheme( new com.Trendy.swing.plaf.Themes.TrendyOrangeTheme());
