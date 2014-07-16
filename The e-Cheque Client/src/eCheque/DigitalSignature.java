@@ -33,9 +33,9 @@ public class DigitalSignature {
 
 	// this function is used to verify the signature to cheque data by RSA algorithm
 	public boolean verifySignature(byte[] messagesign, String message, PublicKey pubKey) throws Exception {
-		Signature veryMessage = Signature.getInstance("SHA1withRSA");
-		veryMessage.initVerify(pubKey);
-		veryMessage.update(message.getBytes());
-		return (!veryMessage.verify(messagesign));
+		Signature verifyMessage = Signature.getInstance("SHA1withRSA");
+		verifyMessage.initVerify(pubKey);
+		verifyMessage.update(message.getBytes());
+		return (!verifyMessage.verify(messagesign));
 	}
 }
