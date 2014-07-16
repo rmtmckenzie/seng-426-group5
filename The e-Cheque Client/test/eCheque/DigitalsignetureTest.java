@@ -17,10 +17,10 @@ public class DigitalsignetureTest {
 			e1.printStackTrace();
 		}
 		
-		Digitalsigneture ds = new Digitalsigneture();
+		DigitalSignature ds = new DigitalSignature();
 		byte[] crypt = null;
 		try {
-			crypt = ds.signeture("Hello World", keyp.getPrivate());
+			crypt = ds.signature("Hello World", keyp.getPrivate());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,10 +46,10 @@ public class DigitalsignetureTest {
 			e1.printStackTrace();
 		}
 		
-		Digitalsigneture ds = new Digitalsigneture();
+		DigitalSignature ds = new DigitalSignature();
 		byte[] crypt = null;
 		try {
-			crypt = ds.signeture("Hello", keyp.getPrivate());
+			crypt = ds.signature("Hello", keyp.getPrivate());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

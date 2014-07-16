@@ -485,7 +485,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
             DigitalCertificateIO readDC = new DigitalCertificateIO();
            
             //Create a Digital signature object.
-            Digitalsigneture verfiy = new Digitalsigneture();
+            DigitalSignature verfiy = new DigitalSignature();
               
             
             try{
@@ -621,8 +621,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
                                    
                                    // get cheque reference string and sign it.
                                    String chequeRef = ChequeReferenceString(chequeObj);
-                                   Digitalsigneture digitalSign = new Digitalsigneture();
-                                   chequeObj.setdrawersiganure(digitalSign.signeture(chequeRef,privKey));
+                                   DigitalSignature digitalSign = new DigitalSignature();
+                                   chequeObj.setdrawersiganure(digitalSign.signature(chequeRef,privKey));
                                    JOptionPane.showMessageDialog(null,"Sign Complete");
                                    
                                    //Save the cheque after you sign it

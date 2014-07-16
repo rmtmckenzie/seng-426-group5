@@ -129,7 +129,7 @@ private PrivateKey privKey;
             out.close();
            
             // verify the cheque siganture using the sender public key.
-            Digitalsigneture digitalSign = new Digitalsigneture();
+            DigitalSignature digitalSign = new DigitalSignature();
             
             // load decrypted chequeObject.
             EChequeIO readChq = new EChequeIO();
