@@ -89,9 +89,10 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
       jTPassword = new javax.swing.JPasswordField();
       jLabel1 = new javax.swing.JLabel();
       jLabel2 = new javax.swing.JLabel();
-      jBActivaton = new javax.swing.JButton();
-      jBConfigure = new javax.swing.JButton();
+      jBActivation = new javax.swing.JButton();
+      jLabel3 = new javax.swing.JLabel();
       jPanel3 = new javax.swing.JPanel();
+      jBConfigure = new javax.swing.JButton();
       jBReceivedCheque = new javax.swing.JButton();
       jBEBanking = new javax.swing.JButton();
       jBSendCheque = new javax.swing.JButton();
@@ -102,7 +103,6 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
       setResizable(false);
 
       jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "e-Cheque Payment ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
-      jPanel1.setLayout(new java.awt.CardLayout());
 
       jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Welcome e-Cheque Client", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
@@ -112,18 +112,10 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 
       jLabel2.setText("Password");
 
-      jBActivaton.setText("Log in");
-      jBActivaton.addMouseListener(new java.awt.event.MouseAdapter() {
+      jBActivation.setText("Log in");
+      jBActivation.addMouseListener(new java.awt.event.MouseAdapter() {
          public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jBActivatonMouseClicked(evt);
-         }
-      });
-
-      jBConfigure.setText("Configure");
-      jBConfigure.setToolTipText("System Configuration");
-      jBConfigure.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jBConfigureActionPerformed(evt);
+            jBActivationMouseClicked(evt);
          }
       });
 
@@ -136,18 +128,19 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
             .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                .add(jPanel4Layout.createSequentialGroup()
                   .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                     .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                  .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                     .add(jPanel4Layout.createSequentialGroup()
+                        .add(jLabel2)
+                        .add(18, 18, 18))
+                     .add(jPanel4Layout.createSequentialGroup()
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
                   .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                     .add(jTUserName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                     .add(jTPassword)))
+                     .add(jTUserName)
+                     .add(jTPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                  .addContainerGap(26, Short.MAX_VALUE))
                .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
-                  .add(0, 89, Short.MAX_VALUE)
-                  .add(jBConfigure, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(18, 18, 18)
-                  .add(jBActivaton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 81, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap())
+                  .add(jBActivation, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 81, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(70, 70, 70))))
       );
       jPanel4Layout.setVerticalGroup(
          jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -160,34 +153,44 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
             .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                .add(jLabel2)
                .add(jTPassword, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-               .add(jBActivaton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .add(jBConfigure, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 12, Short.MAX_VALUE)
+            .add(jBActivation)
+            .addContainerGap())
       );
+
+      jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/UserLogo.jpg"))); // NOI18N
 
       org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
       jPanel2.setLayout(jPanel2Layout);
       jPanel2Layout.setHorizontalGroup(
          jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
          .add(jPanel2Layout.createSequentialGroup()
-            .add(25, 25, 25)
+            .addContainerGap()
             .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(15, Short.MAX_VALUE))
       );
       jPanel2Layout.setVerticalGroup(
          jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
          .add(jPanel2Layout.createSequentialGroup()
-            .addContainerGap()
-            .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(24, Short.MAX_VALUE))
+            .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+               .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+               .add(jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+            .addContainerGap())
       );
-
-      jPanel1.add(jPanel2, "card2");
 
       jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GO TO:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
-      jBReceivedCheque.setText("Receive Cheques");
+      jBConfigure.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/Config.jpg"))); // NOI18N
+      jBConfigure.setToolTipText("System Configuration");
+      jBConfigure.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jBConfigureActionPerformed(evt);
+         }
+      });
+
+      jBReceivedCheque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/Send&Receivejpg.jpg"))); // NOI18N
       jBReceivedCheque.setToolTipText("Receive Cheque");
       jBReceivedCheque.addMouseListener(new java.awt.event.MouseAdapter() {
          public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -195,7 +198,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
          }
       });
 
-      jBEBanking.setText("E-Banking");
+      jBEBanking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/E-Banking.jpg"))); // NOI18N
       jBEBanking.setToolTipText("E-Banking");
       jBEBanking.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +206,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
          }
       });
 
-      jBSendCheque.setText("Send Cheque");
+      jBSendCheque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/Send&Receivejpg.jpg"))); // NOI18N
       jBSendCheque.setToolTipText("Send Cheque");
       jBSendCheque.addMouseListener(new java.awt.event.MouseAdapter() {
          public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -211,7 +214,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
          }
       });
 
-      jBDrawCheque.setText("Create an E-Cheque");
+      jBDrawCheque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/Draw.jpg"))); // NOI18N
       jBDrawCheque.setToolTipText("e-Cheque Tools");
       jBDrawCheque.addMouseListener(new java.awt.event.MouseAdapter() {
          public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -224,48 +227,69 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
       jPanel3Layout.setHorizontalGroup(
          jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
          .add(jPanel3Layout.createSequentialGroup()
-            .add(25, 25, 25)
-            .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-               .add(jBReceivedCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-               .add(jBDrawCheque))
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 53, Short.MAX_VALUE)
-            .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-               .add(jBEBanking, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-               .add(jBSendCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(20, 20, 20))
+            .addContainerGap()
+            .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+               .add(jBEBanking, 0, 0, Short.MAX_VALUE)
+               .add(jBSendCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, Short.MAX_VALUE))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 16, Short.MAX_VALUE)
+            .add(jBConfigure, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+               .add(jBReceivedCheque, 0, 0, Short.MAX_VALUE)
+               .add(jBDrawCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 121, Short.MAX_VALUE))
+            .addContainerGap())
       );
       jPanel3Layout.setVerticalGroup(
          jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
          .add(jPanel3Layout.createSequentialGroup()
-            .addContainerGap(24, Short.MAX_VALUE)
             .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-               .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
-                  .add(jBDrawCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                  .add(jBReceivedCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(26, 26, 26))
-               .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
-                  .add(jBEBanking, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                  .add(jBSendCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(27, 27, 27))))
+               .add(jPanel3Layout.createSequentialGroup()
+                  .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                     .add(jBReceivedCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                     .add(jBSendCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                  .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                  .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                     .add(jBEBanking, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                     .add(jBDrawCheque, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
+               .add(jPanel3Layout.createSequentialGroup()
+                  .add(61, 61, 61)
+                  .add(jBConfigure, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 128, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap())
       );
 
-      jPanel1.add(jPanel3, "card3");
-      jPanel3.getAccessibleContext().setAccessibleName("");
+      org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+      jPanel1.setLayout(jPanel1Layout);
+      jPanel1Layout.setHorizontalGroup(
+         jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+         .add(jPanel3, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      );
+      jPanel1Layout.setVerticalGroup(
+         jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+         .add(jPanel1Layout.createSequentialGroup()
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
+      );
 
       org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
          layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+            .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+         .add(layout.createSequentialGroup()
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
       );
 
-      setSize(new java.awt.Dimension(400, 248));
+      setSize(new java.awt.Dimension(465, 541));
       setLocationRelativeTo(null);
    }// </editor-fold>//GEN-END:initComponents
 
@@ -310,8 +334,8 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
       eChqueConfigureWindow.setVisible(true);
    }//GEN-LAST:event_jBConfigureActionPerformed
 
-   private void jBActivatonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBActivatonMouseClicked
-      if(!jBActivaton.isEnabled()){return;}
+   private void jBActivationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBActivationMouseClicked
+      if(!jBActivation.isEnabled()){return;}
 
       if (!tryToLogin()) {
          return;
@@ -338,6 +362,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Welcome " + registeredUser.getClientName(), "Welcome Message", JOptionPane.INFORMATION_MESSAGE);
 
             // You have logged-in, therefore disable the configure? and login pages?
+				jBConfigure.setEnabled(false);
             enableLoginSection(false);
             // go to the other layout
             CardLayout card = (CardLayout)(jPanel1.getLayout());
@@ -349,7 +374,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
       } catch (Exception exp) {
          JOptionPane.showMessageDialog(null, "One of your security key is invaild");
       }
-   }//GEN-LAST:event_jBActivatonMouseClicked
+   }//GEN-LAST:event_jBActivationMouseClicked
 
 	/**
 	 * Private method used to attempt login. This will mutate the passTemp and
@@ -415,7 +440,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 	}
 
 	private void enableLoginSection(boolean value) {
-		jBActivaton.setEnabled(value);
+		jBActivation.setEnabled(value);
 		jTPassword.setEnabled(value);
 		jTUserName.setEnabled(value);
 	}
@@ -430,7 +455,8 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 		try {
 			// Set a default blank user, so that when we create the othe JFrames
 			// we still have a user to pass to them.
-			registeredUser = new EChequeRegistration();
+			//registeredUser = new EChequeRegistration();
+			registeredUser = null;
 
 			// Try to read in the registeredUser from "Config.epc"
 			ObjectInputStream readObj = new ObjectInputStream(new FileInputStream("Config.epc"));
@@ -438,16 +464,13 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 
 			// If all goes well, then enable the login section.			
 			enableLoginSection(true);
+			jBConfigure.setEnabled(false);
 			
 		} catch (IOException exp) {
 			//JOptionPane.showMessageDialog(null, "Your e-Cheque System is not Configured Yet\nYou have to configure it first", "Please Register.",JOptionPane.INFORMATION_MESSAGE);
 			JOptionPane.showMessageDialog(null, "Please configure an account before using the e-cheque client.", "Please configure the system.", JOptionPane.INFORMATION_MESSAGE);
 			// diable the login section, until 						
-			enableLoginSection(false);						
-			//jBConfigure.setEnabled(true);			
-			//jTPassword.setEnabled(false);
-			//jBActivaton.setEnabled(true);
-			//jTUserName.setEnabled(false);			
+			enableLoginSection(false);			
 		} catch (ClassNotFoundException exp) {
 			exp.printStackTrace();
 		}
@@ -466,7 +489,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 		});
 	}
    // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JButton jBActivaton;
+   private javax.swing.JButton jBActivation;
    private javax.swing.JButton jBConfigure;
    private javax.swing.JButton jBDrawCheque;
    private javax.swing.JButton jBEBanking;
@@ -474,6 +497,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
    private javax.swing.JButton jBSendCheque;
    private javax.swing.JLabel jLabel1;
    private javax.swing.JLabel jLabel2;
+   private javax.swing.JLabel jLabel3;
    private javax.swing.JPanel jPanel1;
    private javax.swing.JPanel jPanel2;
    private javax.swing.JPanel jPanel3;

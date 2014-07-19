@@ -56,7 +56,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
     
     @Test
     public void testNoLoadUserInfo() {
-        ElectronicChequeJFrame frame = new ElectronicChequeJFrame();
+        ElectronicChequeJFrame frame = new ElectronicChequeJFrame();		  
         setDefaultObject(frame);
         try {
 //            runMethod(getMethod(c, "loadUserInfo"), frame);
@@ -68,7 +68,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
                     ((JTextField)getAttrDef("jTUserName")).isEnabled());
                         
             assertFalse("Login Button should not be enabled.",
-                    ((JButton)getAttrDef("loadUserInfo")).isEnabled());
+                    ((JButton)getAttrDef("jBActivation")).isEnabled());
             
             assertTrue("Configure button should be enabled.",
                     ((JButton)getAttrDef("jBConfigure")).isEnabled());
@@ -88,8 +88,8 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
             assertNull("Registration information should not be null.",
                     getAttrDef("registeredUser"));
             
-            assertTrue("ActivationNeed should be true.", 
-                    (Boolean)getAttrDef("activationNeed"));
+            assertFalse("ActivationNeed should be true.", 
+                    (Boolean)getAttrDef("isActivated"));
 
         } catch (NoSuchFieldException e) {
             fail("Field not found: "+e.getMessage());
@@ -106,7 +106,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
         Field f;
         
         try {
-            Method method = c.getDeclaredMethod("loadUserInfo", Void.class);
+            Method method = c.getDeclaredMethod("loadUserInfo");				
             method.setAccessible(true);
             method.invoke(frame);
             
@@ -135,7 +135,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
             b = (JButton) f.get(frame);
             assertFalse("Configure button should not be enabled", b.isEnabled());
                     
-            f = c.getDeclaredField("activationNeed");
+            f = c.getDeclaredField("isActivated");
             f.setAccessible(false);
             boolean ac = (Boolean) f.get(frame);
             assertFalse("Activation need should be false", ac);
@@ -159,9 +159,8 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
         System.out.println("main");
         String[] args = null;
         ElectronicChequeJFrame.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        
+        // TODO review the generated test code and remove the default call to fail.		  
+        //fail("The test case is a prototype.");        
     }
     
 }
