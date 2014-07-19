@@ -19,17 +19,17 @@ import javax.swing.JOptionPane;
  */
 public class BankSever implements Runnable{
     private ServerSocket serverSocket;
+	 private volatile boolean done  = false;
+	 
     /** Creates a new instance of BankSever */
-    public BankSever() throws IOException{
-        
+    public BankSever() throws IOException{        
         serverSocket = new ServerSocket(8189);
     }
     
     
     public void run(){
         try{
-            while(true){
-            
+            while(!done){            
                 Socket incoming = serverSocket.accept();
                 Runnable chequeServer = new Echqueserver(incoming);
                 Thread bankThreading = new Thread(chequeServer);
@@ -43,4 +43,7 @@ public class BankSever implements Runnable{
         
     }
     
+	 public void shutdown(){
+		 done = true;
+	 }
 }

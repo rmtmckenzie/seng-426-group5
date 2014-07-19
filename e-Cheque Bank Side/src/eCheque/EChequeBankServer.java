@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class EChequeBankServer extends javax.swing.JFrame {
 
 	private boolean serverStartFlag;
-	private boolean isThreadAlreadySetup;
+	private BankSever runBank;	
 	private Thread bankServerThread;
 
 	/**
@@ -119,15 +119,16 @@ public class EChequeBankServer extends javax.swing.JFrame {
 
 		 if (serverStartFlag) {
 			 try {
-				 JOptionPane.showMessageDialog(null, "The server is going to shutdown (10 secs).\nThis will close the application.", "System Information", JOptionPane.INFORMATION_MESSAGE);
+				 JOptionPane.showMessageDialog(null, "The server is going to shutdown (5 secs).\nThis will close the application.", "System Information", JOptionPane.INFORMATION_MESSAGE);
 				 //jTBankShell.append(">> The server is shutting down in 10 secs...\n");				 
-				 Thread.sleep(10000);
+				 runBank.shutdown();				 
+				 Thread.sleep(5000);				 
 				 System.exit(0);
-			 } catch (Exception e) {
+			 } catch (Exception exp) {
+				 jTBankShell.append(">> Network Error: " + exp.getMessage() + ".\n");				 
 			 }
 		 } else {
 			 jTBankShell.append(">> Server is not running.\n");
-			 //JOptionPane.showMessageDialog(null, "The Server is not working", "System Information", JOptionPane.INFORMATION_MESSAGE);
 		 }
     }//GEN-LAST:event_jBStopMouseClicked
 
@@ -137,7 +138,7 @@ public class EChequeBankServer extends javax.swing.JFrame {
 			 jTBankShell.append(">> Starting up the server...\n");
 			 try {
 
-				 Runnable runBank = new BankSever();
+				 runBank = new BankSever();
 				 bankServerThread = new Thread(runBank);
 				 bankServerThread.start();
 				 serverStartFlag = true;
@@ -145,12 +146,9 @@ public class EChequeBankServer extends javax.swing.JFrame {
 				 jTBankShell.append(">> Server started: " + getCurrentTimeString() + "\n");
 			 } catch (IOException exp) {
 				 jTBankShell.append(">> Network Error: " + exp.getMessage() + ".\n");
-				 //JOptionPane.showMessageDialog(null, exp.getMessage(), "Network Error", JOptionPane.ERROR_MESSAGE);
 			 }
-
 		 } else {
-			 jTBankShell.append(">> Server is already running.\n");
-			 //JOptionPane.showMessageDialog(null, "The Server is aready running", "System Information", JOptionPane.INFORMATION_MESSAGE);
+			 jTBankShell.append(">> Server is already running.\n");			 
 		 }
     }//GEN-LAST:event_jBStartMouseClicked
 

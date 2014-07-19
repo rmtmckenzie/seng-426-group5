@@ -361,8 +361,10 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 		passTemp = "";
 		userName = jTUserName.getText();
 		char password[];
-
+		
 		password = jTPassword.getPassword();
+		
+		// pad the password up to 16 characters.
 		if (password.length >= 8 && password.length < 16) {
 
 			for (int i = 0; i < password.length; i++) {
