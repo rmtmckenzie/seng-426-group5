@@ -692,7 +692,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
 			// encrypt private key with user password.
 			outObj = new ObjectOutputStream(new FileOutputStream(eWalletPath
-					+ "\\Security Tools\\privateKey.key"));
+					+ "/Security Tools/privateKey.key"));
 			outObj.writeObject(RSAKeys.getPrivate());
 			outObj.close();
 
@@ -701,16 +701,16 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 			Key AES128 = aesCrypt.inilizeAESKeyByPassword(passTemp);
 			Cipher cipher = aesCrypt.initializeCipher(AES128, 0);
 			InputStream in = new FileInputStream(eWalletPath
-					+ "\\Security Tools\\privateKey.key");
+					+ "/Security Tools/privateKey.key");
 			OutputStream out = new FileOutputStream(eWalletPath
-					+ "\\Security Tools\\Private Key.key");
+					+ "/Security Tools/Private Key.key");
 
 			// encrypt the private key with the AES key and delete the plain key
 			aesCrypt.crypt(in, out, cipher);
 			in.close();
 			out.close();
 			File control = new File(eWalletPath
-					+ "\\Security Tools\\privateKey.key");
+					+ "/Security Tools/privateKey.key");
 			control.delete();
 
 			// create Digital certificate object.
@@ -724,7 +724,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
 			// save the user digital certificate
 			DigitalCertificateIO dcIO = new DigitalCertificateIO();
-			dcIO.SaveDC(dcObj, eWalletPath + "\\Security Tools\\"
+			dcIO.SaveDC(dcObj, eWalletPath + "/Security Tools/"
 					+ registerationObj.getClientName() + "DigCert.edc");
 
 			// Connect to the bank server to activate the e-cheque account.

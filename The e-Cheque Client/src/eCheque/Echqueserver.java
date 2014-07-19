@@ -107,7 +107,7 @@ private PrivateKey privKey;
             cheqName += currTime.get(currTime.MILLISECOND);
                                  
             //read the cheque from the socket
-            FileOutputStream chqIn = new FileOutputStream(walletPath+"\\In Coming\\"+cheqName+".cry");
+            FileOutputStream chqIn = new FileOutputStream(walletPath+"/In Coming/"+cheqName+".cry");
             byte[] buffer = new byte[1024];
             int numread;
             while ((numread = socketInput.read(buffer))>=0)
@@ -118,8 +118,8 @@ private PrivateKey privKey;
             chqIn.close(); 
         
             //validate the received cheque.
-            InputStream in = new FileInputStream(walletPath+"\\In Coming\\"+cheqName+".cry");
-            OutputStream out = new FileOutputStream(walletPath+"\\My Cheques\\"+cheqName+".sec");
+            InputStream in = new FileInputStream(walletPath+"/In Coming/"+cheqName+".cry");
+            OutputStream out = new FileOutputStream(walletPath+"/My Cheques/"+cheqName+".sec");
             
             //create AES object to decrypt the received cheque
             AESCrypt aesObj = new AESCrypt();
@@ -134,7 +134,7 @@ private PrivateKey privKey;
             // load decrypted chequeObject.
             EChequeIO readChq = new EChequeIO();
             ECheque recivedChq = new ECheque();
-            recivedChq = readChq.readcheque(walletPath+"\\My Cheques\\"+cheqName+".sec");
+            recivedChq = readChq.readcheque(walletPath+"/My Cheques/"+cheqName+".sec");
             String chqSign = ChequeReferenceString(recivedChq);
             
             boolean verifySign = digitalSign.verifySignature(recivedChq.getdrawersiganure(),chqSign,clientCerit.getpublicKey());
