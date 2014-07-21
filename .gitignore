@@ -16,7 +16,10 @@ hs_err_pid*
 *.epc
 *.edc
 
+
+
 # NetBeans specific #
+The\ e-Cheque\ Client/The\ e-Cheque\ Client.iml
 The\ e-Cheque\ Client/nbproject/private/
 The\ e-Cheque\ Client/build/
 The\ e-Cheque\ Client/nbbuild/
@@ -24,7 +27,9 @@ The\ e-Cheque\ Client/dist/
 The\ e-Cheque\ Client/nbdist/
 The\ e-Cheque\ Client/nbactions.xml
 The\ e-Cheque\ Client/nb-configuration.xml
+The\ e-Cheque\ Client/.idea/*
 
+e-Cheque\ Bank\ Side/e-Cheque\ Bank\ Side.iml
 e-Cheque\ Bank\ Side/nbproject/private/
 e-Cheque\ Bank\ Side/build/
 e-Cheque\ Bank\ Side/nbbuild/
@@ -32,4 +37,6 @@ e-Cheque\ Bank\ Side/dist/
 e-Cheque\ Bank\ Side/nbdist/
 e-Cheque\ Bank\ Side/nbactions.xml
 e-Cheque\ Bank\ Side/nb-configuration.xml
+
+e-Cheque\ Bank\ Side/.idea/*
 
