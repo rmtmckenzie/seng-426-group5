@@ -63,11 +63,8 @@ public class EchequeServer implements Runnable {
     }
 
     private void processConnection() throws Exception {
-
-        DigitalCertificate clientCerit;
-
         //exchange digital certificates
-        clientCerit = (DigitalCertificate) socketInputObject.readObject();
+        DigitalCertificate clientCertificate = (DigitalCertificate) socketInputObject.readObject();
         socketOutputObject.writeObject(serverCertificate);
         socketOutputObject.flush();
 
@@ -126,7 +123,7 @@ public class EchequeServer implements Runnable {
         ECheque receivedCheque = readChq.readcheque(walletPath + File.separator +
                 "My Cheques" + File.separator + chequeName + ".sec");
 
-        if (digitalSign.verifySignature(receivedCheque.getdrawersiganure(), ChequeReferenceString(receivedCheque), clientCerit.getpublicKey())) {
+        if (digitalSign.verifySignature(receivedCheque.getdrawersiganure(), ChequeReferenceString(receivedCheque), clientCertificate.getpublicKey())) {
             JOptionPane.showMessageDialog(null, "The signature is valid", "e-Cheque Cleared", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "The signature is not valid", "e-Cheque not Cleared", JOptionPane.WARNING_MESSAGE);
