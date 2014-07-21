@@ -725,7 +725,6 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             dcObj.setPublicKey(RSAKeys.getPublic());
 
             // save the user digital certificate
-            DigitalCertificateIO dcIO = new DigitalCertificateIO();
             dcObj.SaveDigitalCertificate(eWalletPath + File.separator 
                     + "Security Tools" + File.separator 
                     + registerationObj.getClientName() + "DigCert.edc");

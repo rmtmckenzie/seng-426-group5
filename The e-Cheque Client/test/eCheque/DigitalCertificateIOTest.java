@@ -37,7 +37,7 @@ public class DigitalCertificateIOTest {
 
 	@Test
 	public void saveDCWithoutErrorTest() {
-		DigitalCertificateIO dcio = new DigitalCertificateIO();
+		DigitalCertificate dcio = new DigitalCertificate();
 		try {
 			instanceCert.SaveDigitalCertificate(filePath);
 		} catch (IOException e) {
@@ -51,7 +51,7 @@ public class DigitalCertificateIOTest {
 	
 	@Test
 	public void readDigitalCertificateCertExistsTest() {
-		DigitalCertificateIO dcio = new DigitalCertificateIO();
+		DigitalCertificate dcio = new DigitalCertificate();
 		DigitalCertificate localCert;
 		try {
 			instanceCert.SaveDigitalCertificate(filePath);
@@ -60,7 +60,7 @@ public class DigitalCertificateIOTest {
 		}
 		
 		try {
-			localCert = localCert.readDigitalCertificate(filePath);
+			localCert = DigitalCertificate.readDigitalCertificate(filePath);
 		} catch (ClassNotFoundException | IOException e) {
 			fail();
 			return;
@@ -81,7 +81,6 @@ public class DigitalCertificateIOTest {
 		File f = new File(filePath);
 		f.delete();
 		
-		DigitalCertificateIO dcio = new DigitalCertificateIO();
 		try {
 			instanceCert.readDigitalCertificate(filePath);
 		} catch ( IOException e) {

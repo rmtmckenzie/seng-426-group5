@@ -20,18 +20,18 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.*;
 import java.security.*;
-// this class generates Digital Signature
 
+// This class holds digital certificate data and file operations
 public class DigitalCertificate implements Serializable {
 
-    private String HolderName;
-    private String Subject;
-    private String Issuer;
-    private String SerialNumber;
-    private String ValidFrom;
-    private String ValidTo;
+    private String holderName;
+    private String subject;
+    private String issuer;
+    private String serialNumber;
+    private String validFrom;
+    private String validTo;
     private PublicKey publicKey;
-    private byte[] IssuerSignature;
+    private byte[] issuerSignature;
 
     /**
      * Creates a new instance of certificate
@@ -40,27 +40,27 @@ public class DigitalCertificate implements Serializable {
     }
 
     public void setHolderName(String x) {
-        HolderName = x;
+        holderName = x;
     }
 
     public void setSubject(String x) {
-        Subject = x;
+        subject = x;
     }
 
     public void setIssuer(String x) {
-        Issuer = x;
+        issuer = x;
     }
 
     public void setSerialNumber(String x) {
-        SerialNumber = x;
+        serialNumber = x;
     }
 
     public void setValidFrom(String x) {
-        ValidFrom = x;
+        validFrom = x;
     }
 
     public void setValidTo(String x) {
-        ValidTo = x;
+        validTo = x;
     }
 
     public void setPublicKey(PublicKey x) {
@@ -68,31 +68,31 @@ public class DigitalCertificate implements Serializable {
     }
 
     public void setIssuerSignature(byte[] x) {
-        IssuerSignature = x;
+        issuerSignature = x;
     }
 
     public String getHolderName() {
-        return HolderName;
+        return holderName;
     }
 
     public String getSubject() {
-        return Subject;
+        return subject;
     }
 
     public String getIssuer() {
-        return Issuer;
+        return issuer;
     }
 
     public String getSerialNumber() {
-        return SerialNumber;
+        return serialNumber;
     }
 
     public String getValidFrom() {
-        return ValidFrom;
+        return validFrom;
     }
 
     public String getValidTo() {
-        return ValidTo;
+        return validTo;
     }
 
     public PublicKey getpublicKey() {
@@ -100,19 +100,21 @@ public class DigitalCertificate implements Serializable {
     }
 
     public byte[] getIssuerSignature() {
-        return IssuerSignature;
+        return issuerSignature;
     }
 
-    public DigitalCertificate readDigitalCertificate(String filePath) throws IOException, ClassNotFoundException {
-        ObjectInputStream In = new ObjectInputStream(new FileInputStream(new File(filePath)));
+    // Read a digital certificate from a file
+    static public DigitalCertificate readDigitalCertificate(String filePath) throws IOException, ClassNotFoundException {
+        ObjectInputStream In = new ObjectInputStream(new FileInputStream(filePath));
         DigitalCertificate DC;
         DC = (DigitalCertificate) In.readObject();
         In.close();
         return DC;
     }
 
+    // Save a digital certificate to a file
     public void SaveDigitalCertificate(String filePath) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File(filePath)));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath));
         out.writeObject(this);
         out.close();
     }
