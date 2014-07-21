@@ -588,7 +588,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                                 ObjectInputStream objIn = new ObjectInputStream(
                                         new FileInputStream(eChequeReg.getEWalletLoaction()
                                                 + File.separator + "Security Tools"
-                                                + "PrivateKey.key"));
+                                                + File.separator + "PrivateKey.key"));
 
                                 // load the user private key.
                                 PrivateKey privKey = (PrivateKey) objIn.readObject();
