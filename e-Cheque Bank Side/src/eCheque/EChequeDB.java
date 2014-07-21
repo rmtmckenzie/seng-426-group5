@@ -42,20 +42,16 @@ public class EChequeDB {
     private boolean connectToDataBase() throws ClassNotFoundException, SQLException {
         // Initialize Connection to DB:
         Class.forName(JDBC_DRIVER); // load database driver class
-        // establish connection to database
         connection = DriverManager.getConnection(DATABASE_URL, userName, password);
         return true;
     }
 
     private boolean closeDataBaseConnection() {
         try {
-            // close the database connection channel
             connection.close();
             sqlStatement.close();
-            //JOptionPane.showMessageDialog(null,"You are disconnected to e-Cheque Bank DB","DB State",JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (SQLException exp) {
-            //JOptionPane.showMessageDialog(null,exp.getMessage(),"DB Error",JOptionPane.ERROR_MESSAGE);
             exp.printStackTrace();
             return false;
         }
@@ -79,16 +75,12 @@ public class EChequeDB {
         boolean flag = false;
         try {
             connectToDataBase();
-            //JOptionPane.showMessageDialog(null,"You are connected to e-Cheque Bank DB","DB State",JOptionPane.INFORMATION_MESSAGE);
             createStatement();
-            //JOptionPane.showMessageDialog(null,"You have created statment","DB State",JOptionPane.INFORMATION_MESSAGE);
             executeSALStatement(databaseStat, databaseMode);
             flag = true;
         } catch (ClassNotFoundException exp) {
-            //JOptionPane.showMessageDialog(null,exp.getMessage(),"DB Error",JOptionPane.ERROR_MESSAGE);
             exp.printStackTrace();
         } catch (SQLException exp) {
-            //JOptionPane.showMessageDialog(null,exp.getMessage(),"DB Error",JOptionPane.ERROR_MESSAGE);
             exp.printStackTrace();
         } finally {
             closeDataBaseConnection();
