@@ -264,15 +264,20 @@ public class SendChequeJFrame extends javax.swing.JFrame {
 
                             InputStream in = new FileInputStream(chequePath);
                             JOptionPane.showMessageDialog(null,eChequeRegisterdUser.getEWalletLoaction());
-                            OutputStream out = new FileOutputStream(eChequeRegisterdUser.getEWalletLoaction()+"/Out going/"+cipherChequePath); 
+                            OutputStream out = new FileOutputStream(eChequeRegisterdUser.getEWalletLoaction()
+                                    + File.separator + "Out going" + File.separator + cipherChequePath); 
                             aesKey128.crypt(in,out,aesCipher);
                             in.close();
                             out.close();
-                            chequePath =eChequeRegisterdUser.getEWalletLoaction()+"/Out going/"+cipherChequePath;
+                            chequePath = eChequeRegisterdUser.getEWalletLoaction() + 
+                                    File.separator + "Out going" + File.separator + cipherChequePath;
                             //Get the sever side digital certificate.
                             DigitalCertificate clientDC= new DigitalCertificate();
                             DigitalCertificateIO readClientDC = new DigitalCertificateIO();
-                            clientDC = readClientDC.readDigitalCertificate(eChequeRegisterdUser.getEWalletLoaction()+"/Security Tools/"+eChequeRegisterdUser.getClientName()+"DigCert.edc");
+                            clientDC = readClientDC.readDigitalCertificate(
+                                    eChequeRegisterdUser.getEWalletLoaction()
+                                            + File.separator + "Security Tools" + File.separator
+                                            + eChequeRegisterdUser.getClientName() + "DigCert.edc");
 
                             JOptionPane.showMessageDialog(null,"Strating client");
                             //Start Server Thread.

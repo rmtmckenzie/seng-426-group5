@@ -11,12 +11,9 @@ package eCheque;
  * @author Saad
  */
 //import com.Trendy.swing.plaf.TrendyLookAndFeel;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.security.PrivateKey;
-import javax.swing.UIManager;
-import javax.swing.JOptionPane;
 import java.net.ServerSocket;
 
 
@@ -179,7 +176,9 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
             //Get the sever side digital certificate.
             DigitalCertificate serverDC= new DigitalCertificate();
             DigitalCertificateIO readServerDC = new DigitalCertificateIO();
-            serverDC = readServerDC.readDigitalCertificate(eChequeReg.getEWalletLoaction()+"/Security Tools/"+eChequeReg.getClientName()+"DigCert.edc");
+            serverDC = readServerDC.readDigitalCertificate(eChequeReg.getEWalletLoaction() + 
+                    File.separator + "Security Tools" + File.separator + 
+                    eChequeReg.getClientName()+"DigCert.edc");
             
             //Initialize the server connection.
             if(!serverStartFlage){
