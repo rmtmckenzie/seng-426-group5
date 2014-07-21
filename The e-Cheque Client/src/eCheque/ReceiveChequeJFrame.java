@@ -175,8 +175,7 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
         try{
             //Get the sever side digital certificate.
             DigitalCertificate serverDC= new DigitalCertificate();
-            DigitalCertificateIO readServerDC = new DigitalCertificateIO();
-            serverDC = readServerDC.readDigitalCertificate(eChequeReg.getEWalletLoaction() + 
+            serverDC = serverDC.readDigitalCertificate(eChequeReg.getEWalletLoaction() + 
                     File.separator + "Security Tools" + File.separator + 
                     eChequeReg.getClientName()+"DigCert.edc");
             

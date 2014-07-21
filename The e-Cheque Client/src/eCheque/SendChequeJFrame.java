@@ -273,8 +273,8 @@ public class SendChequeJFrame extends javax.swing.JFrame {
                                     File.separator + "Out going" + File.separator + cipherChequePath;
                             //Get the sever side digital certificate.
                             DigitalCertificate clientDC= new DigitalCertificate();
-                            DigitalCertificateIO readClientDC = new DigitalCertificateIO();
-                            clientDC = readClientDC.readDigitalCertificate(
+                            
+                            clientDC = clientDC.readDigitalCertificate(
                                     eChequeRegisterdUser.getEWalletLoaction()
                                             + File.separator + "Security Tools" + File.separator
                                             + eChequeRegisterdUser.getClientName() + "DigCert.edc");

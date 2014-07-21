@@ -96,10 +96,10 @@ public class EChequeServer implements Runnable {
         // verify the cheque signature using the sender public key.
         DigitalSignature digitalSign = new DigitalSignature();
         // load decrypted chequeObject.
-        EChequeIO readChq = new EChequeIO();
-        ECheque receivedCheque = readChq.readcheque(walletPath + File.separator
+        
+        ECheque receivedCheque =  ECheque.readCheque(walletPath + File.separator
                 + "My Cheques" + File.separator + chequeName + ".sec");
-        return digitalSign.verifySignature(receivedCheque.getdrawersiganure(), chequeReferenceString(receivedCheque), clientCertificate.getpublicKey());
+        return digitalSign.verifySignature(receivedCheque.getDrawerSignature(), chequeReferenceString(receivedCheque), clientCertificate.getpublicKey());
     }
 
     private void decryptCheque(Key sessionKey, String chequeName) throws Exception {
@@ -167,8 +167,10 @@ public class EChequeServer implements Runnable {
     }
 
     private String chequeReferenceString(ECheque chq) {
-        return chq.getaccountNumber() + chq.getaccountholder() + chq.getbankname() + chq.getchequeNumber()
-                + chq.getMoney() + chq.getcurrencytype() + chq.getearnday() + chq.getguaranteed() + chq.getpayToOrderOf();
+        return chq.getAccountNumber() + chq.getAccountHolder()
+                + chq.getBankName() + chq.getChequeNumber() + chq.getMoney()
+                + chq.getCurrencyType() + chq.getEarnday()
+                + chq.getGuaranteed() + chq.getPayToOrderOf();
     }
 
     public void run() {
