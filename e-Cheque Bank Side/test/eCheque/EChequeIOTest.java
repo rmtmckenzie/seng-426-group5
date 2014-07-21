@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class EChequeIOTest {
 
-	static EChequeIO eChequeIO;
 	static ECheque eChequeToSave;
 	static String eChequeFileName;
 
@@ -29,29 +28,23 @@ public class EChequeIOTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		eChequeIO = new EChequeIO();
 		eChequeFileName = "fileName";
 
 		eChequeToSave = new ECheque();
 
-		eChequeToSave.setaccountholder(accountholderVariable);
-		eChequeToSave.setaccountNumber(accountNumberVariable);
-		eChequeToSave.setbankname(banknameVariable);
-		eChequeToSave.setpayToOrderOf(payToOrderOfVariable);
-		eChequeToSave.setamountofMony(amountofMonyVariable);
-		eChequeToSave.setcurrencytype(currencytypeVariable);
-		eChequeToSave.setchequeNumber(chequeNumberVariable);
-		eChequeToSave.setguaranteed(guaranteedVariable);
-		eChequeToSave.setearnday(earndayVariable);
-		eChequeToSave.setbanksignature(banksignatureVariable);
-		eChequeToSave.setdrawersiganure(drawersiganureVariable);
+		eChequeToSave.setAccountHolder(accountholderVariable);
+		eChequeToSave.setAccountNumber(accountNumberVariable);
+		eChequeToSave.setBankName(banknameVariable);
+		eChequeToSave.setPayToOrderOf(payToOrderOfVariable);
+		eChequeToSave.setAmountOfMony(amountofMonyVariable);
+		eChequeToSave.setCurrencyType(currencytypeVariable);
+		eChequeToSave.setChequeNumber(chequeNumberVariable);
+		eChequeToSave.setGuaranteed(guaranteedVariable);
+		eChequeToSave.setEarnday(earndayVariable);
+		eChequeToSave.setBankSignature(banksignatureVariable);
+		eChequeToSave.setDrawerSignature(drawersiganureVariable);
 
 		eChequeToSave.saveCheque(eChequeFileName);
-	}
-
-	@Test
-	public void testEChequeIO() {
-		assertNotNull(eChequeIO);
 	}
 
 	@Test
@@ -62,21 +55,21 @@ public class EChequeIOTest {
 	@Test
 	public void testReadcheque() throws ClassNotFoundException, IOException {
 		ECheque eChequeToLoad;
-		eChequeToLoad = eChequeToLoad.readCheque(eChequeFileName);
+		eChequeToLoad = ECheque.readCheque(eChequeFileName);
 		
 		if(eChequeToLoad != null)
 		{
-			assertEquals(accountholderVariable, eChequeToLoad.getaccountholder());
-			assertEquals(accountNumberVariable, eChequeToLoad.getaccountNumber());
-			assertEquals(banknameVariable, eChequeToLoad.getbankname());
-			assertEquals(payToOrderOfVariable, eChequeToLoad.getpayToOrderOf());
+			assertEquals(accountholderVariable, eChequeToLoad.getAccountHolder());
+			assertEquals(accountNumberVariable, eChequeToLoad.getAccountNumber());
+			assertEquals(banknameVariable, eChequeToLoad.getBankName());
+			assertEquals(payToOrderOfVariable, eChequeToLoad.getPayToOrderOf());
 			assertEquals(amountofMonyVariable, eChequeToLoad.getMoney());
-			assertEquals(currencytypeVariable, eChequeToLoad.getcurrencytype());
-			assertEquals(chequeNumberVariable, eChequeToLoad.getchequeNumber());
-			assertEquals(guaranteedVariable, eChequeToLoad.getguaranteed());
-			assertEquals(earndayVariable, eChequeToLoad.getearnday());
-			assertArrayEquals(banksignatureVariable, eChequeToLoad.getbanksignature());
-			assertArrayEquals(drawersiganureVariable, eChequeToLoad.getdrawersiganure());
+			assertEquals(currencytypeVariable, eChequeToLoad.getCurrencyType());
+			assertEquals(chequeNumberVariable, eChequeToLoad.getChequeNumber());
+			assertEquals(guaranteedVariable, eChequeToLoad.getGuaranteed());
+			assertEquals(earndayVariable, eChequeToLoad.getEarnday());
+			assertArrayEquals(banksignatureVariable, eChequeToLoad.getBankSignature());
+			assertArrayEquals(drawersiganureVariable, eChequeToLoad.getDrawerSignature());
 		}
 	}
 

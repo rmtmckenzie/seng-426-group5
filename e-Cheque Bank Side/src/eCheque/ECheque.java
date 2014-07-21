@@ -20,15 +20,15 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.*;
 
-//this class  for inter data cheque form user
+// This class stores data from an echeque and does file operations
 public class ECheque implements Serializable {
 
-    private String accountholder;
+    private String accountHolder;
     private String accountNumber;
-    private String bankname;
+    private String bankName;
     private String payToOrderOf;
-    private String amountofMoney;
-    private String currencytype;
+    private String amountOfMoney;
+    private String currencyType;
     private String chequeNumber;
     private boolean guaranteed;
     private String earnday;
@@ -42,109 +42,111 @@ public class ECheque implements Serializable {
 
     }
 
-    public void setaccountholder(String x) {
-        accountholder = x;
+    public void setAccountHolder(String x) {
+        accountHolder = x;
 
     }
 
-    public void setaccountNumber(String y) {
+    public void setAccountNumber(String y) {
         accountNumber = y;
     }
 
-    public void setbankname(String z) {
-        bankname = z;
+    public void setBankName(String z) {
+        bankName = z;
 
     }
 
-    public void setpayToOrderOf(String m) {
+    public void setPayToOrderOf(String m) {
         payToOrderOf = m;
 
     }
 
-    public void setamountofMony(String s) {
-        amountofMoney = s;
+    public void setAmountOfMony(String s) {
+        amountOfMoney = s;
     }
 
-    public void setcurrencytype(String n) {
-        currencytype = n;
+    public void setCurrencyType(String n) {
+        currencyType = n;
 
     }
 
-    public void setchequeNumber(String c) {
+    public void setChequeNumber(String c) {
         chequeNumber = c;
     }
 
-    public void setguaranteed(boolean s) {
+    public void setGuaranteed(boolean s) {
         guaranteed = s;
 
     }
 
-    public void setearnday(String u) {
+    public void setEarnday(String u) {
         earnday = u;
 
     }
 
-    public void setbanksignature(byte[] y) {
+    public void setBankSignature(byte[] y) {
         bankSignature = y;
 
     }
 
-    public void setdrawersiganure(byte[] y) {
+    public void setDrawerSignature(byte[] y) {
         drawerSignature = y;
 
     }
 
     public String getMoney() {
-        return amountofMoney;
+        return amountOfMoney;
     }
 
-    public String getaccountholder() {
-        return accountholder;
+    public String getAccountHolder() {
+        return accountHolder;
     }
 
-    public String getaccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public String getbankname() {
-        return bankname;
+    public String getBankName() {
+        return bankName;
     }
 
-    public String getpayToOrderOf() {
+    public String getPayToOrderOf() {
         return payToOrderOf;
     }
 
-    public String getcurrencytype() {
-        return currencytype;
+    public String getCurrencyType() {
+        return currencyType;
     }
 
-    public String getchequeNumber() {
+    public String getChequeNumber() {
         return chequeNumber;
     }
 
-    public boolean getguaranteed() {
+    public boolean getGuaranteed() {
         return guaranteed;
     }
 
-    public String getearnday() {
+    public String getEarnday() {
         return earnday;
     }
 
-    public byte[] getbanksignature() {
+    public byte[] getBankSignature() {
         return bankSignature;
     }
 
-    public byte[] getdrawersiganure() {
+    public byte[] getDrawerSignature() {
         return drawerSignature;
     }
 
+    // Save cheque to a file
     public void saveCheque(String filename) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File(filename)));
         out.writeObject(this);
         out.close();
     }
 
-    public ECheque readCheque(String filename) throws IOException, ClassNotFoundException {
+    // Read cheque from a file
+    static public ECheque readCheque(String filename) throws IOException, ClassNotFoundException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File(filename)));
         ECheque cheq;
         cheq = (ECheque) in.readObject();

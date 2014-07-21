@@ -26,7 +26,7 @@ import javax.swing.JTextArea;
 public class EChequeDB {
     
     private static final String JDBC_DRIVER ="com.mysql.jdbc.Driver";   
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/ebank";
+    private static final String DATABASE_URL = "db2.seng.uvic.ca";
     private String userName;
     private String password;
     private Connection connection = null; 
@@ -36,8 +36,8 @@ public class EChequeDB {
     
     /** Creates a new instance of EChequeDB */
     public EChequeDB() {
-        userName ="seng426";
-        password="log2IT05";
+        userName ="group5";
+        password="cXPIdSI5";
         
     }
     
