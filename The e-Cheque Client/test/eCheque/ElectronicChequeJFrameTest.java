@@ -85,11 +85,11 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
             assertFalse("Draw Cheque button should not be enabled.",
                     ((JButton)getAttrDef("jBDrawCheque")).isEnabled());
             
-            assertNull("Registration information should be null.",
+            assertNull("Registration information should not be null.",
                     getAttrDef("registeredUser"));
             
-            assertTrue("ActivationNeed should be true.", 
-                    (Boolean)getAttrDef("activationNeed"));
+            assertFalse("ActivationNeed should be true.", 
+                    (Boolean)getAttrDef("isActivated"));
 
         } catch (NoSuchFieldException e) {
             fail("Field not found: "+e.getMessage());
@@ -134,7 +134,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
                     getAttrDef("registeredUser"));
             
             assertFalse("ActivationNeed should be false.", 
-                    (Boolean)getAttrDef("activationNeed"));
+                    (Boolean)getAttrDef("isActivated"));
 
         } catch (NoSuchFieldException e) {
             fail("Field not found: "+e.getMessage());
@@ -151,9 +151,8 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
         System.out.println("main");
         String[] args = null;
         ElectronicChequeJFrame.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        
+        // TODO review the generated test code and remove the default call to fail.		  
+        //fail("The test case is a prototype.");        
     }
     
 }

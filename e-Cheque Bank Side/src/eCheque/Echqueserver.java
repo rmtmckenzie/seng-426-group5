@@ -79,8 +79,8 @@ private OutputStream socketOutput;
 }
  
  private void registerClientInfo() throws IOException, ClassNotFoundException{
-          EChequeRegisteration registerClient;
-          registerClient = (EChequeRegisteration)socketInputObject.readObject();
+          EChequeRegistration registerClient;
+          registerClient = (EChequeRegistration)socketInputObject.readObject();
           // get user account ID
           String accountID = "'"+registerClient.getAccountNumber()+"',";
           String cerit ="'"+registerClient.getClientName()+"DC.edc"+"',";
@@ -97,9 +97,9 @@ private OutputStream socketOutput;
           
           //store client digital certificate
           DigitalCertificateIO dcIO = new DigitalCertificateIO();
-          dcIO.SaveDC(registDC,"Bank\\"+registerClient.getClientName()+"DC.edc");
+          dcIO.SaveDC(registDC,"Bank/"+registerClient.getClientName()+"DC.edc");
           
-          socketOutputObject.writeObject("registeration complete");
+          socketOutputObject.writeObject("registration complete");
           socketOutputObject.flush();
           //JOptionPane.showMessageDialog(null,"Register Done");
         

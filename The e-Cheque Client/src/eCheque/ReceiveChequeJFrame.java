@@ -22,13 +22,13 @@ import java.net.ServerSocket;
 
 public class ReceiveChequeJFrame extends javax.swing.JFrame {
     
-     private EChequeRegisteration eChequeReg;
+     private EChequeRegistration eChequeReg;
      private PrivateKey privKey;
      private ServerSocket serverSocket;
      private boolean serverStartFlage;
      
     /** Creates new form ReceiveChequeJFrame */
-    public ReceiveChequeJFrame(EChequeRegisteration eChqReg, PrivateKey pKey) {
+    public ReceiveChequeJFrame(EChequeRegistration eChqReg, PrivateKey pKey) {
         
         try{
             //TrendyLookAndFeel tlf = new TrendyLookAndFeel();
@@ -107,7 +107,7 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Via e-mail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0)));
-        jButton1.setIcon(new javax.swing.ImageIcon("E:\\e-Cheque Project Final Version\\Photo\\icon-zip.gif"));
+        jButton1.setIcon(new javax.swing.ImageIcon("E:/e-Cheque Project Final Version/Photo/icon-zip.gif"));
         jButton1.setText("Un ZIP Cheque");
 
         org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
@@ -179,7 +179,7 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
             //Get the sever side digital certificate.
             DigitalCertificate serverDC= new DigitalCertificate();
             DigitalCertificateIO readServerDC = new DigitalCertificateIO();
-            serverDC = readServerDC.readDigitalCertificate(eChequeReg.getEWalletLoaction()+"\\Security Tools\\"+eChequeReg.getClientName()+"DigCert.edc");
+            serverDC = readServerDC.readDigitalCertificate(eChequeReg.getEWalletLoaction()+"/Security Tools/"+eChequeReg.getClientName()+"DigCert.edc");
             
             //Initialize the server connection.
             if(!serverStartFlage){
