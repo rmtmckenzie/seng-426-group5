@@ -13,7 +13,13 @@
  */
 package eCheque;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.*;
 import java.security.*;
 // this class generates Digital Signature
 
@@ -97,6 +103,20 @@ public class DigitalCertificate implements Serializable
          public byte[] getIssuerSignature()
     {
         return IssuerSignature;
+    }
+
+    public DigitalCertificate readDigitalCertificate(String filePath) throws IOException, ClassNotFoundException {
+        ObjectInputStream In = new ObjectInputStream(new FileInputStream(new File(filePath)));
+        DigitalCertificate DC;
+        DC = (DigitalCertificate) In.readObject();
+        In.close();
+        return DC;
+    }
+
+    public void SaveDigitalCertificate(String filePath) throws IOException {
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File(filePath)));
+        out.writeObject(this);
+        out.close();
     }
      
 }

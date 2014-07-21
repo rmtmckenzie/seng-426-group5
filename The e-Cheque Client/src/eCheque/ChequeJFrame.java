@@ -476,15 +476,12 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
                 //Create Digital Certificate Object for verification
                 DigitalCertificate drawerDC = new DigitalCertificate();
-
-                // Create Digital Certificate IO to load the Certificate
-                DigitalCertificateIO readDC = new DigitalCertificateIO();
-
+                
                 //Create a Digital signature object.
                 DigitalSignature verfiy = new DigitalSignature();
 
                 try {
-                    drawerDC = (DigitalCertificate) readDC.readDigitalCertificate(certificatePath);
+                    drawerDC = (DigitalCertificate) drawerDC.readDigitalCertificate(certificatePath);
 
                     boolean verfiySign;
                     verfiySign = verfiy.verifySignature(oldCheque.getdrawersiganure(), sigatureRef, drawerDC.getpublicKey());
@@ -623,8 +620,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "Sign Complete");
 
                                 //Save the cheque after you sign it
-                                EChequeIO drawCheque = new EChequeIO();
-                                drawCheque.savecheque(chequeObj, eChequeReg.getEWalletLoaction()
+                                chequeObj.saveCheque(eChequeReg.getEWalletLoaction()
                                         + File.separator + "My Cheques"
                                         + File.separator + chequeObj.getchequeNumber() + ".sec");
                                 JOptionPane.showMessageDialog(null, "Done");
@@ -697,11 +693,10 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         if (chequePath.length() != 0) {
             oldCheque = new ECheque();
-            EChequeIO loadCheque = new EChequeIO();
 
             try {
                 // load cheque that already exist
-                oldCheque = loadCheque.readcheque(chequePath);
+                oldCheque = oldCheque.readCheque(chequePath);
                 jLDrawerName.setText(oldCheque.getaccountholder());
                 jLBankName.setText("Bank Name: " + oldCheque.getbankname());
                 jLAccountNum.setText("Account no: " + oldCheque.getaccountNumber());

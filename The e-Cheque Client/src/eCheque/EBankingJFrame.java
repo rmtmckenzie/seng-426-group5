@@ -252,8 +252,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
         chequePath = getFileLocation("Open Saved Cheque");
         if (chequePath.length() != 0) {
             try {
-                EChequeIO loadCheq = new EChequeIO();
-                depositCheque = loadCheq.readcheque(chequePath);
+                depositCheque = depositCheque.readCheque(chequePath);
                 selectChequeFlag = true;
             } catch (IOException exp) {
                 JOptionPane.showMessageDialog(null, "can not load the cheque", "System Error", JOptionPane.ERROR_MESSAGE);

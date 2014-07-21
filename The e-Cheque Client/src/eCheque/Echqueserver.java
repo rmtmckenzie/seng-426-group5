@@ -135,9 +135,8 @@ private PrivateKey privKey;
             DigitalSignature digitalSign = new DigitalSignature();
             
             // load decrypted chequeObject.
-            EChequeIO readChq = new EChequeIO();
             ECheque recivedChq = new ECheque();
-            recivedChq = readChq.readcheque(walletPath + File.separator + 
+            recivedChq = recivedChq.readCheque(walletPath + File.separator + 
                     "My Cheques" + File.separator + cheqName + ".sec");
             String chqSign = ChequeReferenceString(recivedChq);
             

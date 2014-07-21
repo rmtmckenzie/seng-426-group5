@@ -46,7 +46,7 @@ public class EChequeIOTest {
 		eChequeToSave.setbanksignature(banksignatureVariable);
 		eChequeToSave.setdrawersiganure(drawersiganureVariable);
 
-		eChequeIO.savecheque(eChequeToSave, eChequeFileName);
+		eChequeToSave.saveCheque(eChequeFileName);
 	}
 
 	@Test
@@ -56,13 +56,13 @@ public class EChequeIOTest {
 
 	@Test
 	public void testSavecheque() throws IOException {
-		eChequeIO.savecheque(eChequeToSave, eChequeFileName);
+		eChequeToSave.saveCheque(eChequeFileName);
 	}
 
 	@Test
 	public void testReadcheque() throws ClassNotFoundException, IOException {
 		ECheque eChequeToLoad;
-		eChequeToLoad = eChequeIO.readcheque(eChequeFileName);
+		eChequeToLoad = eChequeToLoad.readCheque(eChequeFileName);
 		
 		if(eChequeToLoad != null)
 		{

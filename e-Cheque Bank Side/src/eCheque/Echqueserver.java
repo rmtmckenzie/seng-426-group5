@@ -96,8 +96,7 @@ private OutputStream socketOutput;
           chqDB.runDB(1,registerStat);
           
           //store client digital certificate
-          DigitalCertificateIO dcIO = new DigitalCertificateIO();
-          dcIO.SaveDC(registDC,"Bank/"+registerClient.getClientName()+"DC.edc");
+          registDC.SaveDigitalCertificate("Bank/"+registerClient.getClientName()+"DC.edc");
           
           socketOutputObject.writeObject("registration complete");
           socketOutputObject.flush();

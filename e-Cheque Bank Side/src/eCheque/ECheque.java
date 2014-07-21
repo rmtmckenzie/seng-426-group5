@@ -13,7 +13,13 @@
  */
 package eCheque;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.*;
 
 //this class  for inter data cheque form user
 public class ECheque implements Serializable
@@ -155,6 +161,20 @@ public class ECheque implements Serializable
     public byte[]  getdrawersiganure()
     {
         return  drawersiganure;
+    }
+
+    public void saveCheque(String filename) throws IOException {
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File(filename)));
+        out.writeObject(this);
+        out.close();
+    }
+
+    public ECheque readCheque(String filename) throws IOException, ClassNotFoundException {
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File(filename)));
+        ECheque cheq;
+        cheq = (ECheque) in.readObject();
+        in.close();
+        return cheq;
     }
    
 }
