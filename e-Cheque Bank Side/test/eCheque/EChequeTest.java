@@ -48,179 +48,179 @@ public class EChequeTest {
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getaccountholder()}.
-	 * Test method for {@link eCheque.ECheque#setaccountholder(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#getAccountHolder()}.
+	 * Test method for {@link eCheque.ECheque#setAccountHolder(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetaccountholder() {
-		assertNull(eCheque.getaccountholder());
+		assertNull(eCheque.getAccountHolder());
 		
-		eCheque.setaccountholder(emptyString);
-		assertEquals(emptyString, eCheque.getaccountholder());
+		eCheque.setAccountHolder(emptyString);
+		assertEquals(emptyString, eCheque.getAccountHolder());
 
-		eCheque.setaccountholder(somethingString);
-		assertEquals(somethingString, eCheque.getaccountholder());
+		eCheque.setAccountHolder(somethingString);
+		assertEquals(somethingString, eCheque.getAccountHolder());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getaccountNumber()}.
-	 * Test method for {@link eCheque.ECheque#setaccountNumber(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#getAccountNumber()}.
+	 * Test method for {@link eCheque.ECheque#setAccountNumber(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetaccountNumber() {
-		assertNull(eCheque.getaccountNumber());
+		assertNull(eCheque.getAccountNumber());
 		
-		eCheque.setaccountNumber(emptyString);
-		assertEquals(emptyString, eCheque.getaccountNumber());
+		eCheque.setAccountNumber(emptyString);
+		assertEquals(emptyString, eCheque.getAccountNumber());
 
-		eCheque.setaccountNumber(somethingString);
-		assertEquals(somethingString, eCheque.getaccountNumber());
+		eCheque.setAccountNumber(somethingString);
+		assertEquals(somethingString, eCheque.getAccountNumber());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getbankname()}.
-	 * Test method for {@link eCheque.ECheque#setbankname(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#getBankName()}.
+	 * Test method for {@link eCheque.ECheque#setBankName(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetbankname() {
-		assertNull(eCheque.getbankname());
+		assertNull(eCheque.getBankName());
 		
-		eCheque.setbankname(emptyString);
-		assertEquals(emptyString, eCheque.getbankname());
+		eCheque.setBankName(emptyString);
+		assertEquals(emptyString, eCheque.getBankName());
 
-		eCheque.setbankname(somethingString);
-		assertEquals(somethingString, eCheque.getbankname());
+		eCheque.setBankName(somethingString);
+		assertEquals(somethingString, eCheque.getBankName());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getpayToOrderOf()}.
-	 * Test method for {@link eCheque.ECheque#setpayToOrderOf(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#getPayToOrderOf()}.
+	 * Test method for {@link eCheque.ECheque#setPayToOrderOf(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetpayToOrderOf() {
-		assertNull(eCheque.getpayToOrderOf());
+		assertNull(eCheque.getPayToOrderOf());
 		
-		eCheque.setpayToOrderOf(emptyString);
-		assertEquals(emptyString, eCheque.getpayToOrderOf());
+		eCheque.setPayToOrderOf(emptyString);
+		assertEquals(emptyString, eCheque.getPayToOrderOf());
 
-		eCheque.setpayToOrderOf(somethingString);
-		assertEquals(somethingString, eCheque.getpayToOrderOf());
+		eCheque.setPayToOrderOf(somethingString);
+		assertEquals(somethingString, eCheque.getPayToOrderOf());
 	}
 
 	/**
 	 * Test method for {@link eCheque.ECheque#getMoney()}.
-	 * Test method for {@link eCheque.ECheque#setamountofMony(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#setAmountOfMony(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetamountofMony() {
 		assertNull(eCheque.getMoney());
 		
-		eCheque.setamountofMony(emptyString);
+		eCheque.setAmountOfMony(emptyString);
 		assertEquals(emptyString, eCheque.getMoney());
 
-		eCheque.setamountofMony(somethingString);
+		eCheque.setAmountOfMony(somethingString);
 		assertEquals(somethingString, eCheque.getMoney());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getcurrencytype()}.
-	 * Test method for {@link eCheque.ECheque#setcurrencytype(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#getCurrencyType()}.
+	 * Test method for {@link eCheque.ECheque#setCurrencyType(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetcurrencytype() {
-		assertNull(eCheque.getcurrencytype());
+		assertNull(eCheque.getCurrencyType());
 		
-		eCheque.setcurrencytype(emptyString);
-		assertEquals(emptyString, eCheque.getcurrencytype());
+		eCheque.setCurrencyType(emptyString);
+		assertEquals(emptyString, eCheque.getCurrencyType());
 
-		eCheque.setcurrencytype(somethingString);
-		assertEquals(somethingString, eCheque.getcurrencytype());
+		eCheque.setCurrencyType(somethingString);
+		assertEquals(somethingString, eCheque.getCurrencyType());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getchequeNumber()}.
-	 * Test method for {@link eCheque.ECheque#setchequeNumber(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#getChequeNumber()}.
+	 * Test method for {@link eCheque.ECheque#setChequeNumber(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetchequeNumber() {
-		assertNull(eCheque.getchequeNumber());
+		assertNull(eCheque.getChequeNumber());
 		
-		eCheque.setchequeNumber(emptyString);
-		assertEquals(emptyString, eCheque.getchequeNumber());
+		eCheque.setChequeNumber(emptyString);
+		assertEquals(emptyString, eCheque.getChequeNumber());
 
-		eCheque.setchequeNumber(somethingString);
-		assertEquals(somethingString, eCheque.getchequeNumber());
+		eCheque.setChequeNumber(somethingString);
+		assertEquals(somethingString, eCheque.getChequeNumber());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getguaranteed()}.
-	 * Test method for {@link eCheque.ECheque#setguaranteed(boolean)}.
+	 * Test method for {@link eCheque.ECheque#getGuaranteed()}.
+	 * Test method for {@link eCheque.ECheque#setGuaranteed(boolean)}.
 	 */
 	@Test
 	public void testGetAndSetguaranteed() {
-		assertFalse(eCheque.getguaranteed());
+		assertFalse(eCheque.getGuaranteed());
 		
-		eCheque.setguaranteed(false);
-		assertEquals(false, eCheque.getguaranteed());
+		eCheque.setGuaranteed(false);
+		assertEquals(false, eCheque.getGuaranteed());
 
-		eCheque.setguaranteed(true);
-		assertEquals(true, eCheque.getguaranteed());
+		eCheque.setGuaranteed(true);
+		assertEquals(true, eCheque.getGuaranteed());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getearnday()}.
-	 * Test method for {@link eCheque.ECheque#setearnday(java.lang.String)}.
+	 * Test method for {@link eCheque.ECheque#getEarnday()}.
+	 * Test method for {@link eCheque.ECheque#setEarnday(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAndSetearnday() {
-		assertNull(eCheque.getearnday());
+		assertNull(eCheque.getEarnday());
 		
-		eCheque.setearnday(emptyString);
-		assertEquals(emptyString, eCheque.getearnday());
+		eCheque.setEarnday(emptyString);
+		assertEquals(emptyString, eCheque.getEarnday());
 
-		eCheque.setearnday(somethingString);
-		assertEquals(somethingString, eCheque.getearnday());
+		eCheque.setEarnday(somethingString);
+		assertEquals(somethingString, eCheque.getEarnday());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getbanksignature()}.
-	 * Test method for {@link eCheque.ECheque#setbanksignature(byte[])}.
+	 * Test method for {@link eCheque.ECheque#getBankSignature()}.
+	 * Test method for {@link eCheque.ECheque#setBankSignature(byte[])}.
 	 */
 	@Test
 	public void testGetAndSetbanksignature() {
-		assertNull(eCheque.getbanksignature());
+		assertNull(eCheque.getBankSignature());
 		
-		eCheque.setbanksignature(nullByte);
-		assertArrayEquals(nullByte, eCheque.getbanksignature());
+		eCheque.setBankSignature(nullByte);
+		assertArrayEquals(nullByte, eCheque.getBankSignature());
 
-		eCheque.setbanksignature(zeroByte);
-		assertArrayEquals(zeroByte, eCheque.getbanksignature());
+		eCheque.setBankSignature(zeroByte);
+		assertArrayEquals(zeroByte, eCheque.getBankSignature());
 		
-		eCheque.setbanksignature(maxByte);
-		assertArrayEquals(maxByte, eCheque.getbanksignature());
+		eCheque.setBankSignature(maxByte);
+		assertArrayEquals(maxByte, eCheque.getBankSignature());
 
-		eCheque.setbanksignature(zeroAndMaxBytes);
-		assertArrayEquals(zeroAndMaxBytes, eCheque.getbanksignature());
+		eCheque.setBankSignature(zeroAndMaxBytes);
+		assertArrayEquals(zeroAndMaxBytes, eCheque.getBankSignature());
 	}
 
 	/**
-	 * Test method for {@link eCheque.ECheque#getdrawersiganure()}.
-	 * Test method for {@link eCheque.ECheque#setdrawersiganure(byte[])}.
+	 * Test method for {@link eCheque.ECheque#getDrawerSignature()}.
+	 * Test method for {@link eCheque.ECheque#setDrawerSignature(byte[])}.
 	 */
 	@Test
 	public void testGetAndSetdrawersiganure() {
-		assertNull(eCheque.getdrawersiganure());
+		assertNull(eCheque.getDrawerSignature());
 		
-		eCheque.setdrawersiganure(nullByte);
-		assertArrayEquals(nullByte, eCheque.getdrawersiganure());
+		eCheque.setDrawerSignature(nullByte);
+		assertArrayEquals(nullByte, eCheque.getDrawerSignature());
 
-		eCheque.setdrawersiganure(zeroByte);
-		assertArrayEquals(zeroByte, eCheque.getdrawersiganure());
+		eCheque.setDrawerSignature(zeroByte);
+		assertArrayEquals(zeroByte, eCheque.getDrawerSignature());
 		
-		eCheque.setdrawersiganure(maxByte);
-		assertArrayEquals(maxByte, eCheque.getdrawersiganure());
+		eCheque.setDrawerSignature(maxByte);
+		assertArrayEquals(maxByte, eCheque.getDrawerSignature());
 
-		eCheque.setdrawersiganure(zeroAndMaxBytes);
-		assertArrayEquals(zeroAndMaxBytes, eCheque.getdrawersiganure());
+		eCheque.setDrawerSignature(zeroAndMaxBytes);
+		assertArrayEquals(zeroAndMaxBytes, eCheque.getDrawerSignature());
 	}
 }
