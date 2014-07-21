@@ -100,7 +100,7 @@ public class EchequeClient implements Runnable {
      *
      * @throws Exception
      */
-    private void processConnection() throws IOException,ClassNotFoundException,NoSuchAlgorithmException,NoSuchPaddingException, IllegalBlockSizeException,InvalidKeyException {
+    private void processConnection() throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, InvalidKeyException {
         DigitalCertificate certificate;
 
         //exchange the Digital Ceritificates
@@ -186,10 +186,18 @@ public class EchequeClient implements Runnable {
 
     private void runClient() {
         try {
-            connectToClient();
-            getSocketStream();
-            if (bankConnection) processBankConnection();
-            else processConnection();
+            if (bankConnection) {
+                connectToClient();
+                getSocketStream();
+                processBankConnection();
+            } else {
+                screenShell.append("\n\n>> Connecting to echeque host.");
+                connectToClient();
+                screenShell.append("\n\n>> You are connected.");
+                getSocketStream();
+                screenShell.append("\n\n>> Starting cheque transfer.");
+                processConnection();
+            }
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, error.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE);
         } finally {
