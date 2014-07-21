@@ -545,18 +545,18 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         eWalletPath = getWalletLoaction("Set e-Wallet Location");
-        pathFlag = new File(eWalletPath + System.lineSeparator() + "In Coming").mkdirs();
+        pathFlag = new File(eWalletPath + File.separator + "In Coming").mkdirs();
         if (pathFlag) {
-            pathFlag = new File(eWalletPath + System.lineSeparator() + "Out going").mkdirs();
+            pathFlag = new File(eWalletPath + File.separator + "Out going").mkdirs();
         }
         if (pathFlag) {
-            pathFlag = new File(eWalletPath + System.lineSeparator() + "Security Tools").mkdirs();
+            pathFlag = new File(eWalletPath + File.separator + "Security Tools").mkdirs();
         }
         if (pathFlag) {
-            pathFlag = new File(eWalletPath + "/My Cheques").mkdirs();
+            pathFlag = new File(eWalletPath + File.separator + "My Cheques").mkdirs();
         }
         if (pathFlag) {
-            pathFlag = new File(eWalletPath + "/History").mkdirs();
+            pathFlag = new File(eWalletPath + File.separator + "History").mkdirs();
         }
     }// GEN-LAST:event_jBeWalletMouseClicked
 
@@ -689,8 +689,8 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
             // encrypt private key with user password.
             outObj = new ObjectOutputStream(new FileOutputStream(eWalletPath
-                    + System.lineSeparator() + "Security Tools" 
-                    + System.lineSeparator() +  "privateKey.key"));
+                    + File.separator + "Security Tools" 
+                    + File.separator +  "privateKey.key"));
             
             outObj.writeObject(RSAKeys.getPrivate());
             outObj.close();
@@ -700,18 +700,18 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             Key AES128 = aesCrypt.inilizeAESKeyByPassword(passTemp);
             Cipher cipher = aesCrypt.initializeCipher(AES128, 0);
             InputStream in = new FileInputStream(eWalletPath
-                    + System.lineSeparator() + "Security Tools"
-                    + System.lineSeparator() + "privateKey.key");
+                    + File.separator + "Security Tools"
+                    + File.separator + "privateKey.key");
             OutputStream out = new FileOutputStream(eWalletPath
-                    + System.lineSeparator() + "Security Tools"
-                    + System.lineSeparator() + "Private Key.key");
+                    + File.separator + "Security Tools"
+                    + File.separator + "Private Key.key");
 
             // encrypt the private key with the AES key and delete the plain key
             aesCrypt.crypt(in, out, cipher);
             in.close();
             out.close();
-            File control = new File(eWalletPath + System.lineSeparator()
-                    + "Security Tools" + System.lineSeparator() 
+            File control = new File(eWalletPath + File.separator
+                    + "Security Tools" + File.separator 
                     + "privateKey.key");
             control.delete();
 
@@ -726,8 +726,8 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
             // save the user digital certificate
             DigitalCertificateIO dcIO = new DigitalCertificateIO();
-            dcIO.SaveDC(dcObj, eWalletPath + System.lineSeparator() 
-                    + "Security Tools" + System.lineSeparator() 
+            dcIO.SaveDC(dcObj, eWalletPath + File.separator 
+                    + "Security Tools" + File.separator 
                     + registerationObj.getClientName() + "DigCert.edc");
 
             // Connect to the bank server to activate the e-cheque account.
