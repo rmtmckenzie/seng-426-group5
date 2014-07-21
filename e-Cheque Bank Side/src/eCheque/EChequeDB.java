@@ -62,7 +62,7 @@ public class EChequeDB {
         return true;
     }
 
-    private void executeSALStatement(String statement, int statType) throws SQLException {
+    private void executeSQLStatement(String statement, int statType) throws SQLException {
         // Initialize sql statement and execute it.
         if (statType == 0) {
             resultSet = sqlStatement.executeQuery(statement);
@@ -76,7 +76,7 @@ public class EChequeDB {
         try {
             connectToDataBase();
             createStatement();
-            executeSALStatement(databaseStat, databaseMode);
+            executeSQLStatement(databaseStat, databaseMode);
             flag = true;
         } catch (ClassNotFoundException exp) {
             exp.printStackTrace();
@@ -108,7 +108,7 @@ public class EChequeDB {
             JOptionPane.showMessageDialog(null, "You have created statement", "DB State", JOptionPane.INFORMATION_MESSAGE);
 
             // run the specific sql statement
-            executeSALStatement(databaseStat, databaseMode);
+            executeSQLStatement(databaseStat, databaseMode);
             flag = resultSet.next();
         } catch (ClassNotFoundException exp) {
             JOptionPane.showMessageDialog(null, exp.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
