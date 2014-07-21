@@ -56,7 +56,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
     
     @Test
     public void testNoLoadUserInfo() {
-        ElectronicChequeJFrame frame = new ElectronicChequeJFrame();		  
+        ElectronicChequeJFrame frame = new ElectronicChequeJFrame();
         setDefaultObject(frame);
         try {
 //            runMethod(getMethod(c, "loadUserInfo"), frame);
@@ -68,7 +68,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
                     ((JTextField)getAttrDef("jTUserName")).isEnabled());
                         
             assertFalse("Login Button should not be enabled.",
-                    ((JButton)getAttrDef("jBActivation")).isEnabled());
+                    ((JButton)getAttrDef("loadUserInfo")).isEnabled());
             
             assertTrue("Configure button should be enabled.",
                     ((JButton)getAttrDef("jBConfigure")).isEnabled());
@@ -102,53 +102,45 @@ public class ElectronicChequeJFrameTest extends ReflectClass{
     @Test
     public void testLoadUserInfo() {
         ElectronicChequeJFrame frame = new ElectronicChequeJFrame();
-        Class c = ElectronicChequeJFrame.class;
-        Field f;
-        
+        setDefaultObject(frame);
         try {
-            Method method = c.getDeclaredMethod("loadUserInfo");				
-            method.setAccessible(true);
-            method.invoke(frame);
+//            runMethod(getMethod(c, "loadUserInfo"), frame);
             
-            f = c.getDeclaredField("registeredUser");
-            f.setAccessible(true);
-            EChequeRegistration reg = (EChequeRegistration) f.get(frame);
-            assertNotNull("Registration information should not be null.",reg);
+            assertTrue("Password field should be enabled.", 
+                    ((JPasswordField)getAttrDef("jTPassword")).isEnabled());
             
-            f = c.getDeclaredField("jBActivation");
-            f.setAccessible(true);
-            JButton b = (JButton) f.get(frame);
-            assertTrue("Login Button should be enabled", b.isEnabled()); 
+            assertTrue("Username field should not enabled.", 
+                    ((JTextField)getAttrDef("jTUserName")).isEnabled());
+                        
+            assertTrue("Login Button should be enabled.",
+                    ((JButton)getAttrDef("loadUserInfo")).isEnabled());
             
-            f = c.getDeclaredField("jTPassword");
-            f.setAccessible(true);
-            JPasswordField pf = (JPasswordField) f.get(frame);
-            assertTrue("ePassword field should be enabled", pf.isEnabled());
+            assertFalse("Configure button should not be enabled.",
+                    ((JButton)getAttrDef("jBConfigure")).isEnabled());
             
-            f = c.getDeclaredField("jTUserName");
-            f.setAccessible(true);
-            JTextField un = (JTextField) f.get(frame);
-            assertTrue("Username field should be enabled", un.isEnabled());
+            assertFalse("Send Cheque button should not be enabled.",
+                    ((JButton)getAttrDef("jBSendCheque")).isEnabled());
             
-            f = c.getDeclaredField("jBConfigure");
-            f.setAccessible(true);
-            b = (JButton) f.get(frame);
-            assertFalse("Configure button should not be enabled", b.isEnabled());
-                    
-            f = c.getDeclaredField("isActivated");
-            f.setAccessible(false);
-            boolean ac = (Boolean) f.get(frame);
-            assertFalse("Activation need should be false", ac);
+            assertFalse("E-Banking button should not be enabled.",
+                    ((JButton)getAttrDef("jBEBanking")).isEnabled());
             
-        } catch (NoSuchMethodException e) {
-            fail("Method not found: "+e.getMessage());
+            assertFalse("Received Cheque button should not be enabled.",
+                    ((JButton)getAttrDef("jBReceivedCheque")).isEnabled());
+            
+            assertFalse("Draw Cheque button should not be enabled.",
+                    ((JButton)getAttrDef("jBDrawCheque")).isEnabled());
+            
+            assertNotNull("Registration information should not be null.",
+                    getAttrDef("registeredUser"));
+            
+            assertFalse("ActivationNeed should be false.", 
+                    (Boolean)getAttrDef("isActivated"));
+
         } catch (NoSuchFieldException e) {
             fail("Field not found: "+e.getMessage());
         } catch (IllegalAccessException e) {
-            fail("Illegal Access Exception");
-        } catch (InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } 
+            fail(e.getLocalizedMessage());
+        }
     }
     
     /**
