@@ -29,7 +29,7 @@ public class BankSever implements Runnable{
     
     public void run(){
         try{
-            while(!done){            
+            while(!done){          
                 Socket incoming = serverSocket.accept();
                 Runnable chequeServer = new Echqueserver(incoming);
                 Thread bankThreading = new Thread(chequeServer);
@@ -37,8 +37,7 @@ public class BankSever implements Runnable{
             }
         }
         catch(IOException exp){
-            JOptionPane.showMessageDialog(null,exp.getMessage(),"Network Error",JOptionPane.ERROR_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null,exp.getMessage(),"Network Error",JOptionPane.ERROR_MESSAGE);            
         }
         
     }
