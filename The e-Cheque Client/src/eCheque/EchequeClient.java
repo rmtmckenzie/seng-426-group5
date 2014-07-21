@@ -181,20 +181,9 @@ public class EchequeClient implements Runnable {
 
     private void runClient() {
         try {
-            if (!bankConnection)
-                screenShell.append("\n\n>> Connecting to echeque host");
             connectToClient();
-            if (!bankConnection)
-                screenShell.append("\n\n>> you are connected");
             getSocketStream();
-            if (!bankConnection)
-                screenShell.append("\n\n>> you are connected");
-
-            if (!bankConnection) {
-                screenShell.append("\n\n>> Starting cheque transfer");
-                processConnection();
-            } else
-                processBankConnection();
+            if(bankConnection) processBankConnection(); else processConnection();
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, error.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE);
         } finally {
