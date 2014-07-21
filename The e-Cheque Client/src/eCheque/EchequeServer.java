@@ -69,7 +69,7 @@ public class EchequeServer implements Runnable {
         socketOutputObject.writeObject(serverCertificate);
         socketOutputObject.flush();
 
-        //get the wraeped key and uwraped it
+        //get the wraped key and unwraped it
         //read the session key form the socket
         int keyLength = socketInputObject.readInt();
         byte[] wrappedKey = new byte[keyLength];
@@ -81,9 +81,9 @@ public class EchequeServer implements Runnable {
         String chequeName = getChequeName();
         readCheque(chequeName);
         decryptCheque(getSessionKey(wrappedKey), chequeName);
-        if (verifySignature(clientCertificate, chequeName)) {
+        if (verifySignature(clientCertificate, chequeName))
             JOptionPane.showMessageDialog(null, "The signature is valid", "e-Cheque Cleared", JOptionPane.INFORMATION_MESSAGE);
-        } else {
+        else {
             JOptionPane.showMessageDialog(null, "The signature is not valid", "e-Cheque not Cleared", JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -95,7 +95,7 @@ public class EchequeServer implements Runnable {
     }
 
     private boolean verifySignature(DigitalCertificate clientCertificate, String chequeName) throws Exception {
-        // verify the cheque siganture using the sender public key.
+        // verify the cheque signature using the sender public key.
         DigitalSignature digitalSign = new DigitalSignature();
         // load decrypted chequeObject.
         EChequeIO readChq = new EChequeIO();
