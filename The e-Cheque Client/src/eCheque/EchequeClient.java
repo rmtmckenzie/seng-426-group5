@@ -76,7 +76,7 @@ public class EchequeClient implements Runnable {
         bankConnection = true;
     }
 
-    private void ConnectToServer() throws Exception {
+    private void connectToClient() throws Exception {
         ClientConnection = new Socket(InetAddress.getByName(hostname), portID);
         getServerConnection = true;
     }
@@ -123,7 +123,7 @@ public class EchequeClient implements Runnable {
 
     }
 
-    private void CloseConnection() {
+    private void closeConnection() {
         try {
             if (getSocketConnection) {
                 SocketInput.close();
@@ -170,12 +170,11 @@ public class EchequeClient implements Runnable {
         JOptionPane.showMessageDialog(null, confirm);
     }
 
-    public void RunClient() {
-
+    private void runClient() {
         try {
             if (!bankConnection)
                 screenShell.append("\n\n>> Connecting to echeque host");
-            ConnectToServer();
+            connectToClient();
             if (!bankConnection)
                 screenShell.append("\n\n>> you are connected");
             getSocketStream();
@@ -190,11 +189,11 @@ public class EchequeClient implements Runnable {
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, error.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE);
         } finally {
-            CloseConnection();
+            closeConnection();
         }
     }
 
     public void run() {
-        RunClient();
+        runClient();
     }
 }
