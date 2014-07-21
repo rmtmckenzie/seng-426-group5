@@ -84,8 +84,7 @@ public class EChequeServer implements Runnable {
         chqDB.runDB(1, registerStat);
 
         //store client digital certificate
-        DigitalCertificateIO dcIO = new DigitalCertificateIO();
-        dcIO.SaveDC(registDC, "Bank" + File.separator + registerClient.getClientName() + "DC.edc");
+        registDC.SaveDigitalCertificate("Bank" + File.separator + registerClient.getClientName() + "DC.edc");
 
         socketOutputObject.writeObject("registration complete");
         socketOutputObject.flush();
@@ -102,7 +101,7 @@ public class EChequeServer implements Runnable {
         String depositAccount = (String) socketInputObject.readObject();
 
         //check the withdraw account. 
-        String withdrawStat = "Select balance from accounts where accountID =" + recievedCheque.getaccountNumber();
+        String withdrawStat = "Select balance from accounts where accountID =" + recievedCheque.getAccountNumber();
         String cheqUpdate = "";
         double[] balanceValue = new double[1];
 
@@ -112,22 +111,22 @@ public class EChequeServer implements Runnable {
             double chequeMoney = Double.parseDouble(recievedCheque.getMoney());
             if (chequeMoney <= balanceValue[0]) {
                 // cheque that the cheque is not canceld
-                withdrawStat = "Select * from cancelledCheque where accountID ='" + recievedCheque.getaccountNumber() + "'and chequeID ='" + recievedCheque.getchequeNumber() + "'";
+                withdrawStat = "Select * from cancelledCheque where accountID ='" + recievedCheque.getAccountNumber() + "'and chequeID ='" + recievedCheque.getChequeNumber() + "'";
                 if (!chqDB.runDB(withdrawStat, 0)) {
-                    withdrawStat = "Select * from eChequeOut where chequeID='" + recievedCheque.getchequeNumber() + "'and accountID='" + recievedCheque.getaccountNumber() + "'";
+                    withdrawStat = "Select * from eChequeOut where chequeID='" + recievedCheque.getChequeNumber() + "'and accountID='" + recievedCheque.getAccountNumber() + "'";
                     if (!chqDB.runDB(withdrawStat, 0)) {
-                        withdrawStat = "Update accounts set balance = balance -" + chequeMoney + "where accountID =" + recievedCheque.getaccountNumber();
+                        withdrawStat = "Update accounts set balance = balance -" + chequeMoney + "where accountID =" + recievedCheque.getAccountNumber();
                         chqDB.runDB(1, withdrawStat);
                         withdrawStat = "Update accounts set balance = balance +" + chequeMoney + "where accountID =" + depositAccount;
                         chqDB.runDB(1, withdrawStat);
 
                         // update cheque out and in table
-                        cheqUpdate = "Insert into eChequeOut(chequeID, accountID, balance) values(" + "'" + recievedCheque.getchequeNumber()
-                                + "','" + recievedCheque.getaccountNumber() + "'," + chequeMoney + ")";
+                        cheqUpdate = "Insert into eChequeOut(chequeID, accountID, balance) values(" + "'" + recievedCheque.getChequeNumber()
+                                + "','" + recievedCheque.getAccountNumber() + "'," + chequeMoney + ")";
                         chqDB.runDB(1, cheqUpdate);
 
-                        cheqUpdate = "Insert into eChequeIN(chequeID, accountID, balance) values(" + "'" + recievedCheque.getchequeNumber()
-                                + "','" + recievedCheque.getaccountNumber() + "'," + chequeMoney + ")";
+                        cheqUpdate = "Insert into eChequeIN(chequeID, accountID, balance) values(" + "'" + recievedCheque.getChequeNumber()
+                                + "','" + recievedCheque.getAccountNumber() + "'," + chequeMoney + ")";
                         chqDB.runDB(1, cheqUpdate);
 
                         //report the deposit result
@@ -156,7 +155,7 @@ public class EChequeServer implements Runnable {
         ECheque recivedCehq = (ECheque) socketInputObject.readObject();
         String cancelChequeStat;
         cancelChequeStat = "insert into cancelledCheque (accountID,chequeID) values('"
-                + recivedCehq.getaccountNumber() + "','" + recivedCehq.getchequeNumber() + "')";
+                + recivedCehq.getAccountNumber() + "','" + recivedCehq.getChequeNumber() + "')";
         EChequeDB chqDB = new EChequeDB();
         if (chqDB.runDB(1, cancelChequeStat)) {
             socketOutputObject.writeObject("cheque canceld done");
@@ -198,14 +197,12 @@ public class EChequeServer implements Runnable {
     }
 
     private String getChequeReferenceString(ECheque chq) {
-
-        String ref = "";
-        ref += chq.getaccountNumber() + chq.getaccountholder()
-                + chq.getbankname() + chq.getchequeNumber()
-                + chq.getMoney() + chq.getcurrencytype() + chq.getearnday()
-                + chq.getguaranteed() + chq.getpayToOrderOf();
-
-        return ref;
+        
+        return chq.getAccountNumber() + chq.getAccountHolder()
+                + chq.getBankName() + chq.getChequeNumber() + chq.getMoney()
+                + chq.getCurrencyType() + chq.getEarnday()
+                + chq.getGuaranteed() + chq.getPayToOrderOf();
+        
     }
 
     public void run() {
