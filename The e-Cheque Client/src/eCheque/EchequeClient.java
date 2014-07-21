@@ -27,6 +27,10 @@ import javax.swing.JTextArea;
 
 public class EchequeClient implements Runnable {
 
+    public static final int MODE_REGISTER = 0;
+    public static final int MODE_DEPOSIT = 1;
+    public static final int MODE_CANCEL = 2;
+
     /**
      * Creates a new instance of EchequeClient
      */
@@ -160,7 +164,7 @@ public class EchequeClient implements Runnable {
         SocketOutputObject.writeInt(bankmode);
         SocketOutputObject.flush();
 
-        if (bankmode == 0) {
+        if (bankmode == MODE_REGISTER) {
             SocketOutputObject.writeObject(registrationData);
             SocketOutputObject.flush();
             SocketOutputObject.writeObject(clientCerit);
@@ -170,13 +174,13 @@ public class EchequeClient implements Runnable {
             outObj.writeObject(registrationData);
             outObj.close();
 
-        } else if (bankmode == 1) {
+        } else if (bankmode == MODE_DEPOSIT) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
             SocketOutputObject.writeObject(registrationData.getAccountNumber());
             SocketOutputObject.flush();
             JOptionPane.showMessageDialog(null, "Deposit information has been sent.");
-        } else if (bankmode == 2) {
+        } else if (bankmode == MODE_CANCEL) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
         }

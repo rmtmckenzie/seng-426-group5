@@ -175,8 +175,7 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
         try{
             //Get the sever side digital certificate.
             DigitalCertificate serverDC= new DigitalCertificate();
-            DigitalCertificateIO readServerDC = new DigitalCertificateIO();
-            serverDC = readServerDC.readDigitalCertificate(eChequeReg.getEWalletLoaction() + 
+            serverDC = serverDC.readDigitalCertificate(eChequeReg.getEWalletLoaction() + 
                     File.separator + "Security Tools" + File.separator + 
                     eChequeReg.getClientName()+"DigCert.edc");
             
@@ -186,7 +185,7 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
                 serverStartFlage = true;
             }
             //Start Server Thread.
-            Runnable threadingServer = new EchequeServer(jTServerState,serverDC,eChequeReg.getEWalletLoaction(),privKey,serverSocket);
+            Runnable threadingServer = new EChequeServer(jTServerState,serverDC,eChequeReg.getEWalletLoaction(),privKey,serverSocket);
             Thread  server = new Thread(threadingServer);
             server.start();
                      

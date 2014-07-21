@@ -6,7 +6,6 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Basel
@@ -14,7 +13,6 @@
 package eCheque;
 
 //import com.sun.crypto.provider.AESCipher;
-
 import java.net.*;
 import java.io.*;
 import java.util.Calendar;
@@ -25,23 +23,23 @@ import javax.swing.JTextArea;
 import javax.crypto.Cipher;
 import java.security.*;
 
-public class EchequeServer implements Runnable {
+public class EChequeServer implements Runnable {
 
     /**
-     * Creates a new instance of EchequeServer
+     * Creates a new instance of EChequeServer
      */
-    private ServerSocket server;
     private Socket ServerConnection;
     private ObjectInputStream socketInputObject;
     private ObjectOutputStream socketOutputObject;
     private InputStream socketInput;
     private OutputStream socketOutput;
-    private JTextArea screenShell;
-    private DigitalCertificate serverCertificate;
-    private String walletPath;
-    private PrivateKey privKey;
+    private final JTextArea screenShell;
+    private final ServerSocket server;
+    private final DigitalCertificate serverCertificate;
+    private final PrivateKey privKey;
+    private final String walletPath;
 
-    public EchequeServer(JTextArea screen, DigitalCertificate DC, String wPath, PrivateKey privateKey, ServerSocket serverSocket) {
+    public EChequeServer(JTextArea screen, DigitalCertificate DC, String wPath, PrivateKey privateKey, ServerSocket serverSocket) {
         screenShell = screen;
         serverCertificate = DC;
         walletPath = wPath;
@@ -81,9 +79,9 @@ public class EchequeServer implements Runnable {
         String chequeName = getChequeName();
         readCheque(chequeName);
         decryptCheque(getSessionKey(wrappedKey), chequeName);
-        if (verifySignature(clientCertificate, chequeName))
+        if (verifySignature(clientCertificate, chequeName)) {
             JOptionPane.showMessageDialog(null, "The signature is valid", "e-Cheque Cleared", JOptionPane.INFORMATION_MESSAGE);
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "The signature is not valid", "e-Cheque not Cleared", JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -98,10 +96,10 @@ public class EchequeServer implements Runnable {
         // verify the cheque signature using the sender public key.
         DigitalSignature digitalSign = new DigitalSignature();
         // load decrypted chequeObject.
-        EChequeIO readChq = new EChequeIO();
-        ECheque receivedCheque = readChq.readcheque(walletPath + File.separator +
-                "My Cheques" + File.separator + chequeName + ".sec");
-        return digitalSign.verifySignature(receivedCheque.getdrawersiganure(), chequeReferenceString(receivedCheque), clientCertificate.getpublicKey());
+        
+        ECheque receivedCheque =  ECheque.readCheque(walletPath + File.separator
+                + "My Cheques" + File.separator + chequeName + ".sec");
+        return digitalSign.verifySignature(receivedCheque.getDrawerSignature(), chequeReferenceString(receivedCheque), clientCertificate.getpublicKey());
     }
 
     private void decryptCheque(Key sessionKey, String chequeName) throws Exception {
@@ -121,7 +119,9 @@ public class EchequeServer implements Runnable {
         FileOutputStream chqIn = new FileOutputStream(walletPath + File.separator + "In Coming" + File.separator + chequeName + ".cry");
         byte[] buffer = new byte[1024];
         int numRead;
-        while ((numRead = socketInput.read(buffer)) >= 0) chqIn.write(buffer, 0, numRead);
+        while ((numRead = socketInput.read(buffer)) >= 0) {
+            chqIn.write(buffer, 0, numRead);
+        }
         chqIn.close();
     }
 
@@ -167,8 +167,10 @@ public class EchequeServer implements Runnable {
     }
 
     private String chequeReferenceString(ECheque chq) {
-        return chq.getaccountNumber() + chq.getaccountholder() + chq.getbankname() + chq.getchequeNumber() +
-                chq.getMoney() + chq.getcurrencytype() + chq.getearnday() + chq.getguaranteed() + chq.getpayToOrderOf();
+        return chq.getAccountNumber() + chq.getAccountHolder()
+                + chq.getBankName() + chq.getChequeNumber() + chq.getMoney()
+                + chq.getCurrencyType() + chq.getEarnday()
+                + chq.getGuaranteed() + chq.getPayToOrderOf();
     }
 
     public void run() {
