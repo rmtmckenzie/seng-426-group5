@@ -220,7 +220,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
      * @param dialogTitle - Title to show for the box
      * @return Path of folder
      */
-    private String SelectFilePath(String dialogTitle) {
+    private String selectFilePath(String dialogTitle) {
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -249,7 +249,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
      * Performs an action using an EchequeClient
      * @param action - number of the action
      */
-    private void PerformAction(int action) {
+    private void performAction(int action) {
         String hostName = jTBankIP.getText();
         Runnable client = new EchequeClient(CLIENTPORT, action, hostName, registerData, depositCheque);
         Thread clientThread = new Thread(client);
@@ -261,7 +261,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void jBLoadChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoadChequeActionPerformed
-       chequePath = SelectFilePath("Open Saved Cheque");
+       chequePath = selectFilePath("Open Saved Cheque");
        selectChequeFlag = false;
        String chequeNumber = "N/A";
         if (chequePath.length() != 0) {
@@ -286,11 +286,11 @@ public class EBankingJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTBankIPKeyTyped
 
     private void jBDepositChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDepositChequeActionPerformed
-        PerformAction(EchequeClient.MODE_DEPOSIT);
+        performAction(EchequeClient.MODE_DEPOSIT);
     }//GEN-LAST:event_jBDepositChequeActionPerformed
 
     private void jBCancelChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelChequeActionPerformed
-        PerformAction(EchequeClient.MODE_CANCEL);
+        performAction(EchequeClient.MODE_CANCEL);
     }//GEN-LAST:event_jBCancelChequeActionPerformed
 
 
