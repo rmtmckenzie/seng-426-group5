@@ -186,7 +186,7 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
                 serverStartFlage = true;
             }
             //Start Server Thread.
-            Runnable threadingServer = new EchequeServer(jTServerState,serverDC,eChequeReg.getEWalletLoaction(),privKey,serverSocket);
+            Runnable threadingServer = new EChequeServer(jTServerState,serverDC,eChequeReg.getEWalletLoaction(),privKey,serverSocket);
             Thread  server = new Thread(threadingServer);
             server.start();
                      
