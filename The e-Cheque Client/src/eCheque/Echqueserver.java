@@ -79,6 +79,8 @@ public class Echqueserver implements Runnable {
         //read the session key form the socket
         keyLength = socketInputObject.readInt();
         wrappedKey = new byte[keyLength];
+
+        //noinspection ResultOfMethodCallIgnored
         socketInput.read(wrappedKey);
 
         //decrypt the session key with the user private key.
@@ -88,11 +90,11 @@ public class Echqueserver implements Runnable {
 
         Calendar currTime = new GregorianCalendar();
         String chequeName = "";
-        chequeName += currTime.get(currTime.YEAR);
-        chequeName += currTime.get(currTime.MONTH);
-        chequeName += currTime.get(currTime.DAY_OF_MONTH);
-        chequeName += currTime.get(currTime.HOUR_OF_DAY);
-        chequeName += currTime.get(currTime.MILLISECOND);
+        chequeName += currTime.get(GregorianCalendar.YEAR);
+        chequeName += currTime.get(GregorianCalendar.MONTH);
+        chequeName += currTime.get(GregorianCalendar.DAY_OF_MONTH);
+        chequeName += currTime.get(GregorianCalendar.HOUR_OF_DAY);
+        chequeName += currTime.get(GregorianCalendar.MILLISECOND);
 
         //read the cheque from the socket
         FileOutputStream chqIn = new FileOutputStream(walletPath +
