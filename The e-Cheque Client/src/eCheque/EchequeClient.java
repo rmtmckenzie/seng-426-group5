@@ -16,8 +16,12 @@ package eCheque;
 
 import java.net.*;
 import java.io.*;
+import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -93,9 +97,10 @@ public class EchequeClient implements Runnable {
 
     /**
      * Process a connection between this client, and another client.
+     *
      * @throws Exception
      */
-    private void processConnection() throws Exception {
+    private void processConnection() throws IOException,ClassNotFoundException,NoSuchAlgorithmException,NoSuchPaddingException, IllegalBlockSizeException,InvalidKeyException {
         DigitalCertificate certificate;
 
         //exchange the Digital Ceritificates
@@ -145,6 +150,7 @@ public class EchequeClient implements Runnable {
 
     /**
      * Process a connection between this client, and a bank server
+     *
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -169,8 +175,7 @@ public class EchequeClient implements Runnable {
             SocketOutputObject.flush();
             SocketOutputObject.writeObject(registrationData.getAccountNumber());
             SocketOutputObject.flush();
-            JOptionPane.showMessageDialog(null, "send info for deposit done");
-
+            JOptionPane.showMessageDialog(null, "Deposit information has been sent.");
         } else if (bankmode == 2) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
@@ -183,7 +188,8 @@ public class EchequeClient implements Runnable {
         try {
             connectToClient();
             getSocketStream();
-            if(bankConnection) processBankConnection(); else processConnection();
+            if (bankConnection) processBankConnection();
+            else processConnection();
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, error.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE);
         } finally {
