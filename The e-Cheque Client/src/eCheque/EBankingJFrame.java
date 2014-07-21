@@ -21,9 +21,12 @@ public class EBankingJFrame extends javax.swing.JFrame {
     private boolean selectChequeFlag;
     private final EChequeRegistration registerData;
     private ECheque depositCheque;
+    
+    private static final int CLIENTPORT = 8189;
 
     /**
      * Creates new form EBankingJFrame
+     * @param registerdUser
      */
     public EBankingJFrame(EChequeRegistration registerdUser) {
         try {
@@ -194,6 +197,12 @@ public class EBankingJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Checks whether buttons are ready to be enabled;
+     * IP address field must have something entered and
+     * a valid cheque must have been selected.
+     * @return 
+     */
     private boolean checkSubmitReady() {
         if (jTBankIP.getText().length() != 0 && selectChequeFlag) {
             jBCancelCheque.setEnabled(true);
@@ -206,7 +215,12 @@ public class EBankingJFrame extends javax.swing.JFrame {
         }
     }
 
-    private String getFileLocation(String dialogTitle) {
+    /**
+     * Get a folder path the user selects
+     * @param dialogTitle - Title to show for the box
+     * @return Path of folder
+     */
+    private String SelectFilePath(String dialogTitle) {
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -226,18 +240,28 @@ public class EBankingJFrame extends javax.swing.JFrame {
                     "Invalid File Name", JOptionPane.ERROR_MESSAGE);
             return "";
         }
+        
         return fileName.getPath();
+        
     }
 
+    /**
+     * Performs an action using an EchequeClient
+     * @param action - number of the action
+     */
     private void PerformAction(int action) {
         String hostName = jTBankIP.getText();
-        Runnable client = new EchequeClient(8189, action, hostName, registerData, depositCheque);
+        Runnable client = new EchequeClient(CLIENTPORT, action, hostName, registerData, depositCheque);
         Thread clientThread = new Thread(client);
         clientThread.start();
     }
 
+    /**
+     * Load a cheque and validate that it is a cheque
+     * @param evt 
+     */
     private void jBLoadChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoadChequeActionPerformed
-       chequePath = getFileLocation("Open Saved Cheque");
+       chequePath = SelectFilePath("Open Saved Cheque");
        selectChequeFlag = false;
        String chequeNumber = "N/A";
         if (chequePath.length() != 0) {
