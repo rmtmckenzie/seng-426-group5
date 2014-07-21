@@ -38,7 +38,6 @@ public class Echqueserver implements Runnable {
     private JTextArea screenShell;
     private DigitalCertificate serverCertificate;
     private String walletPath;
-    private int portID;
     private PrivateKey privKey;
 
     public Echqueserver(JTextArea screen, DigitalCertificate DC, String wPath, PrivateKey privateKey, ServerSocket serverSocket) {
@@ -125,8 +124,7 @@ public class Echqueserver implements Runnable {
         ECheque receivedCheque = readChq.readcheque(walletPath + File.separator +
                 "My Cheques" + File.separator + chequeName + ".sec");
 
-        boolean verifySign = digitalSign.verifySignature(receivedCheque.getdrawersiganure(), ChequeReferenceString(receivedCheque), clientCerit.getpublicKey());
-        if (verifySign) {
+        if (digitalSign.verifySignature(receivedCheque.getdrawersiganure(), ChequeReferenceString(receivedCheque), clientCerit.getpublicKey())) {
             JOptionPane.showMessageDialog(null, "The signature is valid", "e-Cheque Cleared", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "The signature is not valid", "e-Cheque not Cleared", JOptionPane.WARNING_MESSAGE);
@@ -149,9 +147,9 @@ public class Echqueserver implements Runnable {
 
     public void RunServer() {
         try {
-            screenShell.append("\n>>Status: Starting The Sever");
+            screenShell.append("\n>>Status: Starting The Server");
             //startServer();
-            screenShell.append("\n>>Status: Wating for connection");
+            screenShell.append("\n>>Status: Waiting for connection");
             acceptConnection();
             screenShell.append("\n>>Status: connection accepted");
             getSocketStream();
@@ -168,16 +166,11 @@ public class Echqueserver implements Runnable {
     }
 
     private String ChequeReferenceString(ECheque chq) {
-
-        String ref = "";
-        ref += chq.getaccountNumber() + chq.getaccountholder() + chq.getbankname() + chq.getchequeNumber() +
+        return chq.getaccountNumber() + chq.getaccountholder() + chq.getbankname() + chq.getchequeNumber() +
                 chq.getMoney() + chq.getcurrencytype() + chq.getearnday() + chq.getguaranteed() + chq.getpayToOrderOf();
-
-        return ref;
     }
 
     public void run() {
-
         RunServer();
     }
 
