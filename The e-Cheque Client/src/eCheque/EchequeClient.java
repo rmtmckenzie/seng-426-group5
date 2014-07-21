@@ -91,6 +91,10 @@ public class EchequeClient implements Runnable {
         getServerConnection = true;
     }
 
+    /**
+     * Process a connection between this client, and another client.
+     * @throws Exception
+     */
     private void processConnection() throws Exception {
         DigitalCertificate certificate;
 
@@ -139,6 +143,11 @@ public class EchequeClient implements Runnable {
         }
     }
 
+    /**
+     * Process a connection between this client, and a bank server
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private void processBankConnection() throws IOException, ClassNotFoundException {
         SocketOutputObject.writeObject("Hello");
         SocketOutputObject.flush();
