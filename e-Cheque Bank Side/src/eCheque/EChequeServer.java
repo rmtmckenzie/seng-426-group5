@@ -21,7 +21,11 @@ public class EChequeServer implements Runnable {
     /**
      * Creates a new instance of EChequeServer
      */
-    private ServerSocket server;
+    
+    public static final int MODE_REGISTER = 0;
+    public static final int MODE_DEPOSIT = 1;
+    public static final int MODE_CANCEL = 2;
+    
     private final Socket serverConnection;
     private ObjectInputStream socketInputObject;
     private ObjectOutputStream socketOutputObject;
@@ -32,12 +36,6 @@ public class EChequeServer implements Runnable {
         serverConnection = socket;
     }
 
- //private void startServer() throws Exception{
-    // server = new ServerSocket(portID);
-//}
-// private void acceptConnection()throws IOException{
-    //   ServerConnection = server.accept();
-//} 
     private void getSocketStream() throws Exception {
         socketOutput = serverConnection.getOutputStream();
         socketOutput.flush();
@@ -49,24 +47,23 @@ public class EChequeServer implements Runnable {
     }
 
     private void processConnection() throws IOException, ClassNotFoundException {
-        boolean sessionDone = false;
+        
         String line;
         int code;
-        if (!sessionDone) {
 
-            line = (String) socketInputObject.readObject();
-            code = socketInputObject.readInt();
-            if (code == 0) {
+        line = (String) socketInputObject.readObject();
+        code = socketInputObject.readInt();
+        
+        switch(code){
+            case MODE_REGISTER:
                 registerClientInfo();
-            }
-            if (code == 1) {
+                break;
+            case MODE_DEPOSIT:
                 depositCheque();
-            }
-            if (code == 2) {
+                break;
+            case MODE_CANCEL:
                 cancelCheque();
-            }
         }
-
     }
 
     private void registerClientInfo() throws IOException, ClassNotFoundException {
@@ -203,8 +200,10 @@ public class EChequeServer implements Runnable {
     private String getChequeReferenceString(ECheque chq) {
 
         String ref = "";
-        ref += chq.getaccountNumber() + chq.getaccountholder() + chq.getbankname() + chq.getchequeNumber()
-                + chq.getMoney() + chq.getcurrencytype() + chq.getearnday() + chq.getguaranteed() + chq.getpayToOrderOf();
+        ref += chq.getaccountNumber() + chq.getaccountholder()
+                + chq.getbankname() + chq.getchequeNumber()
+                + chq.getMoney() + chq.getcurrencytype() + chq.getearnday()
+                + chq.getguaranteed() + chq.getpayToOrderOf();
 
         return ref;
     }
