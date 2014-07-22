@@ -21,11 +21,10 @@ public class EChequeServer implements Runnable {
     /**
      * Creates a new instance of EChequeServer
      */
-    
     public static final int MODE_REGISTER = 0;
     public static final int MODE_DEPOSIT = 1;
     public static final int MODE_CANCEL = 2;
-    
+
     private final Socket serverConnection;
     private ObjectInputStream socketInputObject;
     private ObjectOutputStream socketOutputObject;
@@ -47,14 +46,14 @@ public class EChequeServer implements Runnable {
     }
 
     private void processConnection() throws IOException, ClassNotFoundException {
-        
+
         String line;
         int code;
 
         line = (String) socketInputObject.readObject();
         code = socketInputObject.readInt();
-        
-        switch(code){
+
+        switch (code) {
             case MODE_REGISTER:
                 registerClientInfo();
                 break;
@@ -71,24 +70,27 @@ public class EChequeServer implements Runnable {
         registerClient = (EChequeRegistration) socketInputObject.readObject();
         // get user account ID
         String accountID = "'" + registerClient.getAccountNumber() + "',";
-        String cerit = "'" + registerClient.getClientName() + "DC.edc" + "',";
+        String certPath = "'" + registerClient.getClientName() + "DC.edc" + "',";
         String clientName = "'" + registerClient.getClientName() + "',";
 
         DigitalCertificate registDC = (DigitalCertificate) socketInputObject.readObject();
 
-        String registerStat = "insert into accounts(accountID,clientName,dcPath,balance) values("
-                + accountID + clientName + cerit + 100000 + ")";
+        String registerStatement = "insert into accounts(accountID,clientName,dcPath,balance) values("
+                + accountID + clientName + certPath + 100000 + ")";
 
         // starting database
         EChequeDB chqDB = new EChequeDB();
-        chqDB.runDB(1, registerStat);
+        boolean result = chqDB.runDB(1, registerStatement);
 
-        //store client digital certificate
-        registDC.SaveDigitalCertificate("Bank" + File.separator + registerClient.getClientName() + "DC.edc");
-
-        socketOutputObject.writeObject("registration complete");
-        socketOutputObject.flush();
-        //JOptionPane.showMessageDialog(null,"Register Done");
+        if (result) {
+            //store client digital certificate
+            registDC.SaveDigitalCertificate("Bank" + File.separator + registerClient.getClientName() + "DC.edc");
+            socketOutputObject.writeObject("registration complete");
+            socketOutputObject.flush();
+        } else {
+            socketOutputObject.writeObject("registration failed");
+            socketOutputObject.flush();
+        }
 
     }
 
@@ -102,7 +104,7 @@ public class EChequeServer implements Runnable {
 
         //check the withdraw account. 
         String withdrawStat = "Select balance from accounts where accountID =" + recievedCheque.getAccountNumber();
-        String cheqUpdate = "";
+        String chequeUpdate = "";
         double[] balanceValue = new double[1];
 
         EChequeDB chqDB = new EChequeDB();
@@ -121,13 +123,13 @@ public class EChequeServer implements Runnable {
                         chqDB.runDB(1, withdrawStat);
 
                         // update cheque out and in table
-                        cheqUpdate = "Insert into eChequeOut(chequeID, accountID, balance) values(" + "'" + recievedCheque.getChequeNumber()
+                        chequeUpdate = "Insert into eChequeOut(chequeID, accountID, balance) values(" + "'" + recievedCheque.getChequeNumber()
                                 + "','" + recievedCheque.getAccountNumber() + "'," + chequeMoney + ")";
-                        chqDB.runDB(1, cheqUpdate);
+                        chqDB.runDB(1, chequeUpdate);
 
-                        cheqUpdate = "Insert into eChequeIN(chequeID, accountID, balance) values(" + "'" + recievedCheque.getChequeNumber()
+                        chequeUpdate = "Insert into eChequeIN(chequeID, accountID, balance) values(" + "'" + recievedCheque.getChequeNumber()
                                 + "','" + recievedCheque.getAccountNumber() + "'," + chequeMoney + ")";
-                        chqDB.runDB(1, cheqUpdate);
+                        chqDB.runDB(1, chequeUpdate);
 
                         //report the deposit result
                         depositResult = "Your acoount recieves the deposit cheque\nyour balance incremented by" + recievedCheque.getMoney();
@@ -197,12 +199,12 @@ public class EChequeServer implements Runnable {
     }
 
     private String getChequeReferenceString(ECheque chq) {
-        
+
         return chq.getAccountNumber() + chq.getAccountHolder()
                 + chq.getBankName() + chq.getChequeNumber() + chq.getMoney()
                 + chq.getCurrencyType() + chq.getEarnday()
                 + chq.getGuaranteed() + chq.getPayToOrderOf();
-        
+
     }
 
     public void run() {

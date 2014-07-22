@@ -6,7 +6,6 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 package eCheque;
 
 import java.sql.ResultSet;
@@ -21,21 +20,19 @@ import javax.swing.JTextArea;
  *
  * @author Saad
  */
-
-
 public class EChequeDB {
-    
-    private static final String JDBC_DRIVER ="com.mysql.jdbc.Driver";   
+
+    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost/ebank";
     private String userName;
     private String password;
-    private Connection connection = null; 
-    private Statement  sqlStatement = null; 
+    private Connection connection = null;
+    private Statement sqlStatement = null;
     private int databaseMode;
-    private ResultSet resultSet;    
-    
-    /** 
-     * Creates a new instance of EChequeDB 
+    private ResultSet resultSet;
+
+    /**
+     * Creates a new instance of EChequeDB
      */
     public EChequeDB() {
         userName = "seng426";
