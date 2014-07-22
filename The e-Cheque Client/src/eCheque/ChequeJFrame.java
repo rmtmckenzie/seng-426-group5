@@ -572,8 +572,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
                             try {
                                 //create AES Key with user password and cipher  
                                 AESCrypt aesCrypt = new AESCrypt();
-                                Key AES128 = aesCrypt.inilizeAESKeyByPassword(signPass);
-                                Cipher cipher = aesCrypt.initializeCipher(AES128, 1);
+                                Key AES128 = aesCrypt.initializeAESKeyByPassword(signPass);
+                                Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.DECRYPT);
                                 InputStream in = new FileInputStream(eChequeReg.getEWalletLoaction()
                                         + File.separator + "Security Tools"
                                         + File.separator + "Private Key.key");

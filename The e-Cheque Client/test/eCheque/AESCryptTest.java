@@ -71,7 +71,7 @@ public class AESCryptTest {
 	public void initializeAESKeyByPasswordTest()
 	{
 		AESCrypt aesCrypt = new AESCrypt();
-		Key key = aesCrypt.inilizeAESKeyByPassword("testtesttesttest");
+		Key key = aesCrypt.initializeAESKeyByPassword("testtesttesttest");
 		assertNotNull(key);
 		assertNotNull(key.getEncoded());
 		assertEquals(key.getAlgorithm(),"AES");
@@ -81,11 +81,11 @@ public class AESCryptTest {
 	public void initializeCipherEncryptTest(){
 		AESCrypt aesCrypt = new AESCrypt();
 		String seed = "testtesttesttest";
-		Key key = aesCrypt.inilizeAESKeyByPassword(seed);
+		Key key = aesCrypt.initializeAESKeyByPassword(seed);
 
 		Cipher cipher = null;
 		try {
-			cipher = aesCrypt.initializeCipher(key, 0);
+			cipher = aesCrypt.initializeCipher(key, AESCrypt.cypherType.ENCRYPT);
 		} catch (Exception e) {
 			fail();
 		}
@@ -97,11 +97,11 @@ public class AESCryptTest {
 	public void initializeCipherDecryptTest(){
 		AESCrypt aesCrypt = new AESCrypt();
 		String seed = "testtesttesttest";
-		Key key = aesCrypt.inilizeAESKeyByPassword(seed);
+		Key key = aesCrypt.initializeAESKeyByPassword(seed);
 
 		Cipher cipher = null;
 		try {
-			cipher = aesCrypt.initializeCipher(key, 1);
+			cipher = aesCrypt.initializeCipher(key, AESCrypt.cypherType.DECRYPT);
 		} catch (Exception e) {
 			fail();
 		}
@@ -124,7 +124,7 @@ public class AESCryptTest {
 
 		Cipher cipher = null;
 		try {
-			cipher = aesCrypt.initializeCipher(key, 2);
+			cipher = aesCrypt.initializeCipher(key, AESCrypt.cypherType.WRAP);
 		} catch (Exception e) {
 			fail();
 		}
@@ -147,7 +147,7 @@ public class AESCryptTest {
 
 		Cipher cipher = null;
 		try {
-			cipher = aesCrypt.initializeCipher(key, 3);
+			cipher = aesCrypt.initializeCipher(key, AESCrypt.cypherType.UNWRAP);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -187,11 +187,11 @@ public class AESCryptTest {
 
 		AESCrypt aesCrypt = new AESCrypt();
 		String seed = "testtesttesttest";
-		Key key = aesCrypt.inilizeAESKeyByPassword(seed);
+		Key key = aesCrypt.initializeAESKeyByPassword(seed);
 		Cipher cipher = null;
 
 		try {
-			cipher = aesCrypt.initializeCipher(key, 0);
+			cipher = aesCrypt.initializeCipher(key, AESCrypt.cypherType.ENCRYPT);
 		} catch (Exception e) {
 			fail("Could not initialize Cipher");
 		}
@@ -235,11 +235,11 @@ public class AESCryptTest {
 
 		AESCrypt aesCrypt = new AESCrypt();
 		String seed = "testtesttesttest";
-		Key key = aesCrypt.inilizeAESKeyByPassword(seed);
+		Key key = aesCrypt.initializeAESKeyByPassword(seed);
 		Cipher cipher = null;
 
 		try {
-			cipher = aesCrypt.initializeCipher(key, 0);
+			cipher = aesCrypt.initializeCipher(key, AESCrypt.cypherType.ENCRYPT);
 		} catch (Exception e) {
 			fail("Could not initialize Cipher");
 		}

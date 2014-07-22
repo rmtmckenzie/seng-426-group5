@@ -404,8 +404,8 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 	private PrivateKey createPrivateKey(String userPassword) throws Exception {
 		//create AES Key with user password and cipher
 		AESCrypt aesCrypt = new AESCrypt();
-		Key AES128 = aesCrypt.inilizeAESKeyByPassword(userPassword);
-		Cipher cipher = aesCrypt.initializeCipher(AES128, 1);
+		Key AES128 = aesCrypt.initializeAESKeyByPassword(userPassword);
+		Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.DECRYPT);
 		InputStream in = new FileInputStream(registeredUser.getEWalletLoaction() + File.separator + "Security Tools" + File.separator + "Private Key.key");
 		OutputStream out = new FileOutputStream(registeredUser.getEWalletLoaction() + File.separator + "Security Tools" + File.separator + "PrivateKey.key");
 

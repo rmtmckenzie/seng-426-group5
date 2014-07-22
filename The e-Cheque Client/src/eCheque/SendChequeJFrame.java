@@ -260,7 +260,7 @@ public class SendChequeJFrame extends javax.swing.JFrame {
                             AESCrypt aesKey128 = new AESCrypt();
                             Key sessionKey;
                             sessionKey = aesKey128.GenerateRandomAESKey();
-                            Cipher aesCipher = aesKey128.initializeCipher(sessionKey,0);
+                            Cipher aesCipher = aesKey128.initializeCipher(sessionKey, AESCrypt.cypherType.ENCRYPT);
 
                             InputStream in = new FileInputStream(chequePath);
                             JOptionPane.showMessageDialog(null,eChequeRegisterdUser.getEWalletLoaction());

@@ -697,8 +697,8 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
             // create AES Key with user password and cipher
             AESCrypt aesCrypt = new AESCrypt();
-            Key AES128 = aesCrypt.inilizeAESKeyByPassword(passTemp);
-            Cipher cipher = aesCrypt.initializeCipher(AES128, 0);
+            Key AES128 = aesCrypt.initializeAESKeyByPassword(passTemp);
+            Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.ENCRYPT);
             InputStream in = new FileInputStream(eWalletPath
                     + File.separator + "Security Tools"
                     + File.separator + "privateKey.key");

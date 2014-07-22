@@ -126,7 +126,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
                     .add(jLChequeSelection)
                     .add(jBLoadCheque))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLCurrentCheque)
                     .add(jLChequeName))
                 .add(0, 21, Short.MAX_VALUE))
@@ -269,7 +269,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
                 depositCheque = depositCheque.readCheque(chequePath);
                 selectChequeFlag = true;
                 
-                chequeNumber = depositCheque.getchequeNumber();
+                chequeNumber = depositCheque.getChequeNumber();
             } catch (IOException exp) {
                 JOptionPane.showMessageDialog(null, "Cannot load the cheque", "System Error", JOptionPane.ERROR_MESSAGE);
             } catch (ClassNotFoundException exp) {

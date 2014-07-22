@@ -108,7 +108,7 @@ public class EChequeServer implements Runnable {
 
         //create AES object to decrypt the received cheque
         AESCrypt aesObj = new AESCrypt();
-        Cipher aesCipher = aesObj.initializeCipher(sessionKey, 1);
+        Cipher aesCipher = aesObj.initializeCipher(sessionKey, AESCrypt.cypherType.DECRYPT);
         aesObj.crypt(in, out, aesCipher);
         in.close();
         out.close();

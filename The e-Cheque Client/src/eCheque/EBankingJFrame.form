@@ -145,9 +145,9 @@
                           <Component id="jBLoadCheque" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLCurrentCheque" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLChequeName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLChequeName" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
                   </Group>
