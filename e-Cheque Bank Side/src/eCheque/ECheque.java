@@ -20,7 +20,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.*;
 
-// This class stores data from an echeque and does file operations
+//this class is for storing cheque data and file operations
 public class ECheque implements Serializable {
 
     private String accountHolder;
@@ -38,7 +38,8 @@ public class ECheque implements Serializable {
     /**
      * Creates a new instance of ECheque
      */
-    public ECheque() {
+    public ECheque() 
+    {
 
     }
 
@@ -123,11 +124,17 @@ public class ECheque implements Serializable {
     }
 
     public boolean getGuaranteed() {
+
         return guaranteed;
     }
 
     public String getEarnday() {
         return earnday;
+    }
+    
+    public String getReferenceString() {
+        return accountNumber + accountHolder + bankName + chequeNumber +
+                amountOfMoney+ currencyType + earnday + guaranteed + payToOrderOf;
     }
 
     public byte[] getBankSignature() {
@@ -138,16 +145,14 @@ public class ECheque implements Serializable {
         return drawerSignature;
     }
 
-    // Save cheque to a file
     public void saveCheque(String filename) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File(filename)));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
         out.writeObject(this);
         out.close();
     }
 
-    // Read cheque from a file
     static public ECheque readCheque(String filename) throws IOException, ClassNotFoundException {
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File(filename)));
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
         ECheque cheq;
         cheq = (ECheque) in.readObject();
         in.close();
