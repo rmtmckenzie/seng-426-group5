@@ -35,7 +35,11 @@ public class EChequeServer implements Runnable {
         serverConnection = socket;
     }
 
-    private void getSocketStream() throws Exception {
+    /**
+     * Gets the input and output stream objects
+     * @throws IOException 
+     */
+    private void getSocketStream() throws IOException {
         socketOutput = serverConnection.getOutputStream();
         socketOutput.flush();
         socketInput = serverConnection.getInputStream();
@@ -45,6 +49,11 @@ public class EChequeServer implements Runnable {
         socketInputObject = new ObjectInputStream(serverConnection.getInputStream());
     }
 
+    /**
+     * Process an incoming connection
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     private void processConnection() throws IOException, ClassNotFoundException {
         int code;
         
@@ -63,6 +72,11 @@ public class EChequeServer implements Runnable {
         }
     }
 
+    /**
+     * Perform the registration of a new user.
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     private void registerClientInfo() throws IOException, ClassNotFoundException {
         EChequeRegistration registerClient;
         registerClient = (EChequeRegistration) socketInputObject.readObject();
@@ -86,6 +100,11 @@ public class EChequeServer implements Runnable {
 
     }
 
+    /**
+     * Perform the depositing of a cheque into a user's account.
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     private void depositCheque() throws IOException, ClassNotFoundException {
 
         String depositResult = "";
@@ -141,6 +160,11 @@ public class EChequeServer implements Runnable {
         }
     }
 
+    /**
+     * Performs the cancelling of a cheque.
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     private void cancelCheque() throws IOException, ClassNotFoundException {
         ECheque receivedCheque = (ECheque) socketInputObject.readObject();
         EChequeDB chqDB = new EChequeDB();
@@ -156,6 +180,9 @@ public class EChequeServer implements Runnable {
 
     }
 
+    /**
+     * Closes the connection.
+     */
     private void closeConnection() {
         try {
             socketInput.close();
@@ -165,17 +192,6 @@ public class EChequeServer implements Runnable {
             serverConnection.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void runServer() {
-        try {
-            getSocketStream();
-            processConnection();
-        } catch (Exception error) {
-            error.printStackTrace();
-        } finally {
-            closeConnection();
         }
     }
 
@@ -189,7 +205,16 @@ public class EChequeServer implements Runnable {
     }
 
     public void run() {
-        runServer();
+        try {
+            getSocketStream();
+            processConnection();
+        } catch (IOException error) {
+            error.printStackTrace();
+        } catch (ClassNotFoundException error) {
+            error.printStackTrace();
+        } finally {
+            closeConnection();
+        }
     }
 
 }

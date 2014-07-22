@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class EChequeBankServer extends javax.swing.JFrame {
 
 	private boolean serverStartFlag;
-	private BankSever runBank;	
+	private BankServer runBank;	
 	private Thread bankServerThread;
 	private boolean already;
 
@@ -141,7 +141,7 @@ public class EChequeBankServer extends javax.swing.JFrame {
 			 try {
 				 
 				 if( already == false){
-					runBank = new BankSever();					
+					runBank = new BankServer();					
 					already = true;
 				 }
 				 bankServerThread = new Thread(runBank);
