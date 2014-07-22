@@ -18,18 +18,20 @@ import javax.crypto.spec.*;
 import java.io.*;
 
 /**
- * Creates a new instance of SecretKeyGenerateRandomAESKey
+ * Creates a new instance of AESCrypt
  */
 public class AESCrypt {
-    public enum cypherType
-    {
-        ENCRYPT, 
-        DECRYPT, 
+
+    public enum cypherType {
+
+        ENCRYPT,
+        DECRYPT,
         WRAP,
         UNWRAP
     };
+
     // Returns a randomly generated secret key
-    public SecretKey GenerateRandomAESKey() throws Exception {
+    static public SecretKey GenerateRandomAESKey() throws Exception {
         KeyGenerator KeyGen = KeyGenerator.getInstance("AES");
         SecureRandom random = new SecureRandom();
         KeyGen.init(random);
@@ -38,7 +40,7 @@ public class AESCrypt {
     }
 
     // Initializes the cypher mode
-    public Cipher initializeCipher(Key key, eCheque.AESCrypt.cypherType mode) throws GeneralSecurityException {
+    static public Cipher initializeCipher(Key key, eCheque.AESCrypt.cypherType mode) throws GeneralSecurityException {
 
         int CipherMode;
 
@@ -49,11 +51,9 @@ public class AESCrypt {
             CipherMode = Cipher.DECRYPT_MODE;
         } else if (mode == cypherType.WRAP) {
             CipherMode = Cipher.WRAP_MODE;
-        } else if(mode == cypherType.UNWRAP){
+        } else if (mode == cypherType.UNWRAP) {
             CipherMode = Cipher.UNWRAP_MODE;
-        }
-        else
-        {
+        } else {
             throw new IllegalArgumentException();
         }
 
@@ -72,8 +72,8 @@ public class AESCrypt {
         return cipherObj;
     }
 
-    // 
-    public void crypt(InputStream in, OutputStream out, Cipher cipherObj) throws GeneralSecurityException, IOException {
+    //  Encrypt or decrypt the inputstream based on the initialized cypher
+    static public void crypt(InputStream in, OutputStream out, Cipher cipherObj) throws GeneralSecurityException, IOException {
 
         int blockSize = cipherObj.getBlockSize();
         int outputSize = cipherObj.getOutputSize(blockSize);
@@ -100,7 +100,7 @@ public class AESCrypt {
     }
 
     // Create a AES key from a password
-    public SecretKeySpec initializeAESKeyByPassword(String pass) {
+    static public SecretKeySpec initializeAESKeyByPassword(String pass) {
 
         byte[] KeyData = pass.getBytes();
         SecretKeySpec aesKey;
