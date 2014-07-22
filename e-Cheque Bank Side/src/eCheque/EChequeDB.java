@@ -12,11 +12,12 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.ResultSet;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -39,24 +40,24 @@ public class EChequeDB {
      * Creates a new instance of EChequeDB
      */
     public EChequeDB() {
-		try {			
-			// Read in the db.config file.
-			// Format
-			// jdbc:mysql://localhost/ebank
-			// username
-			// password
-			FileInputStream fis = new FileInputStream("db.config"); 			
-			BufferedReader br = new BufferedReader(new InputStreamReader(fis));					
-			database_url = br.readLine();
-			userName = br.readLine();			
-			password = br.readLine();
-			br.close();				
-		} catch (IOException exp) {
-			database_url = "";
-			userName = "";
-			password = "";
-			exp.printStackTrace();			
-		}	
+        try {
+            // Read in the db.config file.
+            // Format
+            // jdbc:mysql://localhost/ebank
+            // username
+            // password
+            FileInputStream fis = new FileInputStream("db.config");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            database_url = br.readLine();
+            userName = br.readLine();
+            password = br.readLine();
+            br.close();
+        } catch (IOException exp) {
+            database_url = "";
+            userName = "";
+            password = "";
+            exp.printStackTrace();
+        }
     }
 
     private boolean connectToDataBase() throws ClassNotFoundException, SQLException {
@@ -89,6 +90,60 @@ public class EChequeDB {
         } else if (statType == 1) {
             sqlStatement.executeUpdate(statement);
         }
+    }
+    
+    public boolean runQuery(String statement, Object ... objects) {
+        boolean result = false;
+        
+        try {
+            PreparedStatement s = connection.prepareStatement(statement);
+            for(int i = 0; i < objects.length; i++) {
+                s.setObject(i + 1, objects[i]);
+            }
+            resultSet = s.executeQuery();
+            result = resultSet.next();
+        } catch (SQLException exp) {
+            JOptionPane.showMessageDialog(null, exp.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
+            exp.printStackTrace();
+        } finally {
+            closeDataBaseConnection();
+        }
+        
+        return result;
+    }
+    
+    public boolean runUpdate(String statement, Object ... objects) {
+        boolean result = false;
+        
+        try {
+            PreparedStatement s = connection.prepareStatement(statement);
+            for(int i = 0; i < objects.length; i++) {
+                s.setObject(i + 1, objects[i]);
+            }
+            s.executeUpdate();
+            result = true;
+        } catch (SQLException exp) {
+            JOptionPane.showMessageDialog(null, exp.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
+            exp.printStackTrace();
+        } finally {
+            closeDataBaseConnection();
+        }
+        
+        return result;
+    }
+    
+    public Object runReturnQuery(String statement, Object ... objects) {
+        Object obj = null;
+        boolean flag = runQuery(statement, objects);
+        if(flag){
+            try {
+                obj =  resultSet.getObject(userName);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+        return obj;
     }
 
     public boolean runDB(int databaseMode, String databaseStat) {
