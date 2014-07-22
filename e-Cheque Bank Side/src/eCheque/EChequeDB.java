@@ -6,7 +6,6 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 package eCheque;
 
 import java.sql.ResultSet;
@@ -21,21 +20,19 @@ import javax.swing.JTextArea;
  *
  * @author Saad
  */
-
-
 public class EChequeDB {
-    
-    private static final String JDBC_DRIVER ="com.mysql.jdbc.Driver";   
+
+    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost/ebank";
     private String userName;
     private String password;
-    private Connection connection = null; 
-    private Statement  sqlStatement = null; 
+    private Connection connection = null;
+    private Statement sqlStatement = null;
     private int databaseMode;
-    private ResultSet resultSet;    
-    
-    /** 
-     * Creates a new instance of EChequeDB 
+    private ResultSet resultSet;
+
+    /**
+     * Creates a new instance of EChequeDB
      */
     public EChequeDB() {
         userName = "seng426";
@@ -65,7 +62,7 @@ public class EChequeDB {
         return true;
     }
 
-    private void executeSALStatement(String statement, int statType) throws SQLException {
+    private void executeSQLStatement(String statement, int statType) throws SQLException {
         // Initialize sql statement and execute it.
         if (statType == 0) {
             resultSet = sqlStatement.executeQuery(statement);
@@ -79,7 +76,7 @@ public class EChequeDB {
         try {
             connectToDataBase();
             createStatement();
-            executeSALStatement(databaseStat, databaseMode);
+            executeSQLStatement(databaseStat, databaseMode);
             flag = true;
         } catch (ClassNotFoundException exp) {
             exp.printStackTrace();
@@ -111,7 +108,7 @@ public class EChequeDB {
             JOptionPane.showMessageDialog(null, "You have created statement", "DB State", JOptionPane.INFORMATION_MESSAGE);
 
             // run the specific sql statement
-            executeSALStatement(databaseStat, databaseMode);
+            executeSQLStatement(databaseStat, databaseMode);
             flag = resultSet.next();
         } catch (ClassNotFoundException exp) {
             JOptionPane.showMessageDialog(null, exp.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);

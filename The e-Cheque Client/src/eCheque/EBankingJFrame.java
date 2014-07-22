@@ -266,7 +266,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
        String chequeNumber = "N/A";
         if (chequePath.length() != 0) {
             try {
-                depositCheque = depositCheque.readCheque(chequePath);
+                depositCheque = ECheque.readCheque(chequePath);
                 selectChequeFlag = true;
                 
                 chequeNumber = depositCheque.getChequeNumber();
