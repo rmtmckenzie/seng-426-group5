@@ -8,6 +8,10 @@
  */
 package eCheque;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -23,7 +27,7 @@ import javax.swing.JTextArea;
 public class EChequeDB {
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/ebank";
+    private String database_url;
     private String userName;
     private String password;
     private Connection connection = null;
@@ -35,14 +39,30 @@ public class EChequeDB {
      * Creates a new instance of EChequeDB
      */
     public EChequeDB() {
-        userName = "seng426";
-        password = "log2IT05";
+		try {			
+			// Read in the db.config file.
+			// Format
+			// jdbc:mysql://localhost/ebank
+			// username
+			// password
+			FileInputStream fis = new FileInputStream("db.config"); 			
+			BufferedReader br = new BufferedReader(new InputStreamReader(fis));					
+			database_url = br.readLine();
+			userName = br.readLine();			
+			password = br.readLine();
+			br.close();				
+		} catch (IOException exp) {
+			database_url = "";
+			userName = "";
+			password = "";
+			exp.printStackTrace();			
+		}	
     }
 
     private boolean connectToDataBase() throws ClassNotFoundException, SQLException {
         // Initialize Connection to DB:
         Class.forName(JDBC_DRIVER); // load database driver class
-        connection = DriverManager.getConnection(DATABASE_URL, userName, password);
+        connection = DriverManager.getConnection(database_url, userName, password);
         return true;
     }
 
