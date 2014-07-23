@@ -215,7 +215,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTPayTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .add(jTPayTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -363,7 +363,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jLabel10)
-                            .add(jLabel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel8)
                             .add(jLabel9))))
                 .add(0, 0, 0)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
@@ -454,13 +454,32 @@ public class ChequeJFrame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(434, 340));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void close(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_close
-// TODO add your handling code here:
+    private void reset()
+    {
         newChequeFlag = false;
         loadChequeFlag = false;
         signPass = "";
         oldCheque = null;
+        jLDrawerName.setText("");
+        jTPayTo.setText("");
+        jTAmount.setText("");
+        jLDate.setText("Date:");
+        jLBankName.setText("Bank Name:");
+        jLAccountNum.setText("Account No:");
+        jTYear.setText("");
+        jTMonth.setText("");
+        jTDay.setText("");
+        
+        jTDay.setEditable(false);
+        jTMonth.setEditable(false);
+        jTYear.setEditable(false);
+        jTAmount.setEditable(false);
+        jTPayTo.setEditable(false);
+        
+    }
+    private void close(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_close
+// TODO add your handling code here:
+        reset();
         
     }//GEN-LAST:event_close
 
