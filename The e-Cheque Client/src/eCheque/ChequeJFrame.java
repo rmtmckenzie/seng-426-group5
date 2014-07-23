@@ -589,95 +589,154 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         // validate the cheque data before saving it
         if (newChequeFlag) {
-            if (amount.length() != 0) {
+            
+            // Check for empty amount
+            if (amount.length() == 0) 
+            {
+            
+                JOptionPane.showMessageDialog(null, "You can not write empty cheque", "User Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            // Check amount is a valid monetary entry
+            boolean isMoney = true;
+            for(int i = 0; i < amount.length(); i++) {
+                if(i == 0 && amount.charAt(i) == '-') {
+                    if(amount.length() == 1) isMoney = false;
+                    else continue;
+                }
+                if((Character.digit(amount.charAt(i), 10) < 0) && amount.charAt(i) != '.') isMoney = false;
+            }
+            if(!isMoney)
+            {
+                JOptionPane.showMessageDialog(null, "Amount must be a number", "User Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Check for empty receiver 
+            if (payTo.length() == 0) 
+            {
+                  JOptionPane.showMessageDialog(null, "You have to specify the cheque receiver under Pay To the Order Of", "User Error",
+                          JOptionPane.ERROR_MESSAGE);
+                  return;
+            }   
+            
+            // Check for empty date
+            if (day.length() == 0 || month.length() == 0 || year.length() == 0) 
+            {
 
-                if (payTo.length() != 0) {
-                    if (day.length() != 0 && month.length() != 0 && year.length() != 0) {
-
-                        // Ask the user to enter his password to sign the cheque with his private key
-                        getSign();
-                        if (signPass.hashCode() == eChequeReg.getPasword()) {
-
-                            ECheque chequeObj = new ECheque();
-                            try {
-                                //create AES Key with user password and cipher  
-                                AESCrypt aesCrypt = new AESCrypt();
-                                Key AES128 = aesCrypt.initializeAESKeyByPassword(signPass);
-                                Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.DECRYPT);
-                                InputStream in = new FileInputStream(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "Security Tools"
-                                        + File.separator + "Private Key.key");
-                                OutputStream out = new FileOutputStream(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "Security Tools"
-                                        + File.separator + "PrivateKey.key");
-
-                                // decrypt the private key with the AES key and delete the plain key
-                                aesCrypt.crypt(in, out, cipher);
-                                in.close();
-                                out.close();
-                                ObjectInputStream objIn = new ObjectInputStream(
-                                        new FileInputStream(eChequeReg.getEWalletLoaction()
-                                                + File.separator + "Security Tools"
-                                                + File.separator + "PrivateKey.key"));
-
-                                // load the user private key.
-                                PrivateKey privKey = (PrivateKey) objIn.readObject();
-                                objIn.close();
-
-                                // delete the un secure key.
-                                File control = new File(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "Security Tools"
-                                        + File.separator + "PrivateKey.key");
-                                control.delete();
-                                JOptionPane.showMessageDialog(null, "Load private key");
-
-                                // Fill the Cheque Data
-                                chequeObj.setAccountNumber(eChequeReg.getAccountNumber());
-                                chequeObj.setAccountHolder(eChequeReg.getClientName());
-                                chequeObj.setBankName(eChequeReg.getBankName());
-                                chequeObj.setChequeNumber(jLSerialNumber.getText());
-                                chequeObj.setAmountOfMony(jTAmount.getText());
-                                chequeObj.setCurrencyType("US $");
-                                chequeObj.setAmountOfMony(jTAmount.getText());
-                                chequeObj.setEarnday(year + "," + month + "," + day);
-                                chequeObj.setPayToOrderOf(payTo);
-                                chequeObj.setGuaranteed(granteed);
-
-                                // get cheque reference string and sign it.
-                                String chequeRef = ChequeReferenceString(chequeObj);
-                                DigitalSignature digitalSign = new DigitalSignature();
-                                chequeObj.setDrawerSignature(digitalSign.signature(chequeRef, privKey));
-                                JOptionPane.showMessageDialog(null, "Sign Complete");
-
-                                //Save the cheque after you sign it
-                                chequeObj.saveCheque(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "My Cheques"
-                                        + File.separator + chequeObj.getChequeNumber() + ".sec");
-                                JOptionPane.showMessageDialog(null, "Done");
-
-                            } catch (Exception exp) {
-                                JOptionPane.showMessageDialog(null, exp.getMessage(), "System error",
-                                        JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "incorect passowrd", "User Error",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "complete the earn date info", "User Error",
+                        JOptionPane.showMessageDialog(null, "Complete the earn date info", "User Error",
                                 JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "you have to specify the cheque receiver", "User Error",
+                        return;
+            }
+            
+            try
+            {
+                int tday =Integer.parseInt(day);
+                int tmonth = Integer.parseInt(month);
+                int tyear =Integer.parseInt(year);
+                if(tyear < 1900)
+                {
+                     JOptionPane.showMessageDialog(null, "Year, must be greater than 1900", "User Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if(tday > 31 || tday < 0)
+                {
+                     JOptionPane.showMessageDialog(null, "Day is invalid", "User Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if(tmonth > 12 || tmonth < 0)
+                {
+                     JOptionPane.showMessageDialog(null, "Month is invalid", "User Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }catch(NumberFormatException e) 
+            {
+                JOptionPane.showMessageDialog(null, "Year, month and day must be a number", "User Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+                
+            // Ask the user to enter his password to sign the cheque with his private key
+            getSign();
+            if (signPass.hashCode() == eChequeReg.getPasword()) {
+
+                ECheque chequeObj = new ECheque();
+                try {
+                    //create AES Key with user password and cipher  
+                    AESCrypt aesCrypt = new AESCrypt();
+                    Key AES128 = aesCrypt.initializeAESKeyByPassword(signPass);
+                    Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.DECRYPT);
+                    InputStream in = new FileInputStream(eChequeReg.getEWalletLoaction()
+                            + File.separator + "Security Tools"
+                            + File.separator + "Private Key.key");
+                    OutputStream out = new FileOutputStream(eChequeReg.getEWalletLoaction()
+                            + File.separator + "Security Tools"
+                            + File.separator + "PrivateKey.key");
+
+                    // decrypt the private key with the AES key and delete the plain key
+                    aesCrypt.crypt(in, out, cipher);
+                    in.close();
+                    out.close();
+                    ObjectInputStream objIn = new ObjectInputStream(
+                            new FileInputStream(eChequeReg.getEWalletLoaction()
+                                    + File.separator + "Security Tools"
+                                    + File.separator + "PrivateKey.key"));
+
+                    // load the user private key.
+                    PrivateKey privKey = (PrivateKey) objIn.readObject();
+                    objIn.close();
+
+                    // delete the un secure key.
+                    File control = new File(eChequeReg.getEWalletLoaction()
+                            + File.separator + "Security Tools"
+                            + File.separator + "PrivateKey.key");
+                    control.delete();
+                    JOptionPane.showMessageDialog(null, "Load private key");
+
+                    // Fill the Cheque Data
+                    chequeObj.setAccountNumber(eChequeReg.getAccountNumber());
+                    chequeObj.setAccountHolder(eChequeReg.getClientName());
+                    chequeObj.setBankName(eChequeReg.getBankName());
+                    chequeObj.setChequeNumber(jLSerialNumber.getText());
+                    chequeObj.setAmountOfMony(jTAmount.getText());
+                    chequeObj.setCurrencyType("US $");
+                    chequeObj.setAmountOfMony(jTAmount.getText());
+                    chequeObj.setEarnday(year + "," + month + "," + day);
+                    chequeObj.setPayToOrderOf(payTo);
+                    chequeObj.setGuaranteed(granteed);
+
+                    // get cheque reference string and sign it.
+                    String chequeRef = ChequeReferenceString(chequeObj);
+                    DigitalSignature digitalSign = new DigitalSignature();
+                    chequeObj.setDrawerSignature(digitalSign.signature(chequeRef, privKey));
+                    JOptionPane.showMessageDialog(null, "Sign Complete");
+
+                    //Save the cheque after you sign it
+                    chequeObj.saveCheque(eChequeReg.getEWalletLoaction()
+                            + File.separator + "My Cheques"
+                            + File.separator + chequeObj.getChequeNumber() + ".sec");
+                    JOptionPane.showMessageDialog(null, "Done");
+
+                } catch (Exception exp) {
+                    JOptionPane.showMessageDialog(null, exp.getMessage(), "System error",
                             JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "you can not write empty cheque", "User Error",
+                JOptionPane.showMessageDialog(null, "Incorect passowrd", "User Error",
                         JOptionPane.ERROR_MESSAGE);
             }
+
+                    
         } else {
-            JOptionPane.showMessageDialog(null, "you should create new cheque first", "User Error",
+            JOptionPane.showMessageDialog(null, "You must create a new cheque first", "User Error",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMSaveChequeActionPerformed
