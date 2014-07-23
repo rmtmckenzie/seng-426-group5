@@ -180,8 +180,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 51)));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drawer Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel2.setFont(new java.awt.Font("Times New Roman", 1, 12));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drawer Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,16 +196,18 @@ public class ChequeJFrame extends javax.swing.JFrame {
             .add(jLDrawerName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLDate.setFont(new java.awt.Font("Times New Roman", 1, 12));
+        jLDate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLDate.setText("Date:");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/barcode.GIF"))); // NOI18N
 
-        jLSerialNumber.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLSerialNumber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLSerialNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pay to the order of", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel3.setFont(new java.awt.Font("Times New Roman", 1, 12));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pay to the order of"));
+        jPanel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+
+        jTPayTo.setEditable(false);
 
         org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -223,7 +225,9 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Amount of Money", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Amount of Money"));
+
+        jTAmount.setEditable(false);
 
         org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -241,7 +245,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Banking Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Banking Info"));
 
         jLBankName.setText("Bank Name:");
 
@@ -269,6 +273,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         jCGranteed.setText("Granteed");
         jCGranteed.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jCGranteed.setEnabled(false);
         jCGranteed.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         jLabel7.setText("Earn Date:");
@@ -282,6 +287,12 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("D");
 
+        jTYear.setEditable(false);
+
+        jTMonth.setEditable(false);
+
+        jTDay.setEditable(false);
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -292,16 +303,11 @@ public class ChequeJFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                            .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))))
+                            .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(32, 32, 32)
-                        .add(jCGranteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
+                        .add(jCGranteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(13, 13, 13)
@@ -445,22 +451,27 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-434)/2, (screenSize.height-340)/2, 434, 340);
+        setSize(new java.awt.Dimension(434, 340));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void close(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_close
 // TODO add your handling code here:
-
+        newChequeFlag = false;
+        loadChequeFlag = false;
+        signPass = "";
+        oldCheque = null;
+        
     }//GEN-LAST:event_close
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 // TODO add your handling code here:
+   
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMExitChequeFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMExitChequeFormActionPerformed
 // TODO add your handling code here:
-
+        dispose();
     }//GEN-LAST:event_jMExitChequeFormActionPerformed
 
     private void jMVerifyChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMVerifyChequeActionPerformed
@@ -468,7 +479,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         String certificatePath;
         if (loadChequeFlag) {
-            certificatePath = getFileLoaction("Load Digital Certificate");
+            certificatePath = getFileLocation("Load Digital Certificate");
             if (certificatePath.length() != 0) {
 
                 //get the cheque reference sigantured. 
@@ -689,14 +700,14 @@ public class ChequeJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String chequePath;
-        chequePath = getFileLoaction("Open Cheque");
+        chequePath = getFileLocation("Open Cheque");
 
         if (chequePath.length() != 0) {
             oldCheque = new ECheque();
 
             try {
                 // load cheque that already exist
-                oldCheque = oldCheque.readCheque(chequePath);
+                oldCheque = ECheque.readCheque(chequePath);
                 jLDrawerName.setText(oldCheque.getAccountHolder());
                 jLBankName.setText("Bank Name: " + oldCheque.getBankName());
                 jLAccountNum.setText("Account no: " + oldCheque.getAccountNumber());
@@ -734,7 +745,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMOpenChequeActionPerformed
 
-    private String getFileLoaction(String dialogTitle) {
+    private String getFileLocation(String dialogTitle) {
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
