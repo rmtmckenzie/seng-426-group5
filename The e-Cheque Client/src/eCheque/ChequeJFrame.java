@@ -180,8 +180,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 51)));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drawer Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel2.setFont(new java.awt.Font("Times New Roman", 1, 12));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drawer Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,16 +196,18 @@ public class ChequeJFrame extends javax.swing.JFrame {
             .add(jLDrawerName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLDate.setFont(new java.awt.Font("Times New Roman", 1, 12));
+        jLDate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLDate.setText("Date:");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/barcode.GIF"))); // NOI18N
 
-        jLSerialNumber.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLSerialNumber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLSerialNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pay to the order of", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel3.setFont(new java.awt.Font("Times New Roman", 1, 12));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pay to the order of"));
+        jPanel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+
+        jTPayTo.setEditable(false);
 
         org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -213,7 +215,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTPayTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .add(jTPayTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -223,7 +225,9 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Amount of Money", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Amount of Money"));
+
+        jTAmount.setEditable(false);
 
         org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -241,7 +245,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Banking Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Banking Info"));
 
         jLBankName.setText("Bank Name:");
 
@@ -269,6 +273,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         jCGranteed.setText("Granteed");
         jCGranteed.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jCGranteed.setEnabled(false);
         jCGranteed.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         jLabel7.setText("Earn Date:");
@@ -282,6 +287,12 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("D");
 
+        jTYear.setEditable(false);
+
+        jTMonth.setEditable(false);
+
+        jTDay.setEditable(false);
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -292,16 +303,11 @@ public class ChequeJFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                            .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))))
+                            .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(32, 32, 32)
-                        .add(jCGranteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
+                        .add(jCGranteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(13, 13, 13)
@@ -357,7 +363,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jLabel10)
-                            .add(jLabel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel8)
                             .add(jLabel9))))
                 .add(0, 0, 0)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
@@ -445,22 +451,46 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-434)/2, (screenSize.height-340)/2, 434, 340);
+        setSize(new java.awt.Dimension(434, 340));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    private void reset()
+    {
+        newChequeFlag = false;
+        loadChequeFlag = false;
+        signPass = "";
+        oldCheque = null;
+        jLDrawerName.setText("");
+        jTPayTo.setText("");
+        jTAmount.setText("");
+        jLDate.setText("Date:");
+        jLBankName.setText("Bank Name:");
+        jLAccountNum.setText("Account No:");
+        jTYear.setText("");
+        jTMonth.setText("");
+        jTDay.setText("");
+        
+        jTDay.setEditable(false);
+        jTMonth.setEditable(false);
+        jTYear.setEditable(false);
+        jTAmount.setEditable(false);
+        jTPayTo.setEditable(false);
+        
+    }
     private void close(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_close
 // TODO add your handling code here:
-
+        reset();
+        
     }//GEN-LAST:event_close
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 // TODO add your handling code here:
+   
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMExitChequeFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMExitChequeFormActionPerformed
 // TODO add your handling code here:
-
+        dispose();
     }//GEN-LAST:event_jMExitChequeFormActionPerformed
 
     private void jMVerifyChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMVerifyChequeActionPerformed
@@ -468,7 +498,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         String certificatePath;
         if (loadChequeFlag) {
-            certificatePath = getFileLoaction("Load Digital Certificate");
+            certificatePath = getFileLocation("Load Digital Certificate");
             if (certificatePath.length() != 0) {
 
                 //get the cheque reference sigantured. 
@@ -559,95 +589,154 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         // validate the cheque data before saving it
         if (newChequeFlag) {
-            if (amount.length() != 0) {
+            
+            // Check for empty amount
+            if (amount.length() == 0) 
+            {
+            
+                JOptionPane.showMessageDialog(null, "You can not write empty cheque", "User Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            // Check amount is a valid monetary entry
+            boolean isMoney = true;
+            for(int i = 0; i < amount.length(); i++) {
+                if(i == 0 && amount.charAt(i) == '-') {
+                    if(amount.length() == 1) isMoney = false;
+                    else continue;
+                }
+                if((Character.digit(amount.charAt(i), 10) < 0) && amount.charAt(i) != '.') isMoney = false;
+            }
+            if(!isMoney)
+            {
+                JOptionPane.showMessageDialog(null, "Amount must be a number", "User Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Check for empty receiver 
+            if (payTo.length() == 0) 
+            {
+                  JOptionPane.showMessageDialog(null, "You have to specify the cheque receiver under Pay To the Order Of", "User Error",
+                          JOptionPane.ERROR_MESSAGE);
+                  return;
+            }   
+            
+            // Check for empty date
+            if (day.length() == 0 || month.length() == 0 || year.length() == 0) 
+            {
 
-                if (payTo.length() != 0) {
-                    if (day.length() != 0 && month.length() != 0 && year.length() != 0) {
-
-                        // Ask the user to enter his password to sign the cheque with his private key
-                        getSign();
-                        if (signPass.hashCode() == eChequeReg.getPasword()) {
-
-                            ECheque chequeObj = new ECheque();
-                            try {
-                                //create AES Key with user password and cipher  
-                                AESCrypt aesCrypt = new AESCrypt();
-                                Key AES128 = aesCrypt.initializeAESKeyByPassword(signPass);
-                                Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.DECRYPT);
-                                InputStream in = new FileInputStream(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "Security Tools"
-                                        + File.separator + "Private Key.key");
-                                OutputStream out = new FileOutputStream(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "Security Tools"
-                                        + File.separator + "PrivateKey.key");
-
-                                // decrypt the private key with the AES key and delete the plain key
-                                aesCrypt.crypt(in, out, cipher);
-                                in.close();
-                                out.close();
-                                ObjectInputStream objIn = new ObjectInputStream(
-                                        new FileInputStream(eChequeReg.getEWalletLoaction()
-                                                + File.separator + "Security Tools"
-                                                + File.separator + "PrivateKey.key"));
-
-                                // load the user private key.
-                                PrivateKey privKey = (PrivateKey) objIn.readObject();
-                                objIn.close();
-
-                                // delete the un secure key.
-                                File control = new File(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "Security Tools"
-                                        + File.separator + "PrivateKey.key");
-                                control.delete();
-                                JOptionPane.showMessageDialog(null, "Load private key");
-
-                                // Fill the Cheque Data
-                                chequeObj.setAccountNumber(eChequeReg.getAccountNumber());
-                                chequeObj.setAccountHolder(eChequeReg.getClientName());
-                                chequeObj.setBankName(eChequeReg.getBankName());
-                                chequeObj.setChequeNumber(jLSerialNumber.getText());
-                                chequeObj.setAmountOfMony(jTAmount.getText());
-                                chequeObj.setCurrencyType("US $");
-                                chequeObj.setAmountOfMony(jTAmount.getText());
-                                chequeObj.setEarnday(year + "," + month + "," + day);
-                                chequeObj.setPayToOrderOf(payTo);
-                                chequeObj.setGuaranteed(granteed);
-
-                                // get cheque reference string and sign it.
-                                String chequeRef = ChequeReferenceString(chequeObj);
-                                DigitalSignature digitalSign = new DigitalSignature();
-                                chequeObj.setDrawerSignature(digitalSign.signature(chequeRef, privKey));
-                                JOptionPane.showMessageDialog(null, "Sign Complete");
-
-                                //Save the cheque after you sign it
-                                chequeObj.saveCheque(eChequeReg.getEWalletLoaction()
-                                        + File.separator + "My Cheques"
-                                        + File.separator + chequeObj.getChequeNumber() + ".sec");
-                                JOptionPane.showMessageDialog(null, "Done");
-
-                            } catch (Exception exp) {
-                                JOptionPane.showMessageDialog(null, exp.getMessage(), "System error",
-                                        JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "incorect passowrd", "User Error",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "complete the earn date info", "User Error",
+                        JOptionPane.showMessageDialog(null, "Complete the earn date info", "User Error",
                                 JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "you have to specify the cheque receiver", "User Error",
+                        return;
+            }
+            
+            try
+            {
+                int tday =Integer.parseInt(day);
+                int tmonth = Integer.parseInt(month);
+                int tyear =Integer.parseInt(year);
+                if(tyear < 1900)
+                {
+                     JOptionPane.showMessageDialog(null, "Year, must be greater than 1900", "User Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if(tday > 31 || tday < 0)
+                {
+                     JOptionPane.showMessageDialog(null, "Day is invalid", "User Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if(tmonth > 12 || tmonth < 0)
+                {
+                     JOptionPane.showMessageDialog(null, "Month is invalid", "User Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }catch(NumberFormatException e) 
+            {
+                JOptionPane.showMessageDialog(null, "Year, month and day must be a number", "User Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+                
+            // Ask the user to enter his password to sign the cheque with his private key
+            getSign();
+            if (signPass.hashCode() == eChequeReg.getPasword()) {
+
+                ECheque chequeObj = new ECheque();
+                try {
+                    //create AES Key with user password and cipher  
+                    AESCrypt aesCrypt = new AESCrypt();
+                    Key AES128 = aesCrypt.initializeAESKeyByPassword(signPass);
+                    Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.DECRYPT);
+                    InputStream in = new FileInputStream(eChequeReg.getEWalletLoaction()
+                            + File.separator + "Security Tools"
+                            + File.separator + "Private Key.key");
+                    OutputStream out = new FileOutputStream(eChequeReg.getEWalletLoaction()
+                            + File.separator + "Security Tools"
+                            + File.separator + "PrivateKey.key");
+
+                    // decrypt the private key with the AES key and delete the plain key
+                    aesCrypt.crypt(in, out, cipher);
+                    in.close();
+                    out.close();
+                    ObjectInputStream objIn = new ObjectInputStream(
+                            new FileInputStream(eChequeReg.getEWalletLoaction()
+                                    + File.separator + "Security Tools"
+                                    + File.separator + "PrivateKey.key"));
+
+                    // load the user private key.
+                    PrivateKey privKey = (PrivateKey) objIn.readObject();
+                    objIn.close();
+
+                    // delete the un secure key.
+                    File control = new File(eChequeReg.getEWalletLoaction()
+                            + File.separator + "Security Tools"
+                            + File.separator + "PrivateKey.key");
+                    control.delete();
+                    JOptionPane.showMessageDialog(null, "Load private key");
+
+                    // Fill the Cheque Data
+                    chequeObj.setAccountNumber(eChequeReg.getAccountNumber());
+                    chequeObj.setAccountHolder(eChequeReg.getClientName());
+                    chequeObj.setBankName(eChequeReg.getBankName());
+                    chequeObj.setChequeNumber(jLSerialNumber.getText());
+                    chequeObj.setAmountOfMony(jTAmount.getText());
+                    chequeObj.setCurrencyType("US $");
+                    chequeObj.setAmountOfMony(jTAmount.getText());
+                    chequeObj.setEarnday(year + "," + month + "," + day);
+                    chequeObj.setPayToOrderOf(payTo);
+                    chequeObj.setGuaranteed(granteed);
+
+                    // get cheque reference string and sign it.
+                    String chequeRef = ChequeReferenceString(chequeObj);
+                    DigitalSignature digitalSign = new DigitalSignature();
+                    chequeObj.setDrawerSignature(digitalSign.signature(chequeRef, privKey));
+                    JOptionPane.showMessageDialog(null, "Sign Complete");
+
+                    //Save the cheque after you sign it
+                    chequeObj.saveCheque(eChequeReg.getEWalletLoaction()
+                            + File.separator + "My Cheques"
+                            + File.separator + chequeObj.getChequeNumber() + ".sec");
+                    JOptionPane.showMessageDialog(null, "Done");
+
+                } catch (Exception exp) {
+                    JOptionPane.showMessageDialog(null, exp.getMessage(), "System error",
                             JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "you can not write empty cheque", "User Error",
+                JOptionPane.showMessageDialog(null, "Incorect passowrd", "User Error",
                         JOptionPane.ERROR_MESSAGE);
             }
+
+                    
         } else {
-            JOptionPane.showMessageDialog(null, "you should create new cheque first", "User Error",
+            JOptionPane.showMessageDialog(null, "You must create a new cheque first", "User Error",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMSaveChequeActionPerformed
@@ -689,14 +778,14 @@ public class ChequeJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String chequePath;
-        chequePath = getFileLoaction("Open Cheque");
+        chequePath = getFileLocation("Open Cheque");
 
         if (chequePath.length() != 0) {
             oldCheque = new ECheque();
 
             try {
                 // load cheque that already exist
-                oldCheque = oldCheque.readCheque(chequePath);
+                oldCheque = ECheque.readCheque(chequePath);
                 jLDrawerName.setText(oldCheque.getAccountHolder());
                 jLBankName.setText("Bank Name: " + oldCheque.getBankName());
                 jLAccountNum.setText("Account no: " + oldCheque.getAccountNumber());
@@ -734,7 +823,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMOpenChequeActionPerformed
 
-    private String getFileLoaction(String dialogTitle) {
+    private String getFileLocation(String dialogTitle) {
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
