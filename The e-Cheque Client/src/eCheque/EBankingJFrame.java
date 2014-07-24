@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 
 public class EBankingJFrame extends javax.swing.JFrame {
 
-    private String chequePath;
     private boolean selectChequeFlag;
     private final EChequeRegistration registerData;
     private ECheque depositCheque;
@@ -29,14 +28,6 @@ public class EBankingJFrame extends javax.swing.JFrame {
      * @param registerdUser
      */
     public EBankingJFrame(EChequeRegistration registerdUser) {
-        try {
-            //TrendyLookAndFeel tlf = new TrendyLookAndFeel();
-            //tlf.setCurrentTheme( new com.Trendy.swing.plaf.Themes.TrendyOrangeTheme());
-            //UIManager.setLookAndFeel(tlf);
-        } catch (Exception e) {
-
-            //JOptionPane.showMessageDialog(null,"System Error", "can not found themes", JOptionPane.ERROR_MESSAGE);
-        }
         initComponents();
         registerData = registerdUser;
         selectChequeFlag = false;
@@ -261,7 +252,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void jBLoadChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoadChequeActionPerformed
-       chequePath = selectFilePath("Open Saved Cheque");
+        String chequePath = selectFilePath("Open Saved Cheque");
        selectChequeFlag = false;
        String chequeNumber = "N/A";
         if (chequePath.length() != 0) {
