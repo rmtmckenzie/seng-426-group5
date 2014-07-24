@@ -86,7 +86,7 @@ public class EChequeServer implements Runnable {
         // starting database
         EChequeDB chqDB = new EChequeDB();
         
-        if (chqDB.runUpdate("insert into accounts(accountID,clientName,dcPath,balance) values( ? ? ? ? )",
+        if (chqDB.runUpdate("insert into accounts(accountID,clientName,dcPath,balance) values( ? , ? , ? , ? );",
                 registerClient.getAccountNumber(), registerClient.getClientName(),
                 registerClient.getClientName() + "DC.edc", 100000)) {
             //store client digital certificate
@@ -118,7 +118,7 @@ public class EChequeServer implements Runnable {
 
         try {
             Double balance = (Double)chqDB.runReturnQuery(
-                    "Select balance from accounts where accountID = ?", 
+                    "Select balance from accounts where accountID = ?;", 
                     receivedCheque.getAccountNumber());
 
             double chequeMoney = Double.parseDouble(receivedCheque.getMoney());
@@ -127,11 +127,11 @@ public class EChequeServer implements Runnable {
             if(chequeMoney > balance){
                 //report the deposit result
                 depositResult = "Drawer's account balance is not sufficient.";
-            } else if (chqDB.runQuery("Select * from cancelledCheque where accountID = ? and chequeID = ?", 
+            } else if (chqDB.runQuery("Select * from cancelledCheque where accountID = ? and chequeID = ?;", 
                     receivedCheque.getAccountNumber(), receivedCheque.getChequeNumber())) {
                 //report the deposit result
                 depositResult = "This cheque has been cancelled by the drawer.";
-            } else if (chqDB.runQuery("Select * from eChequeOut where chequeID = ? and accountID = ?",
+            } else if (chqDB.runQuery("Select * from eChequeOut where chequeID = ? and accountID = ?;",
                     receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber())) {
                 //report the deposit result
                 depositResult = "This cheque has already been deposited.";
@@ -141,10 +141,10 @@ public class EChequeServer implements Runnable {
                 chqDB.runUpdate("Update accounts set balance = balance + ? where accountID = ?", 
                         chequeMoney, depositAccount);
 
-                chqDB.runUpdate("Insert into eChequeOut(chequeID, accountID, balance) values( ? , ? , ? )", 
+                chqDB.runUpdate("Insert into eChequeOut(chequeID, accountID, balance) values( ? , ? , ? );", 
                         receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber(), chequeMoney);
 
-                chqDB.runUpdate("Insert into eChequeIn(chequeID, accountID, balance) values( ? , ? , ? )", 
+                chqDB.runUpdate("Insert into eChequeIn(chequeID, accountID, balance) values( ? , ? , ? );", 
                         receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber(), chequeMoney);
 
                 //report the deposit result
@@ -169,7 +169,7 @@ public class EChequeServer implements Runnable {
         ECheque receivedCheque = (ECheque) socketInputObject.readObject();
         EChequeDB chqDB = new EChequeDB();
         
-        if (chqDB.runUpdate("insert into cancelledCheque (accountID,chequeID) values( ? ? )",
+        if (chqDB.runUpdate("insert into cancelledCheque (accountID,chequeID) values( ? , ? );",
                 receivedCheque.getAccountNumber(), receivedCheque.getChequeNumber())) {
             socketOutputObject.writeObject("The cheque has been cancelled.");
             socketOutputObject.flush();
