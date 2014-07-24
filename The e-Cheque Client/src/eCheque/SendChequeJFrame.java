@@ -12,44 +12,25 @@ package eCheque;
  */
 //import com.Trendy.swing.plaf.TrendyLookAndFeel;
 //import com.sun.crypto.provider.AESCipher;
-import java.io.IOException;
 import javax.crypto.Cipher;
-import javax.swing.UIManager;
-import javax.swing.JOptionPane;
-import javax.swing.JFileChooser;
-import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.security.*;
+import javax.swing.*;
+import java.io.*;
+import java.security.Key;
 
 public class SendChequeJFrame extends javax.swing.JFrame {
     
     private String chequePath;
-    private String recieverIP;
     private String cipherChequePath;
     private boolean selectChequeFlag;
     private EChequeRegistration eChequeRegisterdUser; 
     
     /** Creates new form SendChequeJFrame */
     public SendChequeJFrame(EChequeRegistration registerdUser) {
-        try{
-            //TrendyLookAndFeel tlf = new TrendyLookAndFeel();
-            //tlf.setCurrentTheme( new com.Trendy.swing.plaf.Themes.TrendyOrangeTheme());
-            //UIManager.setLookAndFeel(tlf);
-        }
-        catch(Exception e){
-            
-            //JOptionPane.showMessageDialog(null,"System Error", "can not found themes", JOptionPane.ERROR_MESSAGE);
-        
-        }    
         initComponents();
         eChequeRegisterdUser = registerdUser;
     }
     
-    private String getFileLoaction(String dialogTitle){
+    private String getFileLocation(String dialogTitle){
     
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -251,30 +232,26 @@ public class SendChequeJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSendPTPChequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBSendPTPChequeMouseClicked
-// TODO add your handling code here:
             if(selectChequeFlag){
                 String hostName = jTReciverIP.getText();
                 if(hostName.length()!=0){
                         try{
-                            // genertate a session key.
-                            AESCrypt aesKey128 = new AESCrypt();
+                            // generate a session key.
                             Key sessionKey;
-                            sessionKey = aesKey128.GenerateRandomAESKey();
-                            Cipher aesCipher = aesKey128.initializeCipher(sessionKey, AESCrypt.cypherType.ENCRYPT);
+                            sessionKey = AESCrypt.GenerateRandomAESKey();
+                            Cipher aesCipher = AESCrypt.initializeCipher(sessionKey, AESCrypt.cypherType.ENCRYPT);
 
                             InputStream in = new FileInputStream(chequePath);
                             JOptionPane.showMessageDialog(null,eChequeRegisterdUser.getEWalletLoaction());
                             OutputStream out = new FileOutputStream(eChequeRegisterdUser.getEWalletLoaction()
                                     + File.separator + "Out going" + File.separator + cipherChequePath); 
-                            aesKey128.crypt(in,out,aesCipher);
+                            AESCrypt.crypt(in, out, aesCipher);
                             in.close();
                             out.close();
                             chequePath = eChequeRegisterdUser.getEWalletLoaction() + 
                                     File.separator + "Out going" + File.separator + cipherChequePath;
                             //Get the sever side digital certificate.
-                            DigitalCertificate clientDC= new DigitalCertificate();
-                            
-                            clientDC = clientDC.readDigitalCertificate(
+                            DigitalCertificate clientDC = DigitalCertificate.readDigitalCertificate(
                                     eChequeRegisterdUser.getEWalletLoaction()
                                             + File.separator + "Security Tools" + File.separator
                                             + eChequeRegisterdUser.getClientName() + "DigCert.edc");
@@ -285,23 +262,15 @@ public class SendChequeJFrame extends javax.swing.JFrame {
                                     chequePath,hostName,8189);
                             Thread  client = new Thread(threadingClient);
                             client.start();
-
-
-
                         }
                         catch(Exception exp){
                             exp.printStackTrace();
                         }
                 }
-                else
-                {
-                    
-                }
             }
             else
             {
-                // you have to select cheque first
-                JOptionPane.showMessageDialog(null,"Youhave to");
+                JOptionPane.showMessageDialog(null,"You have to select a cheque first");
             }
             
                      
@@ -311,7 +280,7 @@ public class SendChequeJFrame extends javax.swing.JFrame {
 
     private void jBselectChqPTPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBselectChqPTPMouseClicked
     // TODO add your handling code here:
-    chequePath = getFileLoaction("Open Saved Cheque"); 
+    chequePath = getFileLocation("Open Saved Cheque");
     
     if(chequePath.length()!=0){
         selectChequeFlag = true;
