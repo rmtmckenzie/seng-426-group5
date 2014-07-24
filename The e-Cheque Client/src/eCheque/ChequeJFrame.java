@@ -501,17 +501,14 @@ public class ChequeJFrame extends javax.swing.JFrame {
             certificatePath = getFileLocation("Load Digital Certificate");
             if (certificatePath.length() != 0) {
 
-                //get the cheque reference sigantured. 
+                //Get the cheques reference siganture. 
                 String sigatureRef = ChequeReferenceString(oldCheque);
-
-                //Create Digital Certificate Object for verification
-                DigitalCertificate drawerDC = new DigitalCertificate();
                 
                 //Create a Digital signature object.
                 DigitalSignature verfiy = new DigitalSignature();
 
                 try {
-                    drawerDC = (DigitalCertificate) drawerDC.readDigitalCertificate(certificatePath);
+                    DigitalCertificate drawerDC = DigitalCertificate.readDigitalCertificate(certificatePath);
 
                     boolean verfiySign;
                     verfiySign = verfiy.verifySignature(oldCheque.getDrawerSignature(), sigatureRef, drawerDC.getpublicKey());
@@ -524,16 +521,16 @@ public class ChequeJFrame extends javax.swing.JFrame {
                                 JOptionPane.WARNING_MESSAGE);
                     }
                 } catch (Exception exp) {
-                    JOptionPane.showMessageDialog(null, "Digital Certificate Courpted", "Unknwon error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digital Certificate Corrupted", "Unknwon error", JOptionPane.ERROR_MESSAGE);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "You have to load tghe drawer Digital Certificate", "User Error",
+                JOptionPane.showMessageDialog(null, "You have to load the drawer's Digital Certificate", "User Error",
                         JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "You have to open cheque", "User Error",
+            JOptionPane.showMessageDialog(null, "You have to open the cheque", "User Error",
                     JOptionPane.ERROR_MESSAGE);
         }
 
