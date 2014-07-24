@@ -24,11 +24,10 @@ public class RSAGenerator {
     }
 
     // Generate RSA keys
-    static public KeyPair GenerateRSAKeys() throws NoSuchAlgorithmException {
+    public static KeyPair GenerateRSAKeys() throws NoSuchAlgorithmException {
         SecureRandom SecRandom = new SecureRandom();
         KeyPairGenerator KeyGenerator = KeyPairGenerator.getInstance("RSA");
         KeyGenerator.initialize(1024, SecRandom);
-        KeyPair RSAKeys = KeyGenerator.generateKeyPair();
-        return RSAKeys;
+        return KeyGenerator.generateKeyPair();
     }
 }
