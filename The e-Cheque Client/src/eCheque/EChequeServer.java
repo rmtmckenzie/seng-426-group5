@@ -13,6 +13,7 @@
 package eCheque;
 
 //import com.sun.crypto.provider.AESCipher;
+
 import java.net.*;
 import java.io.*;
 import java.util.Calendar;
@@ -81,7 +82,7 @@ public class EChequeServer implements Runnable {
      * @throws Exception
      */
     private void processConnection()
-            throws ClassNotFoundException, IOException, Exception {
+            throws Exception {
         //exchange digital certificates
         DigitalCertificate clientCertificate
                 = (DigitalCertificate) socketInputObject.readObject();
@@ -142,22 +143,22 @@ public class EChequeServer implements Runnable {
 
         ECheque receivedCheque = ECheque.readCheque(
                 walletPath + File.separator + "My Cheques"
-                + File.separator + chequeName + ".sec");
+                        + File.separator + chequeName + ".sec");
         return digitalSign.verifySignature(
                 receivedCheque.getDrawerSignature(),
                 receivedCheque.getReferenceString(),
                 clientCertificate.getpublicKey());
     }
 
-    private void decryptCheque(Key sessionKey, String chequeName) 
-            throws FileNotFoundException, IOException, GeneralSecurityException {
+    private void decryptCheque(Key sessionKey, String chequeName)
+            throws IOException, GeneralSecurityException {
         //try-with-resources - auto closes upon failure
         try (InputStream in = new FileInputStream(
                 walletPath + File.separator + "In Coming"
                         + File.separator + chequeName + ".cry");
-            OutputStream out = new FileOutputStream(
-                    walletPath + File.separator + "My Cheques"
-                            + File.separator + chequeName + ".sec")) {
+             OutputStream out = new FileOutputStream(
+                     walletPath + File.separator + "My Cheques"
+                             + File.separator + chequeName + ".sec")) {
             //Decrypt using AES
             Cipher aesCipher = AESCrypt.initializeCipher(sessionKey, AESCrypt.cypherType.DECRYPT);
             AESCrypt.crypt(in, out, aesCipher);
@@ -168,7 +169,7 @@ public class EChequeServer implements Runnable {
         //read the cheque from the socket
         try (FileOutputStream chqIn = new FileOutputStream(
                 walletPath + File.separator + "In Coming"
-                + File.separator + chequeName + ".cry")) {
+                        + File.separator + chequeName + ".cry")) {
 
             byte[] buffer = new byte[1024];
             int numRead;
@@ -180,14 +181,7 @@ public class EChequeServer implements Runnable {
 
     private String getChequeName() {
         Calendar currTime = new GregorianCalendar();
-        StringBuilder name = new StringBuilder();
-        name.append(Integer.toString(currTime.get(GregorianCalendar.YEAR)))
-                .append(Integer.toString(currTime.get(GregorianCalendar.MONTH)))
-                .append(Integer.toString(currTime.get(GregorianCalendar.DAY_OF_MONTH)))
-                .append(Integer.toString(currTime.get(GregorianCalendar.HOUR_OF_DAY)))
-                .append(Integer.toString(currTime.get(GregorianCalendar.MILLISECOND)));
-
-        return name.toString();
+        return Integer.toString(currTime.get(GregorianCalendar.YEAR)) + Integer.toString(currTime.get(GregorianCalendar.MONTH)) + Integer.toString(currTime.get(GregorianCalendar.DAY_OF_MONTH)) + Integer.toString(currTime.get(GregorianCalendar.HOUR_OF_DAY)) + Integer.toString(currTime.get(GregorianCalendar.MILLISECOND));
     }
 
     private void closeConnection() {
