@@ -36,6 +36,6 @@ public class DigitalSignature {
 		Signature verifyMessage = Signature.getInstance("SHA1withRSA");
 		verifyMessage.initVerify(pubKey);
 		verifyMessage.update(message.getBytes());
-		return (!verifyMessage.verify(messagesign));
+		return verifyMessage.verify(messagesign);
 	}
 }
