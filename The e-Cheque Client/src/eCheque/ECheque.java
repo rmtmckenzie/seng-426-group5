@@ -12,12 +12,6 @@
  */
 package eCheque;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.io.*;
 
 //this class is for storing cheque data and file operations
@@ -32,7 +26,6 @@ public class ECheque implements Serializable {
     private String chequeNumber;
     private boolean guaranteed;
     private String earnday;
-    private byte[] bankSignature;
     private byte[] drawerSignature;
 
     /**
@@ -63,8 +56,6 @@ public class ECheque implements Serializable {
     public void setGuaranteed(boolean s) { guaranteed = s ;}
 
     public void setEarnday(String u) { earnday = u;}
-
-    public void setBankSignature(byte[] y) { bankSignature = y; }
 
     public void setDrawerSignature(byte[] y) { drawerSignature = y; }
 
@@ -105,10 +96,6 @@ public class ECheque implements Serializable {
     public String getReferenceString() {
         return accountNumber + accountHolder + bankName + chequeNumber +
                 amountOfMoney + currencyType + earnday + guaranteed + payToOrderOf;
-    }
-
-    public byte[] getBankSignature() {
-        return bankSignature;
     }
 
     public byte[] getDrawerSignature() {
