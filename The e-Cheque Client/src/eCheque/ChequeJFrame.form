@@ -239,7 +239,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jCGranteed" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="jCGuarenteed" min="-2" pref="96" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -335,7 +335,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jCGranteed" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCGuarenteed" min="-2" max="-2" attributes="0"/>
                       <Component id="jLSerialNumber" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -522,9 +522,9 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JCheckBox" name="jCGranteed">
+        <Component class="javax.swing.JCheckBox" name="jCGuarenteed">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Granteed"/>
+            <Property name="text" type="java.lang.String" value="Guarenteed"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="0" left="0" right="0" top="0"/>

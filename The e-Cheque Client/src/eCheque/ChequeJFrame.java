@@ -81,7 +81,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLBankName = new javax.swing.JLabel();
         jLAccountNum = new javax.swing.JLabel();
-        jCGranteed = new javax.swing.JCheckBox();
+        jCGuarenteed = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -271,10 +271,10 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jCGranteed.setText("Granteed");
-        jCGranteed.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jCGranteed.setEnabled(false);
-        jCGranteed.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jCGuarenteed.setText("Guarenteed");
+        jCGuarenteed.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jCGuarenteed.setEnabled(false);
+        jCGuarenteed.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         jLabel7.setText("Earn Date:");
 
@@ -307,7 +307,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                             .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(32, 32, 32)
-                        .add(jCGranteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(jCGuarenteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(13, 13, 13)
@@ -378,7 +378,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                     .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jCGranteed)
+                    .add(jCGuarenteed)
                     .add(jLSerialNumber, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -572,7 +572,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
         String day;
         String month;
         String year;
-        boolean granteed = false;
+        boolean guaranteed = false;
 
         // get cheque info to save it.
         amount = jTAmount.getText();
@@ -580,8 +580,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
         day = jTDay.getText();
         month = jTMonth.getText();
         year = jTYear.getText();
-        if (jCGranteed.isSelected()) {
-            granteed = true;
+        if (jCGuarenteed.isSelected()) {
+            guaranteed = true;
         }
 
         // validate the cheque data before saving it
@@ -629,6 +629,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                         return;
             }
             
+            // verify dates
             try
             {
                 int tday =Integer.parseInt(day);
@@ -708,7 +709,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                     chequeObj.setAmountOfMony(jTAmount.getText());
                     chequeObj.setEarnday(year + "," + month + "," + day);
                     chequeObj.setPayToOrderOf(payTo);
-                    chequeObj.setGuaranteed(granteed);
+                    chequeObj.setGuaranteed(guaranteed);
 
                     // get cheque reference string and sign it.
                     String chequeRef = ChequeReferenceString(chequeObj);
@@ -747,7 +748,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jTYear.setEditable(true);
         jTMonth.setEditable(true);
         jTDay.setEditable(true);
-        jCGranteed.setEnabled(true);
+        jCGuarenteed.setEnabled(true);
 
         //set the user registeration data on the form
         jLDrawerName.setText(eChequeReg.getClientName());
@@ -766,7 +767,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jTDay.setText("");
         jTMonth.setText("");
         jTYear.setText("");
-        jCGranteed.setSelected(false);
+        jCGuarenteed.setSelected(false);
 
         newChequeFlag = true;
     }//GEN-LAST:event_jMNewChequeActionPerformed
@@ -803,8 +804,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 jTAmount.setEditable(false);
 
                 if (oldCheque.getGuaranteed()) {
-                    jCGranteed.setSelected(true);
-                    jCGranteed.setEnabled(false);
+                    jCGuarenteed.setSelected(true);
+                    jCGuarenteed.setEnabled(false);
                 }
                 jLSerialNumber.setText(oldCheque.getChequeNumber());
                 jLDate.setText("Date: " + currentDate());
@@ -893,7 +894,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancel;
     private javax.swing.JButton jBOK;
-    private javax.swing.JCheckBox jCGranteed;
+    private javax.swing.JCheckBox jCGuarenteed;
     private javax.swing.JDialog jDSignCheque;
     private javax.swing.JLabel jLAccountNum;
     private javax.swing.JLabel jLBankName;
