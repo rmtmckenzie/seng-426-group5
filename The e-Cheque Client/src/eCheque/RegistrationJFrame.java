@@ -547,6 +547,27 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         if (pathFlag) {
             pathFlag = new File(eWalletPath + File.separator + "History").mkdirs();
         }
+        
+        if(!pathFlag) {
+        	int option = JOptionPane.showConfirmDialog(null, "E-Wallet already exists!\nDo you want to overwrite it?", "E-Wallet already exists", JOptionPane.YES_NO_OPTION);
+        	if (option == JOptionPane.NO_OPTION) {
+        		pathFlag = true;
+        	}
+        	else {
+        		File eWalletFile = new File(eWalletPath);
+        		String[] entries = eWalletFile.list();
+        		for (String s: entries) {
+        			File currentFile = new File (eWalletFile.getPath(),s);
+        			currentFile.delete();
+        		}
+                new File(eWalletPath + File.separator + "In Coming").mkdirs();
+                new File(eWalletPath + File.separator + "Out going").mkdirs();
+                new File(eWalletPath + File.separator + "Security Tools").mkdirs();
+                new File(eWalletPath + File.separator + "My Cheques").mkdirs();
+                new File(eWalletPath + File.separator + "History").mkdirs();
+        		pathFlag = true;
+        	}
+        }
     }// GEN-LAST:event_jBeWalletMouseClicked
 
     private void jBRFRegisterMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBRFRegisterMouseClicked
