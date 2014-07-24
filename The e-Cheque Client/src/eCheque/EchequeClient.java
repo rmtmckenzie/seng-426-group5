@@ -99,10 +99,15 @@ public class EchequeClient implements Runnable {
         getServerConnection = true;
     }
 
+
     /**
      * Process a connection between this client, and another client.
-     *
-     * @throws Exception
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws InvalidKeyException
      */
     private void processConnection() throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, InvalidKeyException {
         DigitalCertificate certificate;
@@ -117,23 +122,18 @@ public class EchequeClient implements Runnable {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.WRAP_MODE, certificate.getpublicKey());
         byte[] wrappedKey = cipher.wrap(sessionKey);
-        int keyLength = wrappedKey.length;
 
-        SocketOutputObject.writeInt(keyLength);
+        SocketOutputObject.writeInt(wrappedKey.length);
         SocketOutputObject.flush();
 
         SocketOutput.write(wrappedKey);
         SocketOutput.flush();
 
         //send encrypted cheque.
-        FileInputStream cheqOut = new FileInputStream(chequePath);
+        FileInputStream chequeOut = new FileInputStream(chequePath);
         byte[] buffer = new byte[1024];
-        int numread;
-        while ((numread = cheqOut.read(buffer)) >= 0) {
-            SocketOutput.write(buffer, 0, numread);
-        }
-        cheqOut.close();
-
+        for(int numread=0; ((numread = chequeOut.read(buffer)) >=0); SocketOutput.write(buffer, 0, numread))
+        chequeOut.close();
     }
 
     private void closeConnection() {
