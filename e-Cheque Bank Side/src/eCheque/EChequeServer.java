@@ -195,15 +195,6 @@ public class EChequeServer implements Runnable {
         }
     }
 
-    private String getChequeReferenceString(ECheque chq) {
-
-        return chq.getAccountNumber() + chq.getAccountHolder()
-                + chq.getBankName() + chq.getChequeNumber() + chq.getMoney()
-                + chq.getCurrencyType() + chq.getEarnday()
-                + chq.getGuaranteed() + chq.getPayToOrderOf();
-
-    }
-
     public void run() {
         try {
             getSocketStream();

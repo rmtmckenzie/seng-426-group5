@@ -37,10 +37,8 @@ public class BankServer implements Runnable {
     public void run() {
         try {
             while (!done) {
-                Socket incoming = serverSocket.accept();
-                Runnable chequeServer = new EChequeServer(incoming);
-                Thread bankThreading = new Thread(chequeServer);
-                bankThreading.start();
+                Runnable chequeServer = new EChequeServer(serverSocket.accept());
+                new Thread(chequeServer).start();
             }
         } catch (IOException exp) {
             JOptionPane.showMessageDialog(null, exp.getMessage(), "Network Error", JOptionPane.ERROR_MESSAGE);
