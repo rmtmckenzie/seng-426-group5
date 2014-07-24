@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class EchequeClient implements Runnable {
-
     public static final int MODE_REGISTER = 0;
     public static final int MODE_DEPOSIT = 1;
     public static final int MODE_CANCEL = 2;
@@ -48,7 +47,7 @@ public class EchequeClient implements Runnable {
     private String chequePath;
     private String hostname;
     private int portID;
-    private int bankmode;
+    private int bankMode;
     private boolean getServerConnection;
     private boolean getSocketConnection;
     private boolean bankConnection;
@@ -68,7 +67,7 @@ public class EchequeClient implements Runnable {
 
     public EchequeClient(int port, int mode, String host, EChequeRegistration register, DigitalCertificate DC) {
         portID = port;
-        bankmode = mode;
+        bankMode = mode;
         hostname = host;
         registrationData = register;
         clientCerit = DC;
@@ -77,7 +76,7 @@ public class EchequeClient implements Runnable {
 
     public EchequeClient(int port, int mode, String host, EChequeRegistration register, ECheque chq) {
         portID = port;
-        bankmode = mode;
+        bankMode = mode;
         hostname = host;
         registrationData = register;
         depositCheque = chq;
@@ -117,7 +116,6 @@ public class EchequeClient implements Runnable {
         SocketOutputObject.flush();
 
         certificate = (DigitalCertificate) SocketInputObject.readObject();
-
         //send session key
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.WRAP_MODE, certificate.getpublicKey());
@@ -132,7 +130,7 @@ public class EchequeClient implements Runnable {
         //send encrypted cheque.
         FileInputStream chequeOut = new FileInputStream(chequePath);
         byte[] buffer = new byte[1024];
-        for(int numread=0; ((numread = chequeOut.read(buffer)) >=0); SocketOutput.write(buffer, 0, numread))
+        for(int numRead=0; ((numRead = chequeOut.read(buffer)) >=0); SocketOutput.write(buffer, 0, numRead))
         chequeOut.close();
     }
 
@@ -161,10 +159,10 @@ public class EchequeClient implements Runnable {
     private void processBankConnection() throws IOException, ClassNotFoundException {
         SocketOutputObject.writeObject("Hello");
         SocketOutputObject.flush();
-        SocketOutputObject.writeInt(bankmode);
+        SocketOutputObject.writeInt(bankMode);
         SocketOutputObject.flush();
 
-        if (bankmode == MODE_REGISTER) {
+        if (bankMode == MODE_REGISTER) {
             SocketOutputObject.writeObject(registrationData);
             SocketOutputObject.flush();
             SocketOutputObject.writeObject(clientCerit);
@@ -173,14 +171,13 @@ public class EchequeClient implements Runnable {
             ObjectOutputStream outObj = new ObjectOutputStream(new FileOutputStream("Config.epc"));
             outObj.writeObject(registrationData);
             outObj.close();
-
-        } else if (bankmode == MODE_DEPOSIT) {
+        } else if (bankMode == MODE_DEPOSIT) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
             SocketOutputObject.writeObject(registrationData.getAccountNumber());
             SocketOutputObject.flush();
             JOptionPane.showMessageDialog(null, "Deposit information has been sent.");
-        } else if (bankmode == MODE_CANCEL) {
+        } else if (bankMode == MODE_CANCEL) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
         }

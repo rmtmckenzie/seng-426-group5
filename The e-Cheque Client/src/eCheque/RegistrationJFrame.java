@@ -533,7 +533,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     + registrationObj.getClientName() + "DigCert.edc");
 
             // Connect to the bank server to activate the e-cheque account.
-            Runnable client = new EchequeClient(8189, 0,
+            Runnable client = new EchequeClient(8189, EchequeClient.MODE_REGISTER,
                     registrationObj.getBankAddress(), registrationObj, dcObj);
             Thread t = new Thread(client);
             t.start();
