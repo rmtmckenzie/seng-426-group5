@@ -23,20 +23,18 @@ import java.io.*;
 public class AESCrypt {
 
     public enum cypherType {
-
         ENCRYPT,
         DECRYPT,
         WRAP,
         UNWRAP
-    };
+    }
 
     // Returns a randomly generated secret key
     static public SecretKey GenerateRandomAESKey() throws Exception {
         KeyGenerator KeyGen = KeyGenerator.getInstance("AES");
         SecureRandom random = new SecureRandom();
         KeyGen.init(random);
-        SecretKey key = KeyGen.generateKey();
-        return key;
+        return KeyGen.generateKey();
     }
 
     // Initializes the cypher mode
@@ -60,15 +58,10 @@ public class AESCrypt {
         Cipher cipherObj;
 
         // Get type of encryption
-        if (mode == cypherType.ENCRYPT || mode == cypherType.DECRYPT) {
-            cipherObj = Cipher.getInstance("AES");
-        } else {
-            cipherObj = Cipher.getInstance("RSA");
-        }
+        cipherObj = (((mode == cypherType.ENCRYPT) || (mode == cypherType.DECRYPT)) ? Cipher.getInstance("AES") : Cipher.getInstance("RSA"));
 
         // Init the object
         cipherObj.init(CipherMode, key);
-
         return cipherObj;
     }
 
