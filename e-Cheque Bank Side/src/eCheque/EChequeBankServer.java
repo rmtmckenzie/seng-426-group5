@@ -5,10 +5,10 @@
  */
 package eCheque;
 
+import java.awt.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,16 +17,15 @@ import javax.swing.JOptionPane;
 public class EChequeBankServer extends javax.swing.JFrame {
 
 	private boolean serverStartFlag;
-	private BankServer runBank;	
-	private Thread bankServerThread;
-	private boolean already;
+	private BankServer runBank;
+    private boolean alreadyRunning;
 
 	/**
 	 * Creates new form EChequeBankServer
 	 */
 	public EChequeBankServer() {
 		initComponents();
-		already = false;
+		alreadyRunning = false;
 		serverStartFlag = false;
 		jTBankShell.append("\n");
 	}
@@ -51,7 +50,7 @@ public class EChequeBankServer extends javax.swing.JFrame {
       jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
       jTBankShell.setColumns(20);
-      jTBankShell.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
+      jTBankShell.setFont(new java.awt.Font("Courier New", Font.BOLD, 12)); // NOI18N
       jTBankShell.setRows(5);
       jTBankShell.setText("\n>> e-Cheque Bank Server Waiting");
       jScrollPane1.setViewportView(jTBankShell);
@@ -139,30 +138,25 @@ public class EChequeBankServer extends javax.swing.JFrame {
 		 if (!serverStartFlag) {
 			 jTBankShell.append(">> Starting up the server...\n");
 			 try {
-				 
-				 if( already == false){
+				 if(!alreadyRunning){
 					runBank = new BankServer();					
-					already = true;
+					alreadyRunning = true;
 				 }
-				 bankServerThread = new Thread(runBank);
-				 bankServerThread.start();
-				 serverStartFlag = true;
-				 
+                new Thread(runBank).start();
+				serverStartFlag = true;
 
 				 jTBankShell.append(">> Server started: " + getCurrentTimeString() + "\n");
 			 } catch (IOException exp) {
 				 jTBankShell.append(">> Network Error: " + exp.getMessage() + ".\n");
 			 }
 		 } else {
-			 jTBankShell.append(">> Server is already running.\n");			 
+			 jTBankShell.append(">> Server is alreadyRunning running.\n");
 		 }
     }//GEN-LAST:event_jBStartMouseClicked
 
 	private String getCurrentTimeString() {
 		Calendar cal = Calendar.getInstance();
-		cal.getTime();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		return sdf.format(cal.getTime());
+		return new SimpleDateFormat("HH:mm:ss").format(cal.getTime());
 	}
 
 	/**
