@@ -18,6 +18,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -70,7 +72,9 @@ public class EChequeDB {
     private boolean closeDataBaseConnection() {
         try {
             connection.close();
-            sqlStatement.close();
+            if(sqlStatement != null){
+                sqlStatement.close();
+            }
             return true;
         } catch (SQLException exp) {
             exp.printStackTrace();
@@ -96,6 +100,7 @@ public class EChequeDB {
         boolean result = false;
         
         try {
+            connectToDataBase();
             PreparedStatement s = connection.prepareStatement(statement);
             for(int i = 0; i < objects.length; i++) {
                 s.setObject(i + 1, objects[i]);
@@ -105,6 +110,8 @@ public class EChequeDB {
         } catch (SQLException exp) {
             JOptionPane.showMessageDialog(null, exp.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
             exp.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeDataBaseConnection();
         }
@@ -116,6 +123,7 @@ public class EChequeDB {
         boolean result = false;
         
         try {
+            connectToDataBase();
             PreparedStatement s = connection.prepareStatement(statement);
             for(int i = 0; i < objects.length; i++) {
                 s.setObject(i + 1, objects[i]);
@@ -125,6 +133,8 @@ public class EChequeDB {
         } catch (SQLException exp) {
             JOptionPane.showMessageDialog(null, exp.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
             exp.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeDataBaseConnection();
         }
