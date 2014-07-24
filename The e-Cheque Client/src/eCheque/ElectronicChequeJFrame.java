@@ -299,7 +299,6 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jBActivationMouseClicked
 
     private void jBDrawChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDrawChequeActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jBDrawChequeActionPerformed
 
     private void jBDrawChequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBDrawChequeMouseClicked

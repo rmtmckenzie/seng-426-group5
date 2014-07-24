@@ -20,16 +20,16 @@ public class EBankingJFrame extends javax.swing.JFrame {
     private boolean selectChequeFlag;
     private final EChequeRegistration registerData;
     private ECheque depositCheque;
-    
+
     private static final int CLIENTPORT = 8189;
 
     /**
      * Creates new form EBankingJFrame
-     * @param registerdUser
+     * @param registeredUser
      */
-    public EBankingJFrame(EChequeRegistration registerdUser) {
+    public EBankingJFrame(EChequeRegistration registeredUser) {
         initComponents();
-        registerData = registerdUser;
+        registerData = registeredUser;
         selectChequeFlag = false;
     }
 
@@ -40,7 +40,6 @@ public class EBankingJFrame extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jPanel1 = new javax.swing.JPanel();
         jPChequeInfo = new javax.swing.JPanel();
         jLBankUrl = new javax.swing.JLabel();
@@ -84,43 +83,43 @@ public class EBankingJFrame extends javax.swing.JFrame {
         org.jdesktop.layout.GroupLayout jPChequeInfoLayout = new org.jdesktop.layout.GroupLayout(jPChequeInfo);
         jPChequeInfo.setLayout(jPChequeInfoLayout);
         jPChequeInfoLayout.setHorizontalGroup(
-            jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPChequeInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPChequeInfoLayout.createSequentialGroup()
-                        .add(jLCurrentCheque)
-                        .add(39, 39, 39)
-                        .add(jLChequeName)
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(jPChequeInfoLayout.createSequentialGroup()
-                        .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLBankUrl)
-                            .add(jLChequeSelection))
-                        .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPChequeInfoLayout.createSequentialGroup()
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jTBankIP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
-                            .add(jPChequeInfoLayout.createSequentialGroup()
-                                .add(46, 46, 46)
-                                .add(jBLoadCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 88, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(0, 0, Short.MAX_VALUE))))))
+                jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPChequeInfoLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(jPChequeInfoLayout.createSequentialGroup()
+                                                .add(jLCurrentCheque)
+                                                .add(39, 39, 39)
+                                                .add(jLChequeName)
+                                                .add(0, 0, Short.MAX_VALUE))
+                                        .add(jPChequeInfoLayout.createSequentialGroup()
+                                                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(jLBankUrl)
+                                                        .add(jLChequeSelection))
+                                                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(jPChequeInfoLayout.createSequentialGroup()
+                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                                .add(jTBankIP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+                                                        .add(jPChequeInfoLayout.createSequentialGroup()
+                                                                .add(46, 46, 46)
+                                                                .add(jBLoadCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 88, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                                .add(0, 0, Short.MAX_VALUE))))))
         );
         jPChequeInfoLayout.setVerticalGroup(
-            jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPChequeInfoLayout.createSequentialGroup()
-                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLBankUrl)
-                    .add(jTBankIP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(16, 16, 16)
-                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLChequeSelection)
-                    .add(jBLoadCheque))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLCurrentCheque)
-                    .add(jLChequeName))
-                .add(0, 21, Short.MAX_VALUE))
+                jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPChequeInfoLayout.createSequentialGroup()
+                                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(jLBankUrl)
+                                        .add(jTBankIP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(16, 16, 16)
+                                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(jLChequeSelection)
+                                        .add(jBLoadCheque))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jPChequeInfoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(jLCurrentCheque)
+                                        .add(jLChequeName))
+                                .add(0, 21, Short.MAX_VALUE))
         );
 
         jBDepositCheque.setText("Deposit Cheque");
@@ -142,46 +141,46 @@ public class EBankingJFrame extends javax.swing.JFrame {
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(18, 18, 18)
-                        .add(jPChequeInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(48, 48, 48)
-                        .add(jBDepositCheque)
-                        .add(30, 30, 30)
-                        .add(jBCancelCheque)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(jPanel1Layout.createSequentialGroup()
+                                                .add(18, 18, 18)
+                                                .add(jPChequeInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(jPanel1Layout.createSequentialGroup()
+                                                .add(48, 48, 48)
+                                                .add(jBDepositCheque)
+                                                .add(30, 30, 30)
+                                                .add(jBCancelCheque)))
+                                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(26, 26, 26)
-                .add(jPChequeInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jBDepositCheque)
-                    .add(jBCancelCheque))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(26, 26, 26)
+                                .add(jPChequeInfo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(jBDepositCheque)
+                                        .add(jBCancelCheque))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(392, 263));
@@ -192,18 +191,13 @@ public class EBankingJFrame extends javax.swing.JFrame {
      * Checks whether buttons are ready to be enabled;
      * IP address field must have something entered and
      * a valid cheque must have been selected.
-     * @return 
+     * @return
      */
     private boolean checkSubmitReady() {
-        if (jTBankIP.getText().length() != 0 && selectChequeFlag) {
-            jBCancelCheque.setEnabled(true);
-            jBDepositCheque.setEnabled(true);
-            return true;
-        } else {
-            jBCancelCheque.setEnabled(false);
-            jBDepositCheque.setEnabled(false);
-            return false;
-        }
+        boolean selectionFlag = jTBankIP.getText().length() != 0 && selectChequeFlag;
+        jBCancelCheque.setEnabled(selectionFlag);
+        jBDepositCheque.setEnabled(selectionFlag);
+        return selectionFlag;
     }
 
     /**
@@ -212,17 +206,11 @@ public class EBankingJFrame extends javax.swing.JFrame {
      * @return Path of folder
      */
     private String selectFilePath(String dialogTitle) {
-
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
         fileChooser.setDialogTitle(dialogTitle);
-        int result = fileChooser.showOpenDialog(this);
 
-        if (result == JFileChooser.CANCEL_OPTION) {
-            return "";
-        }
-
+        if (fileChooser.showOpenDialog(this) == JFileChooser.CANCEL_OPTION) return "";
         File fileName = fileChooser.getSelectedFile();
 
         // display error if invalid
@@ -231,9 +219,7 @@ public class EBankingJFrame extends javax.swing.JFrame {
                     "Invalid File Name", JOptionPane.ERROR_MESSAGE);
             return "";
         }
-        
         return fileName.getPath();
-        
     }
 
     /**
@@ -249,17 +235,17 @@ public class EBankingJFrame extends javax.swing.JFrame {
 
     /**
      * Load a cheque and validate that it is a cheque
-     * @param evt 
+     * @param evt
      */
     private void jBLoadChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoadChequeActionPerformed
         String chequePath = selectFilePath("Open Saved Cheque");
-       selectChequeFlag = false;
-       String chequeNumber = "N/A";
+        selectChequeFlag = false;
+        String chequeNumber = "N/A";
         if (chequePath.length() != 0) {
             try {
                 depositCheque = ECheque.readCheque(chequePath);
                 selectChequeFlag = true;
-                
+
                 chequeNumber = depositCheque.getChequeNumber();
             } catch (IOException exp) {
                 JOptionPane.showMessageDialog(null, "Cannot load the cheque", "System Error", JOptionPane.ERROR_MESSAGE);

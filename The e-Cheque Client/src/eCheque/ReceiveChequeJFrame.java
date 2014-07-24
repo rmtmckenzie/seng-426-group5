@@ -164,7 +164,6 @@ public class ReceiveChequeJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBRecieveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBRecieveMouseClicked
-        // TODO add your handling code here:
         try {
             //Get the sever side digital certificate.
             DigitalCertificate serverDC = DigitalCertificate.readDigitalCertificate(eChequeReg.getEWalletLoaction() +
