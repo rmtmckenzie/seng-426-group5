@@ -32,17 +32,6 @@ public class RegistrationJFrame extends javax.swing.JFrame {
      * Creates new form RegistrationFrame
      */
     public RegistrationJFrame() {
-        try {
-			// TrendyLookAndFeel tlf = new TrendyLookAndFeel();
-            // tlf.setCurrentTheme( new
-            // com.Trendy.swing.plaf.Themes.TrendyOrangeTheme());
-            // UIManager.setLookAndFeel(tlf);
-        } catch (Exception e) {
-
-			// JOptionPane.showMessageDialog(null,"System Error",
-            // "can not found themes", JOptionPane.ERROR_MESSAGE);
-        }
-
         pathFlag = false;
         initComponents();
     }
@@ -651,7 +640,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             return;
         }
 
-        if (pathFlag == false) {
+        if (!pathFlag) {
             JOptionPane.showMessageDialog(null,
                     "You have to create your e-wallet", "User Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -684,8 +673,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         try {
             ObjectOutputStream outObj;
             // create the user digital certificate (digital identity)
-            RSAGenerator keyGen = new RSAGenerator();
-            KeyPair RSAKeys = keyGen.GenerateRSAKeys();
+            KeyPair RSAKeys = RSAGenerator.GenerateRSAKeys();
 
             // encrypt private key with user password.
             outObj = new ObjectOutputStream(new FileOutputStream(eWalletPath
@@ -696,9 +684,8 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             outObj.close();
 
             // create AES Key with user password and cipher
-            AESCrypt aesCrypt = new AESCrypt();
-            Key AES128 = aesCrypt.initializeAESKeyByPassword(passTemp);
-            Cipher cipher = aesCrypt.initializeCipher(AES128, AESCrypt.cypherType.ENCRYPT);
+            Key AES128 = AESCrypt.initializeAESKeyByPassword(passTemp);
+            Cipher cipher = AESCrypt.initializeCipher(AES128, AESCrypt.cypherType.ENCRYPT);
             InputStream in = new FileInputStream(eWalletPath
                     + File.separator + "Security Tools"
                     + File.separator + "privateKey.key");
@@ -707,7 +694,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     + File.separator + "Private Key.key");
 
             // encrypt the private key with the AES key and delete the plain key
-            aesCrypt.crypt(in, out, cipher);
+            AESCrypt.crypt(in, out, cipher);
             in.close();
             out.close();
             File control = new File(eWalletPath + File.separator
