@@ -38,62 +38,35 @@ public class ECheque implements Serializable {
     /**
      * Creates a new instance of ECheque
      */
-    public ECheque() 
-    {
+    public ECheque() {}
 
-    }
-
-    public void setAccountHolder(String x) {
-        accountHolder = x;
-
-    }
+    public void setAccountHolder(String x) { accountHolder = x; }
 
     public void setAccountNumber(String y) {
         accountNumber = y;
     }
 
-    public void setBankName(String z) {
-        bankName = z;
+    public void setBankName(String z) { bankName = z; }
 
-    }
-
-    public void setPayToOrderOf(String m) {
-        payToOrderOf = m;
-
-    }
+    public void setPayToOrderOf(String m) { payToOrderOf = m; }
 
     public void setAmountOfMony(String s) {
         amountOfMoney = s;
     }
 
-    public void setCurrencyType(String n) {
-        currencyType = n;
-
-    }
+    public void setCurrencyType(String n) { currencyType = n; }
 
     public void setChequeNumber(String c) {
         chequeNumber = c;
     }
 
-    public void setGuaranteed(boolean s) {
-        guaranteed = s;
+    public void setGuaranteed(boolean s) { guaranteed = s ;}
 
-    }
+    public void setEarnday(String u) { earnday = u;}
 
-    public void setEarnday(String u) {
-        earnday = u;
+    public void setBankSignature(byte[] y) { bankSignature = y; }
 
-    }
-
-    public void setBankSignature(byte[] y) {
-        bankSignature = y;
-
-    }
-
-    public void setDrawerSignature(byte[] y) {
-        drawerSignature = y;
-
-    }
+    public void setDrawerSignature(byte[] y) { drawerSignature = y; }
 
     public String getMoney() {
         return amountOfMoney;
@@ -123,18 +96,15 @@ public class ECheque implements Serializable {
         return chequeNumber;
     }
 
-    public boolean getGuaranteed() {
-
-        return guaranteed;
-    }
+    public boolean getGuaranteed() { return guaranteed; }
 
     public String getEarnday() {
         return earnday;
     }
-    
+
     public String getReferenceString() {
         return accountNumber + accountHolder + bankName + chequeNumber +
-                amountOfMoney+ currencyType + earnday + guaranteed + payToOrderOf;
+                amountOfMoney + currencyType + earnday + guaranteed + payToOrderOf;
     }
 
     public byte[] getBankSignature() {
