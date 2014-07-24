@@ -504,7 +504,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 				458, 482);
 	}// </editor-fold>//GEN-END:initComponents
 
-    private String getWalletLoaction(String dialogTitle) {
+    private String getWalletLocation(String dialogTitle) {
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -533,7 +533,12 @@ public class RegistrationJFrame extends javax.swing.JFrame {
     private void jBeWalletMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBeWalletMouseClicked
         // TODO add your handling code here:
 
-        eWalletPath = getWalletLoaction("Set e-Wallet Location");
+        eWalletPath = getWalletLocation("Set e-Wallet Location");
+        if (eWalletPath == "") {
+        	pathFlag = false;
+        	return ;
+        }
+
         pathFlag = new File(eWalletPath + File.separator + "In Coming").mkdirs();
         if (pathFlag) {
             pathFlag = new File(eWalletPath + File.separator + "Out going").mkdirs();
