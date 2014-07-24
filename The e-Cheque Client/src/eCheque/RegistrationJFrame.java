@@ -404,14 +404,29 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (bankName.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Bank Name cannot contain numbers",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (bankURL.length() == 0) {
             JOptionPane.showMessageDialog(null,
                     "Bank URL or IP address can not be empty", "User Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (bankURL.matches("[a-zA-Z]+") && !bankURL.equals("localhost")){
+            JOptionPane.showMessageDialog(null, "Bank URL cannot contain letters",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (clientName.length() == 0) {
             JOptionPane.showMessageDialog(null, "Client name can not be empty",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (clientName.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Client Name cannot contain numbers",
                     "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -421,10 +436,20 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (accountNumber.matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(null, "Account Number cannot contain letters",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (digitalCIssuer.length() == 0) {
             JOptionPane.showMessageDialog(null,
                     "Certificate issuer can not be empty", "User Error",
                     JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (digitalCIssuer.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Digital Certificate Issuer cannot contain numbers",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (digitalCURL.length() == 0) {
