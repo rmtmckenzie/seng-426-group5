@@ -12,6 +12,7 @@
  */
 package eCheque;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -33,10 +34,9 @@ public class DigitalCertificate implements Serializable {
     private byte[] issuerSignature;
 
     /**
-     * Creates a new instance of a certificate
+     * Creates a new instance of certificate
      */
-    public DigitalCertificate() 
-    {
+    public DigitalCertificate() {
     }
 
     public void setHolderName(String x) {
@@ -103,8 +103,8 @@ public class DigitalCertificate implements Serializable {
         return issuerSignature;
     }
 
-    // Read a certificate from a file
-    static public DigitalCertificate readDigitalCertificate(String filePath) throws IOException, ClassNotFoundException, ClassCastException {
+    // Read a digital certificate from a file
+    static public DigitalCertificate readDigitalCertificate(String filePath) throws IOException, ClassNotFoundException {
         ObjectInputStream In = new ObjectInputStream(new FileInputStream(filePath));
         DigitalCertificate DC;
         DC = (DigitalCertificate) In.readObject();
@@ -112,7 +112,7 @@ public class DigitalCertificate implements Serializable {
         return DC;
     }
 
-    // Write a certificate to a file
+    // Save a digital certificate to a file
     public void SaveDigitalCertificate(String filePath) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath));
         out.writeObject(this);
