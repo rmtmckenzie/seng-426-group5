@@ -27,12 +27,14 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
     private boolean pathFlag;
     private String eWalletPath;
+	 private boolean registrationState;
 
     /**
      * Creates new form RegistrationFrame
      */
     public RegistrationJFrame() {
         pathFlag = false;
+		  registrationState = false;
         initComponents();
     }
 
@@ -557,11 +559,20 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     + "Security Tools" + File.separator 
                     + registrationObj.getClientName() + "DigCert.edc");
 
-            // Connect to the bank server to activate the e-cheque account.
-            Runnable client = new EchequeClient(8189, EchequeClient.MODE_REGISTER,
+            // Connect to the bank server to activate the e-cheque account.				
+            EchequeClient client = new EchequeClient(8189, EchequeClient.MODE_REGISTER,
                     registrationObj.getBankAddress(), registrationObj, dcObj);
             Thread t = new Thread(client);
             t.start();
+				t.join();				
+				
+				registrationState = client.getRegistrationState();
+				if(registrationState){
+					JOptionPane.showMessageDialog(null,"Registration complete","Registration",JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					JOptionPane.showMessageDialog(null,"Registration failed","Registration", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 			// JOptionPane.showMessageDialog(null,"Registeration Done\n\tYou have to restart your system","Confirm",
             // JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException exp) {
@@ -577,6 +588,10 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     "Error Message", JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_jBRFRegisterMouseClicked
+	 
+	 public boolean getRegistrationState(){
+		 return registrationState;
+	 }
 
     /**
      * @param args the command line arguments

@@ -29,11 +29,12 @@ public class EchequeClient implements Runnable {
     public static final int MODE_REGISTER = 0;
     public static final int MODE_DEPOSIT = 1;
     public static final int MODE_CANCEL = 2;
-
+	 
+	 
     /**
      * Creates a new instance of EchequeClient
      */
-
+	 private volatile boolean registrationState;
     private Socket ClientConnection;
     private ObjectInputStream SocketInputObject;
     private ObjectOutputStream SocketOutputObject;
@@ -171,6 +172,19 @@ public class EchequeClient implements Runnable {
             ObjectOutputStream outObj = new ObjectOutputStream(new FileOutputStream("Config.epc"));
             outObj.writeObject(registrationData);
             outObj.close();
+				
+				String confirm = (String) SocketInputObject.readObject();		  
+				registrationState = confirm.equals("registration complete");				
+				if(registrationState == false){
+					// If the registration failed, then delete the config.epc file
+					try {
+						File file = new File("Config.epc");
+						file.delete();
+					} catch (Exception exp) {
+						exp.printStackTrace();
+					}
+				}
+				return;
         } else if (bankMode == MODE_DEPOSIT) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
@@ -181,9 +195,13 @@ public class EchequeClient implements Runnable {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
         }
-        String confirm = (String) SocketInputObject.readObject();
+		  
+        String confirm = (String) SocketInputObject.readObject();		  
         JOptionPane.showMessageDialog(null, confirm);
     }
+	 public boolean getRegistrationState(){
+		 return registrationState;
+	 }
 
     private void runClient() {
         try {
@@ -206,7 +224,9 @@ public class EchequeClient implements Runnable {
         }
     }
 
+	 @Override
     public void run() {
         runClient();
+		  //System.exit(0);
     }
 }
