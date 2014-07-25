@@ -364,7 +364,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         		String[] entries = eWalletFile.list();
         		for (String s: entries) {
         			File currentFile = new File (eWalletFile.getPath(),s);
-        			currentFile.delete();
+        			//currentFile.delete();
         		}
                 new File(eWalletPath + File.separator + "In Coming").mkdirs();
                 new File(eWalletPath + File.separator + "Out going").mkdirs();
@@ -498,7 +498,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         //pad the password
         for (int i = 0; i < 16 - password.length; i++) strPassword += password[i];
 
-        passwordCode = strPassword.hashCode();
+        passwordCode = strPassword.hashCode();		  
 
 		// For Test:
         // JOptionPane.showMessageDialog(null,passTemp);
