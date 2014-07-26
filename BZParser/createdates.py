@@ -33,6 +33,9 @@ bugs = sorted(bugs,key=lambda bug: bug['cday'])
 
 print "Created:"
 for bug in bugs:
-    print bug['cday'], bug['reporter']
+    status = 'Closed on '+ bug['mday'] if bug['status'] == 'RESOLVED' else 'Open'
+    print "{0}  {1: <20} {2}".format(bug['cday'], bug['reporter'], status)
+
+
     
 
