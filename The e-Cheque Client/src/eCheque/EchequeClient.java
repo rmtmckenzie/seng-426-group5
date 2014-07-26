@@ -26,15 +26,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class EchequeClient implements Runnable {
-
     public static final int MODE_REGISTER = 0;
     public static final int MODE_DEPOSIT = 1;
     public static final int MODE_CANCEL = 2;
-
+	 
+	 
     /**
      * Creates a new instance of EchequeClient
      */
-
+	 private volatile boolean registrationState;
     private Socket ClientConnection;
     private ObjectInputStream SocketInputObject;
     private ObjectOutputStream SocketOutputObject;
@@ -48,7 +48,7 @@ public class EchequeClient implements Runnable {
     private String chequePath;
     private String hostname;
     private int portID;
-    private int bankmode;
+    private int bankMode;
     private boolean getServerConnection;
     private boolean getSocketConnection;
     private boolean bankConnection;
@@ -68,7 +68,7 @@ public class EchequeClient implements Runnable {
 
     public EchequeClient(int port, int mode, String host, EChequeRegistration register, DigitalCertificate DC) {
         portID = port;
-        bankmode = mode;
+        bankMode = mode;
         hostname = host;
         registrationData = register;
         clientCerit = DC;
@@ -77,7 +77,7 @@ public class EchequeClient implements Runnable {
 
     public EchequeClient(int port, int mode, String host, EChequeRegistration register, ECheque chq) {
         portID = port;
-        bankmode = mode;
+        bankMode = mode;
         hostname = host;
         registrationData = register;
         depositCheque = chq;
@@ -99,10 +99,15 @@ public class EchequeClient implements Runnable {
         getServerConnection = true;
     }
 
+
     /**
      * Process a connection between this client, and another client.
-     *
-     * @throws Exception
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws InvalidKeyException
      */
     private void processConnection() throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, InvalidKeyException {
         DigitalCertificate certificate;
@@ -112,28 +117,22 @@ public class EchequeClient implements Runnable {
         SocketOutputObject.flush();
 
         certificate = (DigitalCertificate) SocketInputObject.readObject();
-
         //send session key
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.WRAP_MODE, certificate.getpublicKey());
         byte[] wrappedKey = cipher.wrap(sessionKey);
-        int keyLength = wrappedKey.length;
 
-        SocketOutputObject.writeInt(keyLength);
+        SocketOutputObject.writeInt(wrappedKey.length);
         SocketOutputObject.flush();
 
         SocketOutput.write(wrappedKey);
         SocketOutput.flush();
 
         //send encrypted cheque.
-        FileInputStream cheqOut = new FileInputStream(chequePath);
+        FileInputStream chequeOut = new FileInputStream(chequePath);
         byte[] buffer = new byte[1024];
-        int numread;
-        while ((numread = cheqOut.read(buffer)) >= 0) {
-            SocketOutput.write(buffer, 0, numread);
-        }
-        cheqOut.close();
-
+        for(int numRead=0; ((numRead = chequeOut.read(buffer)) >=0); SocketOutput.write(buffer, 0, numRead))
+        chequeOut.close();
     }
 
     private void closeConnection() {
@@ -161,10 +160,10 @@ public class EchequeClient implements Runnable {
     private void processBankConnection() throws IOException, ClassNotFoundException {
         SocketOutputObject.writeObject("Hello");
         SocketOutputObject.flush();
-        SocketOutputObject.writeInt(bankmode);
+        SocketOutputObject.writeInt(bankMode);
         SocketOutputObject.flush();
 
-        if (bankmode == MODE_REGISTER) {
+        if (bankMode == MODE_REGISTER) {
             SocketOutputObject.writeObject(registrationData);
             SocketOutputObject.flush();
             SocketOutputObject.writeObject(clientCerit);
@@ -173,20 +172,36 @@ public class EchequeClient implements Runnable {
             ObjectOutputStream outObj = new ObjectOutputStream(new FileOutputStream("Config.epc"));
             outObj.writeObject(registrationData);
             outObj.close();
-
-        } else if (bankmode == MODE_DEPOSIT) {
+				
+				String confirm = (String) SocketInputObject.readObject();		  
+				registrationState = confirm.equals("registration complete");				
+				if(registrationState == false){
+					// If the registration failed, then delete the config.epc file
+					try {
+						File file = new File("Config.epc");
+						file.delete();
+					} catch (Exception exp) {
+						exp.printStackTrace();
+					}
+				}
+				return;
+        } else if (bankMode == MODE_DEPOSIT) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
             SocketOutputObject.writeObject(registrationData.getAccountNumber());
             SocketOutputObject.flush();
             JOptionPane.showMessageDialog(null, "Deposit information has been sent.");
-        } else if (bankmode == MODE_CANCEL) {
+        } else if (bankMode == MODE_CANCEL) {
             SocketOutputObject.writeObject(depositCheque);
             SocketOutputObject.flush();
         }
-        String confirm = (String) SocketInputObject.readObject();
+		  
+        String confirm = (String) SocketInputObject.readObject();		  
         JOptionPane.showMessageDialog(null, confirm);
     }
+	 public boolean getRegistrationState(){
+		 return registrationState;
+	 }
 
     private void runClient() {
         try {
@@ -209,7 +224,9 @@ public class EchequeClient implements Runnable {
         }
     }
 
+	 @Override
     public void run() {
         runClient();
+		  //System.exit(0);
     }
 }

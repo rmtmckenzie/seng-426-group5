@@ -81,18 +81,15 @@ public class EChequeServer implements Runnable {
      * @throws IOException
      * @throws Exception
      */
-    private void processConnection()
-            throws Exception {
+    private void processConnection() throws Exception {
         //exchange digital certificates
-        DigitalCertificate clientCertificate
-                = (DigitalCertificate) socketInputObject.readObject();
+        DigitalCertificate clientCertificate = (DigitalCertificate) socketInputObject.readObject();
         socketOutputObject.writeObject(serverCertificate);
         socketOutputObject.flush();
 
         //get the wrapped key and unwrap it
         //read the session key from the socket
-        int keyLength = socketInputObject.readInt();
-        byte[] wrappedKey = new byte[keyLength];
+        byte[] wrappedKey = new byte[socketInputObject.readInt()];
 
         //noinspection ResultOfMethodCallIgnored
         socketInput.read(wrappedKey);
@@ -121,8 +118,7 @@ public class EChequeServer implements Runnable {
      * @throws NoSuchPaddingException
      * @throws InvalidKeyException
      */
-    private Key getSessionKey(byte[] wrappedKey)
-            throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+    private Key getSessionKey(byte[] wrappedKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.UNWRAP_MODE, privKey);
         return cipher.unwrap(wrappedKey, "AES", Cipher.SECRET_KEY);
@@ -150,8 +146,7 @@ public class EChequeServer implements Runnable {
                 clientCertificate.getpublicKey());
     }
 
-    private void decryptCheque(Key sessionKey, String chequeName)
-            throws IOException, GeneralSecurityException {
+    private void decryptCheque(Key sessionKey, String chequeName) throws IOException, GeneralSecurityException {
         //try-with-resources - auto closes upon failure
         try (InputStream in = new FileInputStream(
                 walletPath + File.separator + "In Coming"
@@ -170,12 +165,8 @@ public class EChequeServer implements Runnable {
         try (FileOutputStream chqIn = new FileOutputStream(
                 walletPath + File.separator + "In Coming"
                         + File.separator + chequeName + ".cry")) {
-
             byte[] buffer = new byte[1024];
-            int numRead;
-            while ((numRead = socketInput.read(buffer)) >= 0) {
-                chqIn.write(buffer, 0, numRead);
-            }
+            for (int numRead; (numRead = socketInput.read(buffer)) >=0; chqIn.write(buffer,0,numRead));
         }
     }
 

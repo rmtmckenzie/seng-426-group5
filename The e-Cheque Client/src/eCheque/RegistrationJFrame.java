@@ -27,12 +27,14 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
     private boolean pathFlag;
     private String eWalletPath;
+	 private boolean registrationState;
 
     /**
      * Creates new form RegistrationFrame
      */
     public RegistrationJFrame() {
         pathFlag = false;
+		  registrationState = false;
         initComponents();
     }
 
@@ -362,7 +364,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         		String[] entries = eWalletFile.list();
         		for (String s: entries) {
         			File currentFile = new File (eWalletFile.getPath(),s);
-        			currentFile.delete();
+        			//currentFile.delete();
         		}
                 new File(eWalletPath + File.separator + "In Coming").mkdirs();
                 new File(eWalletPath + File.separator + "Out going").mkdirs();
@@ -404,14 +406,29 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (bankName.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Bank Name cannot contain numbers",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (bankURL.length() == 0) {
             JOptionPane.showMessageDialog(null,
                     "Bank URL or IP address can not be empty", "User Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (bankURL.matches("[a-zA-Z]+") && !bankURL.equals("localhost")){
+            JOptionPane.showMessageDialog(null, "Bank URL cannot contain letters",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (clientName.length() == 0) {
             JOptionPane.showMessageDialog(null, "Client name can not be empty",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (clientName.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Client Name cannot contain numbers",
                     "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -421,10 +438,20 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (accountNumber.matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(null, "Account Number cannot contain letters",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (digitalCIssuer.length() == 0) {
             JOptionPane.showMessageDialog(null,
                     "Certificate issuer can not be empty", "User Error",
                     JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (digitalCIssuer.matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "Digital Certificate Issuer cannot contain numbers",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (digitalCURL.length() == 0) {
@@ -445,15 +472,9 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         }
 
         /* Checking if both passwords are the same */
-        String passTemp = "";
-        String passTemp2 = "";
+        String strPassword = new String(password);
 
-        for (int i = 0; i < password.length; i++) {
-            passTemp += password[i];
-            passTemp2 += password2[i];
-        }
-
-        if (passTemp.compareTo(passTemp2) != 0) {
+        if (strPassword.compareTo(new String(password2)) != 0) {
             JOptionPane.showMessageDialog(null, "Passwords not match ",
                     "User Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -474,26 +495,23 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         // prepare the user name and password
         userNameCode = userName.hashCode();
 
-        int pad = 16 - password.length;
+        //pad the password
+        for (int i = 0; i < 16 - password.length; i++) strPassword += password[i];
 
-        for (int i = 0; i < pad; i++) {
-            passTemp += password[i];
-        }
-
-        passwordCode = passTemp.hashCode();
+        passwordCode = strPassword.hashCode();		  
 
 		// For Test:
         // JOptionPane.showMessageDialog(null,passTemp);
 		// create a registration object
         // to save user registration data
-        EChequeRegistration registerationObj = new EChequeRegistration();
-        registerationObj.setBankName(bankName);
-        registerationObj.setBankAddress(bankURL);
-        registerationObj.setClientName(clientName);
-        registerationObj.setAccountNumber(accountNumber);
-        registerationObj.setEWalletLoaction(eWalletPath);
-        registerationObj.setUsername(userNameCode);
-        registerationObj.setPasword(passwordCode);
+        EChequeRegistration registrationObj = new EChequeRegistration();
+        registrationObj.setBankName(bankName);
+        registrationObj.setBankAddress(bankURL);
+        registrationObj.setClientName(clientName);
+        registrationObj.setAccountNumber(accountNumber);
+        registrationObj.setEWalletLoaction(eWalletPath);
+        registrationObj.setUsername(userNameCode);
+        registrationObj.setPasword(passwordCode);
 
         try {
             ObjectOutputStream outObj;
@@ -509,7 +527,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             outObj.close();
 
             // create AES Key with user password and cipher
-            Key AES128 = AESCrypt.initializeAESKeyByPassword(passTemp);
+            Key AES128 = AESCrypt.initializeAESKeyByPassword(strPassword);
             Cipher cipher = AESCrypt.initializeCipher(AES128, AESCrypt.cypherType.ENCRYPT);
             InputStream in = new FileInputStream(eWalletPath
                     + File.separator + "Security Tools"
@@ -539,13 +557,22 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             // save the user digital certificate
             dcObj.SaveDigitalCertificate(eWalletPath + File.separator 
                     + "Security Tools" + File.separator 
-                    + registerationObj.getClientName() + "DigCert.edc");
+                    + registrationObj.getClientName() + "DigCert.edc");
 
-            // Connect to the bank server to activate the e-cheque account.
-            Runnable client = new EchequeClient(8189, 0,
-                    registerationObj.getBankAddress(), registerationObj, dcObj);
+            // Connect to the bank server to activate the e-cheque account.				
+            EchequeClient client = new EchequeClient(8189, EchequeClient.MODE_REGISTER,
+                    registrationObj.getBankAddress(), registrationObj, dcObj);
             Thread t = new Thread(client);
             t.start();
+				t.join();				
+				
+				registrationState = client.getRegistrationState();
+				if(registrationState){
+					JOptionPane.showMessageDialog(null,"Registration complete","Registration",JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					JOptionPane.showMessageDialog(null,"Registration failed","Registration", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 			// JOptionPane.showMessageDialog(null,"Registeration Done\n\tYou have to restart your system","Confirm",
             // JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException exp) {
@@ -561,6 +588,10 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     "Error Message", JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_jBRFRegisterMouseClicked
+	 
+	 public boolean getRegistrationState(){
+		 return registrationState;
+	 }
 
     /**
      * @param args the command line arguments

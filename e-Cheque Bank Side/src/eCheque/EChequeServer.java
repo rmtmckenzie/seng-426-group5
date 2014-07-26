@@ -24,6 +24,8 @@ public class EChequeServer implements Runnable {
     public static final int MODE_REGISTER = 0;
     public static final int MODE_DEPOSIT = 1;
     public static final int MODE_CANCEL = 2;
+	 public static final String REGISTRATION_SUCCESS = "registration complete";
+	 public static final String REGISTRATION_FAILURE = "registration failed";
 
     private final Socket serverConnection;
     private ObjectInputStream socketInputObject;
@@ -91,10 +93,10 @@ public class EChequeServer implements Runnable {
                 registerClient.getClientName() + "DC.edc", 100000)) {
             //store client digital certificate
             registDC.SaveDigitalCertificate("Bank" + File.separator + registerClient.getClientName() + "DC.edc");
-            socketOutputObject.writeObject("registration complete");
+            socketOutputObject.writeObject(REGISTRATION_SUCCESS);
             socketOutputObject.flush();
         } else {
-            socketOutputObject.writeObject("registration failed");
+            socketOutputObject.writeObject(REGISTRATION_FAILURE);
             socketOutputObject.flush();
         }
 
