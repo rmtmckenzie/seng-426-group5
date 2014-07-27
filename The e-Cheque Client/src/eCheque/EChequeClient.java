@@ -50,6 +50,13 @@ public class EChequeClient implements Runnable {
 	private boolean getSocketConnection;
 	private boolean bankConnection;
 	private boolean registrationState;
+	
+	// This is only used in the case when:
+	// 1.) This constructor is called EchqueClient(int port, int mode, String host, EChequeRegistration register, DigitalCertificate DC, RegData r) {
+	// 2.) processBankConnection is called
+	// 3.) The bank mode used is MODE_REGISTER
+	// We need this because it allows us to pass data to the RegistrationJFrame,
+	// without putting TOO much effort into getting it to work.
 	private volatile RegData regData;
 
 	public EChequeClient(JTextArea screen, DigitalCertificate DC, Key aesKey, String wPath, String cPath, String host, int port) {
@@ -177,7 +184,7 @@ public class EChequeClient implements Runnable {
 
 				String confirm = (String) SocketInputObject.readObject();
 				registrationState  = confirm.equals("registration complete");
-				if (registrationState) {
+				if (registrationState == false) {
 					// If the registration failed, then delete the config.epc file
 					JOptionPane.showMessageDialog(null, "Registration failed, please contact your bank for troubleshooting information.");
 					try {
@@ -189,13 +196,14 @@ public class EChequeClient implements Runnable {
 				}
 								
 				// set the registration state to true or false.
-				// This is the method we use to comuunicate with the Registration JFrame
+				// This is the method we use to comuunicate with the Registration JFrame				
 				regData.value = registrationState;
 				if (registrationState) {
 					JOptionPane.showMessageDialog(null, "Registration complete", "Registration", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "Registration failed", "Registration", JOptionPane.INFORMATION_MESSAGE);
 				}				
+				break;
 			case MODE_DEPOSIT:
 				SocketOutputObject.writeObject(depositCheque);
 				SocketOutputObject.flush();
@@ -210,6 +218,11 @@ public class EChequeClient implements Runnable {
 		}		
 	}
 
+	private void screenShellPrint(String s){
+		if(screenShell != null){
+			screenShell.append(s);
+		}
+	}
 	private void runClient() {
 		try {
 			if (bankConnection) {
@@ -217,40 +230,40 @@ public class EChequeClient implements Runnable {
 				getSocketStream();
 				processBankConnection();
 			} else {
-				screenShell.append("\n\n>> Connecting to echeque host.");
+				screenShellPrint("\n\n>> Connecting to echeque host.");
 				connectToClient();
-				screenShell.append("\n\n>> You are connected.");
+				screenShellPrint("\n\n>> You are connected.");
 				getSocketStream();
-				screenShell.append("\n\n>> Starting cheque transfer.");
+				screenShellPrint("\n\n>> Starting cheque transfer.");
 				processConnection();
 			}
 		} catch (NoSuchPaddingException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error: There is a problem with your echeque installation.");
-			screenShell.append("\n\n>> Cheque transfer failed.");
+			screenShellPrint("\n\n>> Cheque transfer failed.");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error: There is a problem with your echeque installation.");
-			screenShell.append("\n\n>> Cheque transfer failed.");
+			screenShellPrint("\n\n>> Cheque transfer failed.");
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error writing cheque to the system. Do you have permission to access your wallet?");
-			screenShell.append("\n\n>> Cheque transfer failed.");
+			screenShellPrint("\n\n>> Cheque transfer failed.");
 		} catch (IllegalBlockSizeException e) {
 			e.printStackTrace();
-			screenShell.append("\n\n>> Cheque transfer failed.");
+			screenShellPrint("\n\n>> Cheque transfer failed.");
 			JOptionPane.showMessageDialog(null, "Error: Inernal system error, please contact the manufacturer.");
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error: There is a problem with your security key.");
-			screenShell.append("\n\n>> Cheque transfer failed.");
+			screenShellPrint("\n\n>> Cheque transfer failed.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error: There is a problem with your echeque installation.");
-			screenShell.append("\n\n>> Cheque transfer failed.");
+			screenShellPrint("\n\n>> Cheque transfer failed.");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error: The cheque transfer failed.");
-			screenShell.append("\n\n>> Cheque transfer failed.");
+			JOptionPane.showMessageDialog(null, "Error: The cheque transfer failed. " + e.toString());
+			screenShellPrint("\n\n>> Cheque transfer failed.");
 		} finally {
 			closeConnection();
 		}

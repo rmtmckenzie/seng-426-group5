@@ -385,28 +385,9 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 	 * @return true for successful login, false otherwise.
 	 */
 	private boolean tryToLogin() {
-		passTemp = "";
-		String userName = jTUserName.getText();
-		char password[];
-
-		password = jTPassword.getPassword();
-
-		// pad the password up to 16 characters.
-		/*if (password.length >= 8 && password.length < 16) {
-
-		 for (char aPassword : password) {
-		 passTemp += aPassword;
-		 }
-
-		 if (password.length < 16) {
-		 int pad = 16 - password.length;
-		 for (int i = 0; i < pad; i++) {
-		 passTemp += password[i];
-		 }
-		 }
-		 }*/
 		passTemp = AESCrypt.padPassword(new String(jTPassword.getPassword()));
-
+		String userName = jTUserName.getText();
+		
 		// Check for the validity of the password and username.
 		if ((userName.hashCode() != registeredUser.getUsername() || userName.length() == 0)
 				  || (passTemp.hashCode() != registeredUser.getPasword() || passTemp.length() == 0)) {
