@@ -272,7 +272,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
             .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
 
-      setSize(new java.awt.Dimension(393, 244));
+      setSize(new java.awt.Dimension(415, 244));
       setLocationRelativeTo(null);
    }// </editor-fold>//GEN-END:initComponents
 

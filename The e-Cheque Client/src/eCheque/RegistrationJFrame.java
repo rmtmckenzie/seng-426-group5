@@ -305,7 +305,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(436, 482));
+        setSize(new java.awt.Dimension(506, 482));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
