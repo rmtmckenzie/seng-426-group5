@@ -12,8 +12,8 @@
  */
 package eCheque;
 
-import java.net.*;
 import java.io.*;
+import java.net.Socket;
 
 public class EChequeServer implements Runnable {
 

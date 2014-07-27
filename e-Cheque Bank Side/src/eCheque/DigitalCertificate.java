@@ -12,14 +12,8 @@
  */
 package eCheque;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.io.*;
-import java.security.*;
+import java.security.PublicKey;
 
 // This class holds digital certificate data and file operations
 public class DigitalCertificate implements Serializable {
