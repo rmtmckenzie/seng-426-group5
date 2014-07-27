@@ -41,7 +41,7 @@ public class DigitalsignetureTest {
 	{
 		KeyPair keyp = null;
 		try {
-			keyp = new RSAGenerator().GenerateRSAKeys();
+			keyp = RSAGenerator.GenerateRSAKeys();
 		} catch (NoSuchAlgorithmException e1) {
 			e1.printStackTrace();
 		}

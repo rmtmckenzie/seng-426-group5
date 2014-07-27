@@ -76,7 +76,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 					eBankingWindow = new EBankingJFrame(registeredUser);
 					eChequeWindow = new ChequeJFrame(registeredUser);
 					sendChequeWindow = new SendChequeJFrame(registeredUser);
-				} 
+				}
 			}
 		});
 
@@ -312,7 +312,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 				// You have logged-in, therefore disable the configure? and login pages?
 				jBConfigure.setEnabled(false);
 				enableLoginSection(false);
-				
+
 				// go to the other panel
 				CardLayout card = (CardLayout) (jPanel1.getLayout());
 				card.next(jPanel1);
@@ -375,7 +375,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jBActivationKeyPressed
 
    private void jBConfigureKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBConfigureKeyPressed
-      if( !jBConfigure.isEnabled()){			
+		if (!jBConfigure.isEnabled()) {
 			eChqueConfigureWindow.setVisible(true);
 		}
    }//GEN-LAST:event_jBConfigureKeyPressed
@@ -396,17 +396,17 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 		// pad the password up to 16 characters.
 		/*if (password.length >= 8 && password.length < 16) {
 
-			for (char aPassword : password) {
-				passTemp += aPassword;
-			}
+		 for (char aPassword : password) {
+		 passTemp += aPassword;
+		 }
 
-			if (password.length < 16) {
-				int pad = 16 - password.length;
-				for (int i = 0; i < pad; i++) {
-					passTemp += password[i];
-				}
-			}
-		}*/
+		 if (password.length < 16) {
+		 int pad = 16 - password.length;
+		 for (int i = 0; i < pad; i++) {
+		 passTemp += password[i];
+		 }
+		 }
+		 }*/
 		passTemp = AESCrypt.padPassword(new String(jTPassword.getPassword()));
 
 		// Check for the validity of the password and username.

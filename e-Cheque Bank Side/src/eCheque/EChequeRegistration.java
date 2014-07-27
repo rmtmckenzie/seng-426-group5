@@ -6,7 +6,6 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Saad
@@ -25,7 +24,9 @@ public class EChequeRegistration implements Serializable {
 	private int userNameHash;
 	private int passwordHash;
 
-	/** Creates a new instance of EChequeRegisteration */
+	/**
+	 * Creates a new instance of EChequeRegisteration
+	 */
 	public EChequeRegistration() {
 	}
 
@@ -84,5 +85,4 @@ public class EChequeRegistration implements Serializable {
 	public int getPasword() {
 		return passwordHash;
 	}
-
 }

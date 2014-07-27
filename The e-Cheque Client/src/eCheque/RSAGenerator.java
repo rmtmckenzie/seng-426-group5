@@ -12,22 +12,22 @@
  */
 package eCheque;
 
-        import java.security.*;
+import java.security.*;
 
 // This class generates PKI keys using Rsa with key size 1024
 public class RSAGenerator {
 
-    /**
-     * Creates a new instance of RSAGenerator
-     */
-    public RSAGenerator() {
-    }
+	/**
+	 * Creates a new instance of RSAGenerator
+	 */
+	public RSAGenerator() {
+	}
 
-    // Generate RSA keys
-    public static KeyPair GenerateRSAKeys() throws NoSuchAlgorithmException {
-        SecureRandom SecRandom = new SecureRandom();
-        KeyPairGenerator KeyGenerator = KeyPairGenerator.getInstance("RSA");
-        KeyGenerator.initialize(1024, SecRandom);
-        return KeyGenerator.generateKeyPair();
-    }
+	// Generate RSA keys
+	public static KeyPair GenerateRSAKeys() throws NoSuchAlgorithmException {
+		SecureRandom SecRandom = new SecureRandom();
+		KeyPairGenerator KeyGenerator = KeyPairGenerator.getInstance("RSA");
+		KeyGenerator.initialize(1024, SecRandom);
+		return KeyGenerator.generateKeyPair();
+	}
 }

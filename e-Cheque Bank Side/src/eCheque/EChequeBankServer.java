@@ -18,7 +18,7 @@ public class EChequeBankServer extends javax.swing.JFrame {
 
 	private boolean serverStartFlag;
 	private BankServer runBank;
-    private boolean alreadyRunning;
+	private boolean alreadyRunning;
 
 	/**
 	 * Creates new form EChequeBankServer
@@ -122,11 +122,11 @@ public class EChequeBankServer extends javax.swing.JFrame {
 			 try {
 				 //JOptionPane.showMessageDialog(null, "The server is going to shutdown (5 secs).", "System Information", JOptionPane.INFORMATION_MESSAGE);
 				 //jTBankShell.append(">> The server is shutting down in 10 secs...\n");				 
-				 runBank.shutdown();				 
+				 runBank.shutdown();
 				 jTBankShell.append(">> Server stopped: " + getCurrentTimeString() + "\n");
-				 serverStartFlag = false;				 
+				 serverStartFlag = false;
 			 } catch (Exception exp) {
-				 jTBankShell.append(">> Network Error: " + exp.getMessage() + ".\n");				 
+				 jTBankShell.append(">> Network Error: " + exp.getMessage() + ".\n");
 			 }
 		 } else {
 			 jTBankShell.append(">> Server is not running.\n");
@@ -138,12 +138,12 @@ public class EChequeBankServer extends javax.swing.JFrame {
 		 if (!serverStartFlag) {
 			 jTBankShell.append(">> Starting up the server...\n");
 			 try {
-				 if(!alreadyRunning){
-					runBank = new BankServer();					
-					alreadyRunning = true;
+				 if (!alreadyRunning) {
+					 runBank = new BankServer();
+					 alreadyRunning = true;
 				 }
-                new Thread(runBank).start();
-				serverStartFlag = true;
+				 new Thread(runBank).start();
+				 serverStartFlag = true;
 
 				 jTBankShell.append(">> Server started: " + getCurrentTimeString() + "\n");
 			 } catch (IOException exp) {
