@@ -342,150 +342,51 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             return;
         }
 
-        pathFlag = new File(eWalletPath + File.separator + "In Coming").mkdirs();
-        pathFlag &= new File(eWalletPath + File.separator + "Out going").mkdirs();
-        pathFlag &= new File(eWalletPath + File.separator + "Security Tools").mkdirs();
-        pathFlag &= new File(eWalletPath + File.separator + "My Cheques").mkdirs();
-        pathFlag &= new File(eWalletPath + File.separator + "History").mkdirs();
-
+        pathFlag = tryCreateWallet();
         if (!pathFlag) {
             int option = JOptionPane.showConfirmDialog(null, "E-Wallet already exists!\nDo you want to overwrite it?", "E-Wallet already exists", JOptionPane.YES_NO_OPTION);
             if (option != JOptionPane.NO_OPTION) {
                 File eWalletFile = new File(eWalletPath);
                 String[] entries = eWalletFile.list();
                 for (String s : entries) {
-                    File currentFile = new File(eWalletFile.getPath(), s);
+                    new File(eWalletFile.getPath(), s);
                 }
-                new File(eWalletPath + File.separator + "In Coming").mkdirs();
-                new File(eWalletPath + File.separator + "Out going").mkdirs();
-                new File(eWalletPath + File.separator + "Security Tools").mkdirs();
-                new File(eWalletPath + File.separator + "My Cheques").mkdirs();
+                tryCreateWallet();
             }
             pathFlag = true;
         }
 
     }// GEN-LAST:event_jBeWalletMouseClicked
 
+    private boolean tryCreateWallet() {
+        boolean pathFlagLocal;
+        pathFlagLocal = new File(eWalletPath + File.separator + "In Coming").mkdirs();
+        pathFlagLocal &= new File(eWalletPath + File.separator + "Out going").mkdirs();
+        pathFlagLocal &= new File(eWalletPath + File.separator + "Security Tools").mkdirs();
+        pathFlagLocal &= new File(eWalletPath + File.separator + "My Cheques").mkdirs();
+        pathFlagLocal &= new File(eWalletPath + File.separator + "History").mkdirs();
+        return pathFlagLocal;
+    }
+
     private void jBRFRegisterMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBRFRegisterMouseClicked
-        String bankName;
-        String bankURL;
-        String clientName;
-        String accountNumber;
-        String digitalCIssuer;
-        String digitalCURL;
-        String userName;
-        char[] password;
-        char[] password2;
-        int userNameCode;
-        int passwordCode;
+        String bankName = jTBankName.getText();
+        String bankURL = jTBankURLIP.getText();
+        String clientName = jTClientName.getText();
+        String accountNumber = jTAccountNo.getText();
+        String digitalCIssuer = jTIssuerName.getText();
+        String digitalCURL = jTDCURLIP.getText();
+        String userName = jTUserName.getText();
+        char[] password = jTPassword.getPassword();
 
-        bankName = jTBankName.getText();
-        bankURL = jTBankURLIP.getText();
-        clientName = jTClientName.getText();
-        accountNumber = jTAccountNo.getText();
-        digitalCIssuer = jTIssuerName.getText();
-        digitalCURL = jTDCURLIP.getText();
-        userName = jTUserName.getText();
-        password = jTPassword.getPassword();
-        password2 = jTPassword2.getPassword();
+        if (checkForErrors(bankName, bankURL, clientName, accountNumber, digitalCIssuer, digitalCURL, userName, password, jTPassword2.getPassword()))
+            return;
 
-        if (bankName.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Bank Name can not be empty",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (bankName.matches(".*\\d.*")) {
-            JOptionPane.showMessageDialog(null, "Bank Name cannot contain numbers",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (bankURL.length() == 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Bank URL or IP address can not be empty", "User Error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (bankURL.matches("[a-zA-Z]+") && !bankURL.equals("localhost")) {
-            JOptionPane.showMessageDialog(null, "Bank URL cannot contain letters",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (clientName.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Client name can not be empty",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (clientName.matches(".*\\d.*")) {
-            JOptionPane.showMessageDialog(null, "Client Name cannot contain numbers",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (accountNumber.length() == 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Account number can not be empty", "User Error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (accountNumber.matches("[a-zA-Z]+")) {
-            JOptionPane.showMessageDialog(null, "Account Number cannot contain letters",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (digitalCIssuer.length() == 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Certificate issuer can not be empty", "User Error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (digitalCIssuer.matches(".*\\d.*")) {
-            JOptionPane.showMessageDialog(null, "Digital Certificate Issuer cannot contain numbers",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (digitalCURL.length() == 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Certificate issuer URl or IP can not be empty",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (userName.length() == 0) {
-            JOptionPane.showMessageDialog(null, "User name can not be empty",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (password.length == 0) {
-            JOptionPane.showMessageDialog(null, "Password cannot be empty ",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-		/* Checking if both passwords are the same */
-        String strPassword = new String(password);
-
-        if (strPassword.compareTo(new String(password2)) != 0) {
-            JOptionPane.showMessageDialog(null, "Passwords not match ",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (password.length < 8) {
-            JOptionPane.showMessageDialog(null,
-                    "Your password should be greater than 7 characters",
-                    "User Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!pathFlag) {
-            JOptionPane.showMessageDialog(null,
-                    "You have to create your e-wallet", "User Error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         // prepare the user name and password
-        userNameCode = userName.hashCode();
+        int userNameCode = userName.hashCode();
 
         //pad the password
-        strPassword = AESCrypt.padPassword(new String(password));
-        passwordCode = strPassword.hashCode();
+        String strPassword = AESCrypt.padPassword(new String(password));
+        int passwordCode = strPassword.hashCode();
 
         // For Test:
         // JOptionPane.showMessageDialog(null,passTemp);
@@ -527,10 +428,9 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             AESCrypt.crypt(in, out, cipher);
             in.close();
             out.close();
-            File control = new File(eWalletPath + File.separator
+            new File(eWalletPath + File.separator
                     + "Security Tools" + File.separator
-                    + "privateKey.key");
-            control.delete();
+                    + "privateKey.key").delete();
 
             // create Digital certificate object.
             DigitalCertificate dcObj = new DigitalCertificate();
@@ -575,6 +475,101 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     "Error Message", JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_jBRFRegisterMouseClicked
+
+    private boolean checkForErrors(String bankName, String bankURL, String clientName, String accountNumber, String digitalCIssuer, String digitalCURL, String userName, char[] password, char[] password2) {
+        if (bankName.length() == 0) {
+            JOptionPane.showMessageDialog(null, "Bank Name can not be empty",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (bankName.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(null, "Bank Name cannot contain numbers",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (bankURL.length() == 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Bank URL or IP address can not be empty", "User Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (bankURL.matches("[a-zA-Z]+") && !bankURL.equals("localhost")) {
+            JOptionPane.showMessageDialog(null, "Bank URL cannot contain letters",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (clientName.length() == 0) {
+            JOptionPane.showMessageDialog(null, "Client name can not be empty",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (clientName.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(null, "Client Name cannot contain numbers",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (accountNumber.length() == 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Account number can not be empty", "User Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (accountNumber.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(null, "Account Number cannot contain letters",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (digitalCIssuer.length() == 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Certificate issuer can not be empty", "User Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (digitalCIssuer.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(null, "Digital Certificate Issuer cannot contain numbers",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (digitalCURL.length() == 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Certificate issuer URl or IP can not be empty",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (userName.length() == 0) {
+            JOptionPane.showMessageDialog(null, "User name can not be empty",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (password.length == 0) {
+            JOptionPane.showMessageDialog(null, "Password cannot be empty ",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+		/* Checking if both passwords are the same */
+        String strPassword = new String(password);
+
+        if (strPassword.compareTo(new String(password2)) != 0) {
+            JOptionPane.showMessageDialog(null, "Passwords not match ",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        if (password.length < 8) {
+            JOptionPane.showMessageDialog(null,
+                    "Your password should be greater than 7 characters",
+                    "User Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        if (!pathFlag) {
+            JOptionPane.showMessageDialog(null,
+                    "You have to create your e-wallet", "User Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        return false;
+    }
 
     public boolean getRegistrationState() {
         return registrationState;
