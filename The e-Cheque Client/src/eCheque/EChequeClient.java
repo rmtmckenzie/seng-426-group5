@@ -245,6 +245,14 @@ public class EChequeClient implements Runnable {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error: There is a problem with your echeque installation.");
 			screenShellPrint("\n\n>> Cheque transfer failed.");
+		} catch (ConnectException e){
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error connecting to the server. Please try again.");
+			screenShellPrint("\n\n>> Connection to server failed");			
+		} catch (SocketException e){
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error communicating to the server. Please try again.");
+			screenShellPrint("\n\n>> Commnication to the server failed");
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error writing cheque to the system. Do you have permission to access your wallet?");
