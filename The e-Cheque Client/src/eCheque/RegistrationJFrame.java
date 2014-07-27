@@ -38,7 +38,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 	 */
 	public RegistrationJFrame() {
 		pathFlag = false;
-		regData= new RegData();
+		regData = new RegData();
 		initComponents();
 	}
 
@@ -80,6 +80,20 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         jBeWallet = new javax.swing.JButton();
         jBRFRegister = new javax.swing.JButton();
 
+        jTBankName.setName("jTBankName");
+        jTBankURLIP.setName("jTBankURLIP");
+        jTClientName.setName("jTClientName");
+        jTAccountNo.setName("jTAccountNo");
+        jTIssuerName.setName("jTIssuerName");
+        jTDCURLIP.setName("jTDCURLIP");
+        jTUserName.setName("jTUserName");
+        jTPassword.setName("jTPassword");
+        jTPassword2.setName("jTPassword2");
+        jCValidation.setName("jCValidation");
+        jCSubject.setName("jCSubject");
+        jBeWallet.setName("jBeWallet");
+        jBRFRegister.setName("jBRFRegister");
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Register");
         setResizable(false);
@@ -316,7 +330,9 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 	private String getWalletLocation(String dialogTitle) {
 
 		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setName("fileChooser");
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
 
 		fileChooser.setDialogTitle(dialogTitle);
 
