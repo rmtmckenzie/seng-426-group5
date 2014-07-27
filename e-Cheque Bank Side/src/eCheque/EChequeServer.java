@@ -162,7 +162,6 @@ public class EChequeServer implements Runnable {
             socketOutputObject.writeObject("Error, cheque was not cancelled.");
             socketOutputObject.flush();
         }
-
     }
 
     /**

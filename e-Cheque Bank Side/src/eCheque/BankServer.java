@@ -17,7 +17,7 @@ import java.net.ServerSocket;
 public class BankServer implements Runnable {
 
 	private final ServerSocket serverSocket;
-	private volatile boolean done = false;
+	private volatile boolean continueRunning = true;
 
 	/**
 	 * Creates a new instance of BankServer
@@ -32,11 +32,11 @@ public class BankServer implements Runnable {
 	 * Starts new instance which waits for socket connections and creates threads
 	 * to deal with them.
 	 *
-	 * Runs until done has been set.
+	 * Runs until continueRunning has been set.
 	 */
 	public void run() {
 		try {
-			while (!done) {
+			while (continueRunning) {
 				Runnable chequeServer = new EChequeServer(serverSocket.accept());
 				new Thread(chequeServer).start();
 			}
@@ -50,6 +50,6 @@ public class BankServer implements Runnable {
 	 * Tells the server to stop accepting sockets.
 	 */
 	public void shutdown() {
-		done = true;
+		continueRunning = false;
 	}
 }
