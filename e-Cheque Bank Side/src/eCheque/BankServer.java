@@ -9,6 +9,8 @@ package eCheque;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +18,7 @@ import java.net.ServerSocket;
  */
 public class BankServer implements Runnable {
 
-	private final ServerSocket serverSocket;
+	private ServerSocket serverSocket;
 	private volatile boolean continueRunning = true;
 
 	/**
@@ -24,8 +26,7 @@ public class BankServer implements Runnable {
 	 *
 	 * @throws java.io.IOException
 	 */
-	public BankServer() throws IOException {
-		serverSocket = new ServerSocket(8189);
+	public BankServer() throws IOException {		
 	}
 
 	/**
@@ -36,7 +37,8 @@ public class BankServer implements Runnable {
 	 */
 	public void run() {
 		try {
-			while (continueRunning) {
+			serverSocket = new ServerSocket(8189);
+			while (continueRunning) {				
 				Runnable chequeServer = new EChequeServer(serverSocket.accept());
 				new Thread(chequeServer).start();
 			}
@@ -51,5 +53,10 @@ public class BankServer implements Runnable {
 	 */
 	public void shutdown() {
 		continueRunning = false;
+		try {
+			serverSocket.close();			
+		} catch (IOException ex) {
+			//Logger.getLogger(BankServer.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }
