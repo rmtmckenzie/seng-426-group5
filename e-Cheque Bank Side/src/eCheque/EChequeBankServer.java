@@ -23,8 +23,7 @@ public class EChequeBankServer extends javax.swing.JFrame {
 	 * Creates new form EChequeBankServer
 	 */
 	public EChequeBankServer() {
-		initComponents();
-		alreadyRunning = false;
+		initComponents();		
 		serverStartFlag = false;
 		jTBankShell.append("\n");
 	}
