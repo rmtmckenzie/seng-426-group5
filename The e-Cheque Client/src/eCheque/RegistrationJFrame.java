@@ -24,17 +24,20 @@ import java.security.*;
 import java.io.File;
 
 public class RegistrationJFrame extends javax.swing.JFrame {
+	
+	public class RegData{
+		public boolean value;
+	}
 
     private boolean pathFlag;
     private String eWalletPath;
-    private boolean registrationState;
+	 private volatile RegData regData;
 
     /**
      * Creates new form RegistrationFrame
      */
     public RegistrationJFrame() {
-        pathFlag = false;
-        registrationState = false;
+        pathFlag = false;        
         initComponents();
     }
 
@@ -448,18 +451,10 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
             // Connect to the bank server to activate the e-cheque account.
             EChequeClient client = new EChequeClient(8189, EChequeClient.MODE_REGISTER,
-                    registrationObj.getBankAddress(), registrationObj, dcObj);
+                    registrationObj.getBankAddress(), registrationObj, dcObj,regData);
             Thread t = new Thread(client);
-            t.start();
-            t.join();
-
-            registrationState = client.getRegistrationState();
-            if (registrationState) {
-                JOptionPane.showMessageDialog(null, "Registration complete", "Registration", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Registration failed", "Registration", JOptionPane.INFORMATION_MESSAGE);
-            }
-
+            t.start();            
+				           
             // JOptionPane.showMessageDialog(null,"Registeration Done\n\tYou have to restart your system","Confirm",
             // JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException exp) {
@@ -572,7 +567,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
     }
 
     public boolean getRegistrationState() {
-        return registrationState;
+        return regData.value;
     }
     /**
      * @param args the command line arguments
