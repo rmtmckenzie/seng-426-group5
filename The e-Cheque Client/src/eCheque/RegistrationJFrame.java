@@ -343,10 +343,10 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         }
 
         pathFlag = new File(eWalletPath + File.separator + "In Coming").mkdirs();
-            pathFlag &= new File(eWalletPath + File.separator + "Out going").mkdirs();
-            pathFlag &= new File(eWalletPath + File.separator + "Security Tools").mkdirs();
-            pathFlag &= new File(eWalletPath + File.separator + "My Cheques").mkdirs();
-            pathFlag &= new File(eWalletPath + File.separator + "History").mkdirs();
+        pathFlag &= new File(eWalletPath + File.separator + "Out going").mkdirs();
+        pathFlag &= new File(eWalletPath + File.separator + "Security Tools").mkdirs();
+        pathFlag &= new File(eWalletPath + File.separator + "My Cheques").mkdirs();
+        pathFlag &= new File(eWalletPath + File.separator + "History").mkdirs();
 
         if (!pathFlag) {
             int option = JOptionPane.showConfirmDialog(null, "E-Wallet already exists!\nDo you want to overwrite it?", "E-Wallet already exists", JOptionPane.YES_NO_OPTION);

@@ -750,27 +750,19 @@ public class ChequeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMOpenChequeActionPerformed
 
 	private String getFileLocation(String dialogTitle) {
-
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
 		fileChooser.setDialogTitle(dialogTitle);
-		int result = fileChooser.showOpenDialog(this);
 
-		if (result == JFileChooser.CANCEL_OPTION) {
-			return "";
-		}
-
+		if (fileChooser.showOpenDialog(this) == JFileChooser.CANCEL_OPTION) return "";
 		File fileName = fileChooser.getSelectedFile();
 
 		// display error if invalid
 		if ((fileName == null) || (fileName.getName().equals(""))) {
-			JOptionPane.showMessageDialog(this, "Invalid File Name",
-					  "Invalid File Name", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Invalid File Name", "Invalid File Name", JOptionPane.ERROR_MESSAGE);
 			return "";
-		} // end if
+		}
 		return fileName.getPath();
-
 	}
 
 	private String generateSerialNumber() {
