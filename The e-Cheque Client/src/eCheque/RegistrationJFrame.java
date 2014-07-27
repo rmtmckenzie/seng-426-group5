@@ -336,52 +336,37 @@ public class RegistrationJFrame extends javax.swing.JFrame {
     }
 
     private void jBeWalletMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBeWalletMouseClicked
-        // TODO add your handling code here:
-
         eWalletPath = getWalletLocation("Set e-Wallet Location");
-        if (eWalletPath == "") {
+        if (eWalletPath.equals("")) {
             pathFlag = false;
             return;
         }
 
         pathFlag = new File(eWalletPath + File.separator + "In Coming").mkdirs();
-        if (pathFlag) {
-            pathFlag = new File(eWalletPath + File.separator + "Out going").mkdirs();
-        }
-        if (pathFlag) {
-            pathFlag = new File(eWalletPath + File.separator + "Security Tools").mkdirs();
-        }
-        if (pathFlag) {
-            pathFlag = new File(eWalletPath + File.separator + "My Cheques").mkdirs();
-        }
-        if (pathFlag) {
-            pathFlag = new File(eWalletPath + File.separator + "History").mkdirs();
-        }
+            pathFlag &= new File(eWalletPath + File.separator + "Out going").mkdirs();
+            pathFlag &= new File(eWalletPath + File.separator + "Security Tools").mkdirs();
+            pathFlag &= new File(eWalletPath + File.separator + "My Cheques").mkdirs();
+            pathFlag &= new File(eWalletPath + File.separator + "History").mkdirs();
 
         if (!pathFlag) {
             int option = JOptionPane.showConfirmDialog(null, "E-Wallet already exists!\nDo you want to overwrite it?", "E-Wallet already exists", JOptionPane.YES_NO_OPTION);
-            if (option == JOptionPane.NO_OPTION) {
-                pathFlag = true;
-            } else {
+            if (option != JOptionPane.NO_OPTION) {
                 File eWalletFile = new File(eWalletPath);
                 String[] entries = eWalletFile.list();
                 for (String s : entries) {
                     File currentFile = new File(eWalletFile.getPath(), s);
-                    //currentFile.delete();
                 }
                 new File(eWalletPath + File.separator + "In Coming").mkdirs();
                 new File(eWalletPath + File.separator + "Out going").mkdirs();
                 new File(eWalletPath + File.separator + "Security Tools").mkdirs();
                 new File(eWalletPath + File.separator + "My Cheques").mkdirs();
-                new File(eWalletPath + File.separator + "History").mkdirs();
-                pathFlag = true;
             }
+            pathFlag = true;
         }
+
     }// GEN-LAST:event_jBeWalletMouseClicked
 
     private void jBRFRegisterMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBRFRegisterMouseClicked
-        // TODO add your handling code here:
-
         String bankName;
         String bankURL;
         String clientName;
