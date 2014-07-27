@@ -23,7 +23,6 @@ import java.io.*;
 public class AESCrypt {
 
 	public enum cypherType {
-
 		ENCRYPT,
 		DECRYPT,
 		WRAP,
@@ -44,22 +43,25 @@ public class AESCrypt {
 		int CipherMode;
 
 		// Get cipher mode
-		if (mode == cypherType.ENCRYPT) {
-			CipherMode = Cipher.ENCRYPT_MODE;
-		} else if (mode == cypherType.DECRYPT) {
-			CipherMode = Cipher.DECRYPT_MODE;
-		} else if (mode == cypherType.WRAP) {
-			CipherMode = Cipher.WRAP_MODE;
-		} else if (mode == cypherType.UNWRAP) {
-			CipherMode = Cipher.UNWRAP_MODE;
-		} else {
-			throw new IllegalArgumentException();
-		}
-
-		Cipher cipherObj;
+        switch (mode) {
+            case ENCRYPT:
+                CipherMode = Cipher.ENCRYPT_MODE;
+                break;
+            case DECRYPT:
+                CipherMode = Cipher.DECRYPT_MODE;
+                break;
+            case WRAP:
+                CipherMode = Cipher.WRAP_MODE;
+                break;
+            case UNWRAP:
+                CipherMode = Cipher.UNWRAP_MODE;
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
 
 		// Get type of encryption
-		cipherObj = (((mode == cypherType.ENCRYPT) || (mode == cypherType.DECRYPT)) ? Cipher.getInstance("AES") : Cipher.getInstance("RSA"));
+        Cipher cipherObj = (((mode == cypherType.ENCRYPT) || (mode == cypherType.DECRYPT)) ? Cipher.getInstance("AES") : Cipher.getInstance("RSA"));
 
 		// Init the object
 		cipherObj.init(CipherMode, key);
