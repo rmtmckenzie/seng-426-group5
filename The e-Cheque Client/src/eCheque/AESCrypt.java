@@ -22,83 +22,94 @@ import java.io.*;
  */
 public class AESCrypt {
 
-    public enum cypherType {
-        ENCRYPT,
-        DECRYPT,
-        WRAP,
-        UNWRAP
-    }
+	public enum cypherType {
 
-    // Returns a randomly generated secret key
-    static public SecretKey GenerateRandomAESKey() throws Exception {
-        KeyGenerator KeyGen = KeyGenerator.getInstance("AES");
-        SecureRandom random = new SecureRandom();
-        KeyGen.init(random);
-        return KeyGen.generateKey();
-    }
+		ENCRYPT,
+		DECRYPT,
+		WRAP,
+		UNWRAP
+	}
 
-    // Initializes the cypher mode
-    static public Cipher initializeCipher(Key key, eCheque.AESCrypt.cypherType mode) throws GeneralSecurityException {
+	// Returns a randomly generated secret key
+	static public SecretKey GenerateRandomAESKey() throws Exception {
+		KeyGenerator KeyGen = KeyGenerator.getInstance("AES");
+		SecureRandom random = new SecureRandom();
+		KeyGen.init(random);
+		return KeyGen.generateKey();
+	}
 
-        int CipherMode;
+	// Initializes the cypher mode
+	static public Cipher initializeCipher(Key key, eCheque.AESCrypt.cypherType mode) throws GeneralSecurityException {
 
-        // Get cipher mode
-        if (mode == cypherType.ENCRYPT) {
-            CipherMode = Cipher.ENCRYPT_MODE;
-        } else if (mode == cypherType.DECRYPT) {
-            CipherMode = Cipher.DECRYPT_MODE;
-        } else if (mode == cypherType.WRAP) {
-            CipherMode = Cipher.WRAP_MODE;
-        } else if (mode == cypherType.UNWRAP) {
-            CipherMode = Cipher.UNWRAP_MODE;
-        } else {
-            throw new IllegalArgumentException();
-        }
+		int CipherMode;
 
-        Cipher cipherObj;
+		// Get cipher mode
+		if (mode == cypherType.ENCRYPT) {
+			CipherMode = Cipher.ENCRYPT_MODE;
+		} else if (mode == cypherType.DECRYPT) {
+			CipherMode = Cipher.DECRYPT_MODE;
+		} else if (mode == cypherType.WRAP) {
+			CipherMode = Cipher.WRAP_MODE;
+		} else if (mode == cypherType.UNWRAP) {
+			CipherMode = Cipher.UNWRAP_MODE;
+		} else {
+			throw new IllegalArgumentException();
+		}
 
-        // Get type of encryption
-        cipherObj = (((mode == cypherType.ENCRYPT) || (mode == cypherType.DECRYPT)) ? Cipher.getInstance("AES") : Cipher.getInstance("RSA"));
+		Cipher cipherObj;
 
-        // Init the object
-        cipherObj.init(CipherMode, key);
-        return cipherObj;
-    }
+		// Get type of encryption
+		cipherObj = (((mode == cypherType.ENCRYPT) || (mode == cypherType.DECRYPT)) ? Cipher.getInstance("AES") : Cipher.getInstance("RSA"));
 
-    //  Encrypt or decrypt the inputstream based on the initialized cypher
-    static public void crypt(InputStream in, OutputStream out, Cipher cipherObj) throws GeneralSecurityException, IOException {
+		// Init the object
+		cipherObj.init(CipherMode, key);
+		return cipherObj;
+	}
 
-        int blockSize = cipherObj.getBlockSize();
-        int outputSize = cipherObj.getOutputSize(blockSize);
-        byte[] inBytes = new byte[blockSize];
-        byte[] outBytes = new byte[outputSize];
-        int inLength = 0;
-        boolean more = true;
+	//  Encrypt or decrypt the inputstream based on the initialized cypher
+	static public void crypt(InputStream in, OutputStream out, Cipher cipherObj) throws GeneralSecurityException, IOException {
 
-        while (more) {
-            inLength = in.read(inBytes);
-            if (inLength == blockSize) {
-                int outLength = cipherObj.update(inBytes, 0, blockSize, outBytes);
-                out.write(outBytes, 0, outLength);
-            } else {
-                more = false;
-            }
-        }
-        if (inLength > 0) {
-            outBytes = cipherObj.doFinal(inBytes, 0, inLength);
-        } else {
-            outBytes = cipherObj.doFinal();
-        }
-        out.write(outBytes);
-    }
+		int blockSize = cipherObj.getBlockSize();
+		int outputSize = cipherObj.getOutputSize(blockSize);
+		byte[] inBytes = new byte[blockSize];
+		byte[] outBytes = new byte[outputSize];
+		int inLength = 0;
+		boolean more = true;
 
-    // Create a AES key from a password
-    static public SecretKeySpec initializeAESKeyByPassword(String pass) {
+		while (more) {
+			inLength = in.read(inBytes);
+			if (inLength == blockSize) {
+				int outLength = cipherObj.update(inBytes, 0, blockSize, outBytes);
+				out.write(outBytes, 0, outLength);
+			} else {
+				more = false;
+			}
+		}
+		if (inLength > 0) {
+			outBytes = cipherObj.doFinal(inBytes, 0, inLength);
+		} else {
+			outBytes = cipherObj.doFinal();
+		}
+		out.write(outBytes);
+	}
 
-        byte[] KeyData = pass.getBytes();
-        SecretKeySpec aesKey;
-        aesKey = new SecretKeySpec(KeyData, "AES");
-        return aesKey;
-    }
+	static public String padPassword(String pass) {
+		char password[] = pass.toCharArray();
+		String strPassword = new String(password);
+		for (int i = 0; i < 16 - password.length; i++) {
+			strPassword += password[i];
+		}
+		if (strPassword.length() > 16) {
+			strPassword = strPassword.substring(0, 16);
+		}
+		return strPassword;
+	}
+	// Create a AES key from a password
 
+	static public SecretKeySpec initializeAESKeyByPassword(String pass) {
+		byte[] KeyData = pass.getBytes();
+		SecretKeySpec aesKey;
+		aesKey = new SecretKeySpec(KeyData, "AES");
+		return aesKey;
+	}
 }

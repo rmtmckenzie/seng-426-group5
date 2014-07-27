@@ -363,7 +363,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         		File eWalletFile = new File(eWalletPath);
         		String[] entries = eWalletFile.list();
         		for (String s: entries) {
-        			File currentFile = new File (eWalletFile.getPath(),s);
+        			File currentFile = new File (eWalletFile.getPath(),s);					
         			//currentFile.delete();
         		}
                 new File(eWalletPath + File.separator + "In Coming").mkdirs();
@@ -479,9 +479,9 @@ public class RegistrationJFrame extends javax.swing.JFrame {
                     "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (password.length < 8 || password.length >= 16) {
+        if (password.length < 8) {
             JOptionPane.showMessageDialog(null,
-                    "Your password should be between 8 - 15 characters",
+                    "Your password should be greater than 7 characters",
                     "User Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -496,9 +496,8 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         userNameCode = userName.hashCode();
 
         //pad the password
-        for (int i = 0; i < 16 - password.length; i++) strPassword += password[i];
-
-        passwordCode = strPassword.hashCode();		  
+		  strPassword = AESCrypt.padPassword(new String(password));        
+        passwordCode = strPassword.hashCode();
 
 		// For Test:
         // JOptionPane.showMessageDialog(null,passTemp);
@@ -526,7 +525,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             outObj.writeObject(RSAKeys.getPrivate());
             outObj.close();
 
-            // create AES Key with user password and cipher
+            // create AES Key with user password and cipher				
             Key AES128 = AESCrypt.initializeAESKeyByPassword(strPassword);
             Cipher cipher = AESCrypt.initializeCipher(AES128, AESCrypt.cypherType.ENCRYPT);
             InputStream in = new FileInputStream(eWalletPath

@@ -507,7 +507,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMVerifyChequeActionPerformed
 
     private void jBOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBOKMouseClicked
-        char password[] = jTuserSign.getPassword();
+        /*char password[] = jTuserSign.getPassword();
         String passTemp = "";
         if (password.length >= 8 && password.length < 16) {
             for (char aPassword : password) passTemp += aPassword;
@@ -516,8 +516,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 int pad = 16 - password.length;
                 for (int i = 0; i < pad; i++) passTemp += password[i];
             }
-        }
-        signPass = passTemp;
+        }*/
+        signPass = AESCrypt.padPassword(new String(jTuserSign.getPassword()));
         jDSignCheque.setVisible(false);
 
     }//GEN-LAST:event_jBOKMouseClicked
