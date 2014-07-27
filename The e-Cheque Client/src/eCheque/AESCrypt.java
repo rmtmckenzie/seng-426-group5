@@ -32,16 +32,13 @@ public class AESCrypt {
 	// Returns a randomly generated secret key
 	static public SecretKey GenerateRandomAESKey() throws Exception {
 		KeyGenerator KeyGen = KeyGenerator.getInstance("AES");
-		SecureRandom random = new SecureRandom();
-		KeyGen.init(random);
+		KeyGen.init(new SecureRandom());
 		return KeyGen.generateKey();
 	}
 
 	// Initializes the cypher mode
 	static public Cipher initializeCipher(Key key, eCheque.AESCrypt.cypherType mode) throws GeneralSecurityException {
-
 		int CipherMode;
-
 		// Get cipher mode
         switch (mode) {
             case ENCRYPT:
@@ -70,14 +67,13 @@ public class AESCrypt {
 
 	//  Encrypt or decrypt the inputstream based on the initialized cypher
 	static public void crypt(InputStream in, OutputStream out, Cipher cipherObj) throws GeneralSecurityException, IOException {
-
 		int blockSize = cipherObj.getBlockSize();
 		int outputSize = cipherObj.getOutputSize(blockSize);
 		byte[] inBytes = new byte[blockSize];
 		byte[] outBytes = new byte[outputSize];
 		int inLength = 0;
-		boolean more = true;
 
+		boolean more = true;
 		while (more) {
 			inLength = in.read(inBytes);
 			if (inLength == blockSize) {
@@ -87,11 +83,7 @@ public class AESCrypt {
 				more = false;
 			}
 		}
-		if (inLength > 0) {
-			outBytes = cipherObj.doFinal(inBytes, 0, inLength);
-		} else {
-			outBytes = cipherObj.doFinal();
-		}
+        outBytes = inLength > 0 ? cipherObj.doFinal(inBytes, 0, inLength) : cipherObj.doFinal();
 		out.write(outBytes);
 	}
 
@@ -102,16 +94,13 @@ public class AESCrypt {
 			strPassword += password[i];
 		}
 		if (strPassword.length() > 16) {
-			strPassword = strPassword.substring(0, 16);
+			return strPassword.substring(0, 16);
 		}
 		return strPassword;
 	}
-	// Create a AES key from a password
 
+	// Create a AES key from a password
 	static public SecretKeySpec initializeAESKeyByPassword(String pass) {
-		byte[] KeyData = pass.getBytes();
-		SecretKeySpec aesKey;
-		aesKey = new SecretKeySpec(KeyData, "AES");
-		return aesKey;
+       return new SecretKeySpec(pass.getBytes(), "AES");
 	}
 }
