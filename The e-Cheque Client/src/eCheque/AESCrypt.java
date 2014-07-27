@@ -71,18 +71,18 @@ public class AESCrypt {
 		int outputSize = cipherObj.getOutputSize(blockSize);
 		byte[] inBytes = new byte[blockSize];
 		byte[] outBytes = new byte[outputSize];
-		int inLength = 0;
+		int inLength;
+		boolean more;
 
-		boolean more = true;
-		while (more) {
+		do {
 			inLength = in.read(inBytes);
-			if (inLength == blockSize) {
+            more = inLength==blockSize;
+			if (more) {
 				int outLength = cipherObj.update(inBytes, 0, blockSize, outBytes);
 				out.write(outBytes, 0, outLength);
-			} else {
-				more = false;
 			}
-		}
+		} while (more);
+
         outBytes = inLength > 0 ? cipherObj.doFinal(inBytes, 0, inLength) : cipherObj.doFinal();
 		out.write(outBytes);
 	}
