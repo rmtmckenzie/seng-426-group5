@@ -6,10 +6,9 @@
  */
 package eCheque;
 
+import javax.swing.*;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.ServerSocket;
-import javax.swing.JOptionPane;
 
 /**
  *
