@@ -35,7 +35,7 @@ public class RegistrationJFrameTest {
 	@Before
 	public void setUp() throws Exception {
 		robot = BasicRobot.robotWithNewAwtHierarchy();
-		robot.settings().delayBetweenEvents(50);
+		robot.settings().delayBetweenEvents(1);
 		
 	    window = new FrameFixture(robot, new RegistrationJFrame());
 	    window.show();
