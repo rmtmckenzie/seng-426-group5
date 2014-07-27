@@ -100,8 +100,7 @@ public class DigitalCertificate implements Serializable {
 	// Read a digital certificate from a file
 	static public DigitalCertificate readDigitalCertificate(String filePath) throws IOException, ClassNotFoundException {
 		ObjectInputStream In = new ObjectInputStream(new FileInputStream(filePath));
-		DigitalCertificate DC;
-		DC = (DigitalCertificate) In.readObject();
+        DigitalCertificate DC = (DigitalCertificate) In.readObject();
 		In.close();
 		return DC;
 	}
