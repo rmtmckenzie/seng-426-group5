@@ -124,12 +124,7 @@ public class ECheque implements Serializable {
 		return earnday;
 	}
 
-	public String getReferenceString() {
-		return accountNumber + accountHolder + bankName + chequeNumber
-				  + amountOfMoney + currencyType + earnday + guaranteed + payToOrderOf;
-	}
-
-	public byte[] getBankSignature() {
+    public byte[] getBankSignature() {
 		return bankSignature;
 	}
 
