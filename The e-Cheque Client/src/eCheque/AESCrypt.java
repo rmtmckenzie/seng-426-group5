@@ -38,34 +38,27 @@ public class AESCrypt {
 
 	// Initializes the cypher mode
 	static public Cipher initializeCipher(Key key, eCheque.AESCrypt.cypherType mode) throws GeneralSecurityException {
-		int CipherMode;
-		// Get cipher mode
-        switch (mode) {
-            case ENCRYPT:
-                CipherMode = Cipher.ENCRYPT_MODE;
-                break;
-            case DECRYPT:
-                CipherMode = Cipher.DECRYPT_MODE;
-                break;
-            case WRAP:
-                CipherMode = Cipher.WRAP_MODE;
-                break;
-            case UNWRAP:
-                CipherMode = Cipher.UNWRAP_MODE;
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
-
-		// Get type of encryption
         Cipher cipherObj = (((mode == cypherType.ENCRYPT) || (mode == cypherType.DECRYPT)) ? Cipher.getInstance("AES") : Cipher.getInstance("RSA"));
-
-		// Init the object
-		cipherObj.init(CipherMode, key);
+		cipherObj.init(getCipherMode(mode), key);
 		return cipherObj;
 	}
 
-	//  Encrypt or decrypt the inputstream based on the initialized cypher
+    private static int getCipherMode(cypherType mode) {
+        switch (mode) {
+            case ENCRYPT:
+                return Cipher.ENCRYPT_MODE;
+            case DECRYPT:
+                return Cipher.DECRYPT_MODE;
+            case WRAP:
+                return Cipher.WRAP_MODE;
+            case UNWRAP:
+                return Cipher.UNWRAP_MODE;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
+    //  Encrypt or decrypt the inputstream based on the initialized cypher
 	static public void crypt(InputStream in, OutputStream out, Cipher cipherObj) throws GeneralSecurityException, IOException {
 		int blockSize = cipherObj.getBlockSize();
 		int outputSize = cipherObj.getOutputSize(blockSize);
