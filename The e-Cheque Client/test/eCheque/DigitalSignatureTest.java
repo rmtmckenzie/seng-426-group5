@@ -6,9 +6,9 @@ import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import org.junit.Test;
 
-public class DigitalsignetureTest {
+public class DigitalSignatureTest {
 	@Test
-	public void signetureSuccessTest()
+	public void signatureSuccessTest()
 	{
 		KeyPair keyp = null;
 		try {
@@ -24,7 +24,7 @@ public class DigitalsignetureTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertNotNull(crypt);
+		assertNotNull("Crypt is null",crypt);
 		
 		boolean result=false;
 		try {
@@ -33,7 +33,7 @@ public class DigitalsignetureTest {
 			e.printStackTrace();
 		}
 		
-		assertTrue(result);
+		assertTrue("Result is not true",result);
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class DigitalsignetureTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertNotNull(crypt);
+		assertNotNull("Crypt is null",crypt);
 		
 		boolean result=false;
 		try {
@@ -62,6 +62,6 @@ public class DigitalsignetureTest {
 			e.printStackTrace();
 		}
 		
-		assertTrue(result);
+		assertFalse("Result is true",result);
 	}
 }
