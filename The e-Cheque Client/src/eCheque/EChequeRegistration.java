@@ -16,73 +16,73 @@ import java.io.Serializable;
 
 public class EChequeRegistration implements Serializable {
 
-	private String bankName;
-	private String bankAddress;
-	private String accountNumber;
-	private String clientName;
-	private String eWalletLocation;
-	private int userNameHash;
-	private int passwordHash;
+    private String bankName;
+    private String bankAddress;
+    private String accountNumber;
+    private String clientName;
+    private String eWalletLocation;
+    private int userNameHash;
+    private int passwordHash;
 
-	/**
-	 * Creates a new instance of EChequeRegisteration
-	 */
-	public EChequeRegistration() {
-	}
+    /**
+     * Creates a new instance of EChequeRegisteration
+     */
+    public EChequeRegistration() {
+    }
 
-	public void setBankName(String bName) {
-		bankName = bName;
-	}
+    public void setBankName(String bName) {
+        bankName = bName;
+    }
 
-	public void setBankAddress(String URL) {
-		bankAddress = URL;
-	}
+    public void setBankAddress(String URL) {
+        bankAddress = URL;
+    }
 
-	public void setAccountNumber(String account) {
-		accountNumber = account;
-	}
+    public void setAccountNumber(String account) {
+        accountNumber = account;
+    }
 
-	public void setClientName(String cName) {
-		clientName = cName;
-	}
+    public void setClientName(String cName) {
+        clientName = cName;
+    }
 
-	public void setEWalletLoaction(String path) {
-		eWalletLocation = path;
-	}
+    public void setEWalletLoaction(String path) {
+        eWalletLocation = path;
+    }
 
-	public void setUsername(int hashValue) {
-		userNameHash = hashValue;
-	}
+    public void setUsername(int hashValue) {
+        userNameHash = hashValue;
+    }
 
-	public void setPasword(int hashValue) {
-		passwordHash = hashValue;
-	}
+    public void setPasword(int hashValue) {
+        passwordHash = hashValue;
+    }
 
-	public String getBankName() {
-		return bankName;
-	}
+    public String getBankName() {
+        return bankName;
+    }
 
-	public String getBankAddress() {
-		return bankAddress;
-	}
+    public String getBankAddress() {
+        return bankAddress;
+    }
 
-	public String getAccountNumber() {
-		return accountNumber;
-	}
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
-	public String getClientName() {
-		return clientName;
-	}
+    public String getClientName() {
+        return clientName;
+    }
 
-	public String getEWalletLoaction() {
-		return eWalletLocation;
-	}
+    public String getEWalletLoaction() {
+        return eWalletLocation;
+    }
 
-	public int getUsername() {
-		return userNameHash;
-	}
+    public int getUsername() {
+        return userNameHash;
+    }
 
-	public int getPasword() {
-		return passwordHash;
-	}
+    public int getPasword() {
+        return passwordHash;
+    }
 }
