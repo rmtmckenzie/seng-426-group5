@@ -76,9 +76,10 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 break;
             case 2:
                 //exit
+            default:
+                //clicked x button
                 dispose();
                 return false;
-            default:
         }
         return true;
     }
