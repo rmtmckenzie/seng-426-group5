@@ -23,6 +23,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
     /**
      * Creates new form ChequeJFrame
      */
+    private int mode;
     private EChequeRegistration eChequeReg;
     private boolean newChequeFlag;
     private boolean loadChequeFlag = false;
@@ -35,6 +36,51 @@ public class ChequeJFrame extends javax.swing.JFrame {
         // set new cheque status false;
         newChequeFlag = false;
 
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        if (!b || setMode()) {
+            super.setVisible(b);
+        }
+    }
+
+    public boolean setMode() {
+        Object[] options = {"Create Cheque",
+            "Validate Cheque",
+            "Exit"};
+
+        mode = JOptionPane.showOptionDialog(this,
+                "What would you like to do?",
+                "Cheque Options",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                options[2]);
+
+        switch (mode) {
+            case 0:
+                //create
+                newCheque();
+                jBVariable.setText("Save");
+                break;
+            case 1:
+                //validate
+                openCheque();
+                if (loadChequeFlag) {
+                    jBVariable.setText("Validate");
+                } else {
+                    return setMode();
+                }
+                break;
+            case 2:
+                //exit
+                dispose();
+                return false;
+            default:
+        }
+        return true;
     }
 
     /**
@@ -51,7 +97,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jTuserSign = new javax.swing.JPasswordField();
         jBOK = new javax.swing.JButton();
         jBCancel = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPCheque = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLDrawerName = new javax.swing.JLabel();
         jLDate = new javax.swing.JLabel();
@@ -72,22 +119,16 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jTYear = new javax.swing.JTextField();
         jTMonth = new javax.swing.JTextField();
         jTDay = new javax.swing.JTextField();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMNewCheque = new javax.swing.JMenuItem();
-        jMOpenCheque = new javax.swing.JMenuItem();
-        jMSaveCheque = new javax.swing.JMenuItem();
-        jMVerifyCheque = new javax.swing.JMenuItem();
-        jMExitChequeForm = new javax.swing.JMenuItem();
+        jBVariable = new javax.swing.JButton();
+        jBCloseCheque = new javax.swing.JButton();
 
         jDSignCheque.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jDSignCheque.setTitle("Sign Cheque");
         jDSignCheque.setAlwaysOnTop(true);
-        jDSignCheque.setLocationByPlatform(true);
         jDSignCheque.setModal(true);
         jDSignCheque.setResizable(false);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sign Cheque", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", Font.BOLD, 11), new java.awt.Color(51, 51, 51))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sign Cheque", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(51, 51, 51))); // NOI18N
 
         jLabel1.setText("Password:");
 
@@ -108,48 +149,48 @@ public class ChequeJFrame extends javax.swing.JFrame {
         org.jdesktop.layout.GroupLayout jPanel6Layout = new org.jdesktop.layout.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
-                jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                        .add(jPanel6Layout.createSequentialGroup()
-                                                .add(jBOK, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .add(jBCancel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 73, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                        .add(jTuserSign))
-                                .add(29, 29, 29))
+            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jPanel6Layout.createSequentialGroup()
+                        .add(jBOK, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jBCancel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 73, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jTuserSign))
+                .add(29, 29, 29))
         );
         jPanel6Layout.setVerticalGroup(
-                jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel6Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(jLabel1)
-                                        .add(jTuserSign, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(jBOK)
-                                        .add(jBCancel))
-                                .addContainerGap())
+            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel1)
+                    .add(jTuserSign, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jBOK)
+                    .add(jBCancel))
+                .addContainerGap())
         );
 
         org.jdesktop.layout.GroupLayout jDSignChequeLayout = new org.jdesktop.layout.GroupLayout(jDSignCheque.getContentPane());
         jDSignCheque.getContentPane().setLayout(jDSignChequeLayout);
         jDSignChequeLayout.setHorizontalGroup(
-                jDSignChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jDSignChequeLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 274, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+            jDSignChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jDSignChequeLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 274, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jDSignChequeLayout.setVerticalGroup(
-                jDSignChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jDSignChequeLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(36, Short.MAX_VALUE))
+            jDSignChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jDSignChequeLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -161,51 +202,53 @@ public class ChequeJFrame extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 51)));
+        jPanel7.setLayout(new java.awt.CardLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drawer Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", Font.BOLD, 11))); // NOI18N
-        jPanel2.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 12)); // NOI18N
+        jPCheque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 51)));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drawer Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
-                                .add(jLDrawerName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                .addContainerGap())
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel2Layout.createSequentialGroup()
+                .add(jLDrawerName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jLDrawerName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jLDrawerName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLDate.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 12)); // NOI18N
+        jLDate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLDate.setText("Date:");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eCheque/resources/barcode.GIF"))); // NOI18N
 
-        jLSerialNumber.setFont(new java.awt.Font("Tahoma", Font.BOLD, 11)); // NOI18N
+        jLSerialNumber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLSerialNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pay to the order of"));
-        jPanel3.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 12)); // NOI18N
+        jPanel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         jTPayTo.setEditable(false);
 
         org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jTPayTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                .addContainerGap())
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jTPayTo)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel3Layout.createSequentialGroup()
-                                .add(jTPayTo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .add(jTPayTo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Amount of Money"));
@@ -215,17 +258,17 @@ public class ChequeJFrame extends javax.swing.JFrame {
         org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-                jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel4Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jTAmount, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                .addContainerGap())
+            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jTAmount)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
-                jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel4Layout.createSequentialGroup()
-                                .add(jTAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(13, Short.MAX_VALUE))
+            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel4Layout.createSequentialGroup()
+                .add(jTAmount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Banking Info"));
@@ -237,27 +280,31 @@ public class ChequeJFrame extends javax.swing.JFrame {
         org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-                jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLAccountNum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLBankName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                                .addContainerGap())
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLAccountNum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLBankName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
-                jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel5Layout.createSequentialGroup()
-                                .add(jLBankName)
-                                .add(14, 14, 14)
-                                .add(jLAccountNum)
-                                .addContainerGap(12, Short.MAX_VALUE))
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel5Layout.createSequentialGroup()
+                .add(jLBankName)
+                .add(14, 14, 14)
+                .add(jLAccountNum)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jCGuarenteed.setText("Guarenteed");
+        jCGuarenteed.setText("Guaranteed");
         jCGuarenteed.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jCGuarenteed.setEnabled(false);
-        jCGuarenteed.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jCGuarenteed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCGuarenteedActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Earn Date:");
 
@@ -276,165 +323,138 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         jTDay.setEditable(false);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .add(jPanel1Layout.createSequentialGroup()
-                                                .add(32, 32, 32)
-                                                .add(jCGuarenteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                        .add(jPanel1Layout.createSequentialGroup()
-                                                .add(13, 13, 13)
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(jLabel3, 0, 0, Short.MAX_VALUE)
-                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                                        .add(jPanel1Layout.createSequentialGroup()
-                                                                                .add(jLabel7)
-                                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                                                .add(jTYear, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                                                .add(jLabel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                                                .add(26, 26, 26)))
-                                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                                        .add(jTMonth, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                                        .add(jPanel1Layout.createSequentialGroup()
-                                                                                .add(11, 11, 11)
-                                                                                .add(jLabel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                                        .add(jPanel1Layout.createSequentialGroup()
-                                                                                .add(12, 12, 12)
-                                                                                .add(jLabel10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                                                        .add(jPanel1Layout.createSequentialGroup()
-                                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                                                .add(jTDay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                                                                .add(12, 12, 12))
-                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                                .add(10, 10, 10)
-                                                                .add(jLSerialNumber, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                                                .add(17, 17, 17))))
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .add(jLDate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                .add(28, 28, 28)))
-                                .add(10, 10, 10))
+        org.jdesktop.layout.GroupLayout jPChequeLayout = new org.jdesktop.layout.GroupLayout(jPCheque);
+        jPCheque.setLayout(jPChequeLayout);
+        jPChequeLayout.setHorizontalGroup(
+            jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPChequeLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPChequeLayout.createSequentialGroup()
+                        .add(12, 12, 12)
+                        .add(jCGuarenteed, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 104, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jPChequeLayout.createSequentialGroup()
+                        .add(13, 13, 13)
+                        .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel3, 0, 0, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPChequeLayout.createSequentialGroup()
+                                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jPChequeLayout.createSequentialGroup()
+                                        .add(jLabel7)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(jTYear, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
+                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPChequeLayout.createSequentialGroup()
+                                        .add(jLabel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(26, 26, 26)))
+                                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jTMonth, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(jPChequeLayout.createSequentialGroup()
+                                        .add(11, 11, 11)
+                                        .add(jLabel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jPChequeLayout.createSequentialGroup()
+                                        .add(12, 12, 12)
+                                        .add(jLabel10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(jPChequeLayout.createSequentialGroup()
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(jTDay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(12, 12, 12))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPChequeLayout.createSequentialGroup()
+                                .add(10, 10, 10)
+                                .add(jLSerialNumber, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(17, 17, 17))))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPChequeLayout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jLDate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(28, 28, 28)))
+                .add(10, 10, 10))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel1Layout.createSequentialGroup()
-                                                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 16, Short.MAX_VALUE)
-                                                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                        .add(jPanel1Layout.createSequentialGroup()
-                                                .add(jLDate)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                                        .add(jLabel10)
-                                                        .add(jLabel8)
-                                                        .add(jLabel9))))
-                                .add(0, 0, 0)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                                        .add(jLabel7)
-                                                        .add(jTYear, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                        .add(jTMonth, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                        .add(jTDay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                        .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jCGuarenteed)
-                                        .add(jLSerialNumber, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
+        jPChequeLayout.setVerticalGroup(
+            jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPChequeLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPChequeLayout.createSequentialGroup()
+                        .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 16, Short.MAX_VALUE)
+                        .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPChequeLayout.createSequentialGroup()
+                        .add(jLDate)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jLabel10)
+                            .add(jLabel8)
+                            .add(jLabel9))))
+                .add(0, 0, 0)
+                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPChequeLayout.createSequentialGroup()
+                        .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jLabel7)
+                            .add(jTYear, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jTMonth, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jTDay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPChequeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jCGuarenteed)
+                    .add(jLSerialNumber, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        jMenu1.setText("Cheque");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel7.add(jPCheque, "card2");
+
+        jBVariable.setText("SetMe");
+        jBVariable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                jBVariableActionPerformed(evt);
             }
         });
 
-        jMNewCheque.setText("New");
-        jMNewCheque.addActionListener(new java.awt.event.ActionListener() {
+        jBCloseCheque.setText("Close");
+        jBCloseCheque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMNewChequeActionPerformed(evt);
+                jBCloseChequeActionPerformed(evt);
             }
         });
-        jMenu1.add(jMNewCheque);
-
-        jMOpenCheque.setText("Open");
-        jMOpenCheque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMOpenChequeActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMOpenCheque);
-
-        jMSaveCheque.setText("Save");
-        jMSaveCheque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMSaveChequeActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMSaveCheque);
-
-        jMVerifyCheque.setText("Verfiy");
-        jMVerifyCheque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMVerifyChequeActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMVerifyCheque);
-
-        jMExitChequeForm.setText("Exit");
-        jMExitChequeForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMExitChequeFormActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMExitChequeForm);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addContainerGap())
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jBVariable)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jBCloseCheque)
+                .add(156, 156, 156))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(29, Short.MAX_VALUE))
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jBVariable)
+                    .add(jBCloseCheque))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(434, 340));
+        setSize(new java.awt.Dimension(434, 335));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -465,14 +485,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_close
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMExitChequeFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMExitChequeFormActionPerformed
-        dispose();
-    }//GEN-LAST:event_jMExitChequeFormActionPerformed
-
-    private void jMVerifyChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMVerifyChequeActionPerformed
+    boolean validateCheque(){
         String certificatePath;
         if (loadChequeFlag) {
             certificatePath = getFileLocation("Load Digital Certificate");
@@ -488,6 +501,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                     if (verifySign) {
                         JOptionPane.showMessageDialog(null, "The signature is vaild", "e-Cheque Clear",
                                 JOptionPane.INFORMATION_MESSAGE);
+                        return true;
                     } else {
                         JOptionPane.showMessageDialog(null, "The signature is not vaild", "e-Cheque not Clear",
                                 JOptionPane.WARNING_MESSAGE);
@@ -503,8 +517,9 @@ public class ChequeJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You have to open the cheque", "User Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jMVerifyChequeActionPerformed
-
+        return false;
+    }
+    
     private void jBOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBOKMouseClicked
         signPass = AESCrypt.padPassword(new String(jTuserSign.getPassword()));
         jDSignCheque.setVisible(false);
@@ -515,7 +530,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
         this.setEnabled(true);
     }//GEN-LAST:event_jBCancelMouseClicked
 
-    private void jMSaveChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSaveChequeActionPerformed
+    boolean saveCheque() {
         // get cheque info to save it.
         String amount = jTAmount.getText();
         String payTo = jTPayTo.getText();
@@ -530,7 +545,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
             if (amount.length() == 0) {
                 JOptionPane.showMessageDialog(null, "You can not write empty cheque", "User Error",
                         JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
 
             // Check amount is a valid monetary entry
@@ -550,14 +565,14 @@ public class ChequeJFrame extends javax.swing.JFrame {
             if (!isMoney) {
                 JOptionPane.showMessageDialog(null, "Amount must be a number", "User Error",
                         JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
 
             // Check for empty receiver 
             if (payTo.length() == 0) {
                 JOptionPane.showMessageDialog(null, "You have to specify the cheque receiver under Pay To the Order Of", "User Error",
                         JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
 
             // Check for empty date
@@ -565,7 +580,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Complete the earn date info", "User Error",
                         JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
 
             // verify dates
@@ -576,24 +591,24 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 if (tyear < 1900) {
                     JOptionPane.showMessageDialog(null, "Year, must be greater than 1900", "User Error",
                             JOptionPane.ERROR_MESSAGE);
-                    return;
+                    return false;
                 }
 
                 if (tday > 31 || tday < 0) {
                     JOptionPane.showMessageDialog(null, "Day is invalid", "User Error",
                             JOptionPane.ERROR_MESSAGE);
-                    return;
+                    return false;
                 }
 
                 if (tmonth > 12 || tmonth < 0) {
                     JOptionPane.showMessageDialog(null, "Month is invalid", "User Error",
                             JOptionPane.ERROR_MESSAGE);
-                    return;
+                    return false;
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Year, month and day must be a number", "User Error",
                         JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
 
             // Ask the user to enter his password to sign the cheque with his private key
@@ -655,6 +670,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
                             + File.separator + "My Cheques"
                             + File.separator + chequeObj.getChequeNumber() + ".sec");
                     JOptionPane.showMessageDialog(null, "Done");
+                    
+                    return true;
 
                 } catch (Exception exp) {
                     JOptionPane.showMessageDialog(null, exp.getMessage(), "System error",
@@ -669,9 +686,10 @@ public class ChequeJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You must create a new cheque first", "User Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jMSaveChequeActionPerformed
+        return false;
+    }
 
-    private void jMNewChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMNewChequeActionPerformed
+    private void newCheque() {
         // Active cheque form
         jTAmount.setEditable(true);
         jTPayTo.setEditable(true);
@@ -700,11 +718,12 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jCGuarenteed.setSelected(false);
 
         newChequeFlag = true;
-    }//GEN-LAST:event_jMNewChequeActionPerformed
+    }
 
-    private void jMOpenChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMOpenChequeActionPerformed
+    private void openCheque() {
         String chequePath;
         chequePath = getFileLocation("Open Cheque");
+        loadChequeFlag = false;
         if (chequePath.length() != 0) {
             oldCheque = new ECheque();
 
@@ -745,8 +764,32 @@ public class ChequeJFrame extends javax.swing.JFrame {
 
         }
 
+    }
 
-    }//GEN-LAST:event_jMOpenChequeActionPerformed
+    private void jCGuarenteedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCGuarenteedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCGuarenteedActionPerformed
+
+    private void jBVariableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVariableActionPerformed
+        if (mode == 0) {
+            //create mode, therefore is save
+            if(saveCheque()) {
+                dispose();
+            }
+            
+        } else {
+            //validate mode, is validate
+            validateCheque();
+        }
+    }//GEN-LAST:event_jBVariableActionPerformed
+
+    private void jBCloseChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCloseChequeActionPerformed
+        // TODO add your handling code here:
+        super.setVisible(false);
+        if (setMode()) {
+            super.setVisible(true);
+        }
+    }//GEN-LAST:event_jBCloseChequeActionPerformed
 
     private String getFileLocation(String dialogTitle) {
         JFileChooser fileChooser = new JFileChooser();
@@ -813,7 +856,9 @@ public class ChequeJFrame extends javax.swing.JFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancel;
+    private javax.swing.JButton jBCloseCheque;
     private javax.swing.JButton jBOK;
+    private javax.swing.JButton jBVariable;
     private javax.swing.JCheckBox jCGuarenteed;
     private javax.swing.JDialog jDSignCheque;
     private javax.swing.JLabel jLAccountNum;
@@ -827,19 +872,13 @@ public class ChequeJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMExitChequeForm;
-    private javax.swing.JMenuItem jMNewCheque;
-    private javax.swing.JMenuItem jMOpenCheque;
-    private javax.swing.JMenuItem jMSaveCheque;
-    private javax.swing.JMenuItem jMVerifyCheque;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPCheque;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTextField jTAmount;
     private javax.swing.JTextField jTDay;
     private javax.swing.JTextField jTMonth;

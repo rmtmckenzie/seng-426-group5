@@ -122,6 +122,11 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
                 jBActivationMouseClicked(evt);
             }
         });
+        jBActivation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActivationActionPerformed(evt);
+            }
+        });
         jBActivation.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jBActivationKeyPressed(evt);
@@ -316,7 +321,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
                 card.next(jPanel1);
             }
         } catch (Exception exp) {
-            JOptionPane.showMessageDialog(null, "One of your security key is invaild");
+            JOptionPane.showMessageDialog(null, "One of your security key is invalid");
         }
     }
 
@@ -378,6 +383,10 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
        }
    }//GEN-LAST:event_jBConfigureKeyPressed
 
+    private void jBActivationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActivationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBActivationActionPerformed
+
     /**
      * Private method used to attempt login. This will mutate the passTemp and
      * userName variables.
@@ -392,7 +401,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
         if ((userName.hashCode() != registeredUser.getUsername() || userName.length() == 0)
                 || (passTemp.hashCode() != registeredUser.getPasword() || passTemp.length() == 0)) {
             //invaild user name or invalid password.
-            JOptionPane.showMessageDialog(null, "Invaild user name or password", "Access Denied", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Invalid user name or password", "Access Denied", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         return true;
