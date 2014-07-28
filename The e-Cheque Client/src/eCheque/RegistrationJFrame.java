@@ -17,10 +17,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+
 import javax.crypto.Cipher;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
+
 import java.security.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.File;
 
 public class RegistrationJFrame extends javax.swing.JFrame {
@@ -743,6 +747,8 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 			String clientName, String accountNumber, String digitalCIssuer,
 			String digitalCURL, String userName, char[] password,
 			char[] password2) {
+		Pattern alphaPattern = Pattern.compile("[a-zA-Z]");
+
 		if (bankName.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Bank Name can not be empty",
 					"User Error", JOptionPane.ERROR_MESSAGE);
@@ -760,7 +766,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 					JOptionPane.ERROR_MESSAGE);
 			return true;
 		}
-		if (bankURL.matches("[a-zA-Z]+") && !bankURL.equals("localhost")) {
+		if (alphaPattern.matcher(bankURL).find() && !bankURL.equals("localhost")) {
 			JOptionPane.showMessageDialog(null,
 					"Bank URL cannot contain letters", "User Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -783,7 +789,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 					JOptionPane.ERROR_MESSAGE);
 			return true;
 		}
-		if (accountNumber.matches("[a-zA-Z]+")) {
+		if (alphaPattern.matcher(accountNumber).find()) {
 			JOptionPane.showMessageDialog(null,
 					"Account Number cannot contain letters", "User Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -804,6 +810,12 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 		if (digitalCURL.length() == 0) {
 			JOptionPane.showMessageDialog(null,
 					"Certificate issuer URl or IP can not be empty",
+					"User Error", JOptionPane.ERROR_MESSAGE);
+			return true;
+		}
+		if (alphaPattern.matcher(digitalCURL).find() && !digitalCURL.equals("localhost")) {
+			JOptionPane.showMessageDialog(null,
+					"Certificate issuer URl or IP cannot contain letters",
 					"User Error", JOptionPane.ERROR_MESSAGE);
 			return true;
 		}

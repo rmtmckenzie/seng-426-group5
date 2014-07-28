@@ -404,7 +404,7 @@ public class RegistrationJFrameTest {
 		window.optionPane().yesButton().click();
 
 		window.button("jBRFRegister").click();
-		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Certificate issuer URl or IP cannot contain letters");
 		window.optionPane().okButton().click();
 	}
 	
@@ -412,7 +412,7 @@ public class RegistrationJFrameTest {
 	public void testWrongUserName() {
 		window.textBox("jTBankName").enterText("ScotiaBank");
 		window.textBox("jTBankURLIP").enterText("localhost");
-		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTClientName").enterText("Mateus Furquim123");
 		window.textBox("jTAccountNo").enterText("123");
 		window.textBox("jTIssuerName").enterText("Issuer");
 		window.textBox("jTDCURLIP").enterText("127.0.0.1");
@@ -426,10 +426,10 @@ public class RegistrationJFrameTest {
 		window.optionPane().yesButton().click();
 
 		window.button("jBRFRegister").click();
-		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Client Name cannot contain numbers");
 		window.optionPane().okButton().click();
 	}
-	
+/*	
 	@Test
 	public void testWrongPassword() {
 		window.textBox("jTBankName").enterText("ScotiaBank");
@@ -451,7 +451,7 @@ public class RegistrationJFrameTest {
 		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
 		window.optionPane().okButton().click();
 	}
-	
+*/
 	@Test
 	public void testMissmatchPassword() {
 		window.textBox("jTBankName").enterText("ScotiaBank");
