@@ -44,7 +44,7 @@ public class RegistrationJFrameTest {
 		window.textBox("jTBankName").enterText("ScotiaBank");
 		window.textBox("jTBankURLIP").enterText("localhost");
 		window.textBox("jTClientName").enterText("Mateus Furquim");
-		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTAccountNo").enterText(String.valueOf((int)(Math.floor(Math.random() * 100000))));
 		window.textBox("jTIssuerName").enterText("Issuer");
 		window.textBox("jTDCURLIP").enterText("127.0.0.1");
 		window.textBox("jTUserName").enterText("mfurquim");
