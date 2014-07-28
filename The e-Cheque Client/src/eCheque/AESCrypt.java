@@ -82,6 +82,9 @@ public class AESCrypt {
 
 	static public String padPassword(String pass) {
 		char password[] = pass.toCharArray();
+		if(password.length == 0){
+			return "";
+		}
 		String strPassword = new String(password);
 		for (int i = 0; i < 16 - password.length; i++) {
 			strPassword += password[i];
