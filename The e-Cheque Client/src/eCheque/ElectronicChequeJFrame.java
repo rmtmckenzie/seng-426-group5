@@ -310,7 +310,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
 
                 // Set the status as activated, and display a message to the user.
                 isActivated = true;
-                JOptionPane.showMessageDialog(null, "Welcome " + registeredUser.getClientName(), "Welcome Message", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Welcome " + registeredUser.getClientName() + ".", "Welcome Message", JOptionPane.PLAIN_MESSAGE);
 
                 // You have logged-in, therefore disable the configure? and login pages?
                 jBConfigure.setEnabled(false);
