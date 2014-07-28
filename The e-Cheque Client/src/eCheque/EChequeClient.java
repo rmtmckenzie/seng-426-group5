@@ -182,8 +182,14 @@ public class EChequeClient implements Runnable {
                 outObj.writeObject(registrationData);
                 outObj.close();
 
-                String confirm = (String) SocketInputObject.readObject();
-                registrationState = confirm.equals("registration complete");
+                String confirm = "";
+                try {
+                	confirm = (String) SocketInputObject.readObject();
+                } catch (EOFException exp) {
+                	JOptionPane.showMessageDialog(null, "Failed to read object.");
+                }
+
+                registrationState = confirm.equalsIgnoreCase("registration complete");
                 if (registrationState == false) {
                     // If the registration failed, then delete the config.epc file
                     JOptionPane.showMessageDialog(null, "Registration failed, please contact your bank for troubleshooting information.");
@@ -201,6 +207,12 @@ public class EChequeClient implements Runnable {
                 if (registrationState) {
                     JOptionPane.showMessageDialog(null, "Registration complete", "Registration", JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    try {
+                        File file = new File("Config.epc");
+                        file.delete();
+                    } catch (Exception exp) {
+                        JOptionPane.showMessageDialog(null, "Cannot delete registration file. Do you have permissions to edit access the folder which this is running from?");
+                    }
                     JOptionPane.showMessageDialog(null, "Registration failed", "Registration", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
