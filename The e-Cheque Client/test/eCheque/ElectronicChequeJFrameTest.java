@@ -53,10 +53,11 @@ public class ElectronicChequeJFrameTest extends ReflectClass {
 	public void testInitNoConf() {
 	}
 
-	/*
 	@Test
-	public void testNoLoadUserInfo() {		
-		new File("Config.epc").delete();		
+	public void testNoLoadUserInfo() {
+		if (new File("Config.epc").exists() == true) {
+			fail("Please delete the Config.epc file then re-run this test");
+		}
 		ElectronicChequeJFrame frame = new ElectronicChequeJFrame();
 		setDefaultObject(frame);
 		try {
@@ -69,7 +70,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass {
 					  ((JTextField) getAttrDef("jTUserName")).isEnabled());
 
 			assertFalse("Login Button should not be enabled.",
-					  ((JButton) getAttrDef("loadUserInfo")).isEnabled());
+					  ((JButton) getAttrDef("jBActivation")).isEnabled());
 
 			assertTrue("Configure button should be enabled.",
 					  ((JButton) getAttrDef("jBConfigure")).isEnabled());
@@ -102,10 +103,9 @@ public class ElectronicChequeJFrameTest extends ReflectClass {
 
 	@Test
 	public void testLoadUserInfo() {
-		System.out.println();
-		File f = new File(System.getProperty("user.dir") + File.separator + "test" + File.separator + "Config.epc");
-		f.renameTo(new File(System.getProperty("user.dir") + File.separator + "Config.epc"));
-		
+		if (new File("Config.epc").exists() == false) {
+			fail("Please register a user and re-run this test");
+		}
 		ElectronicChequeJFrame frame = new ElectronicChequeJFrame();
 		setDefaultObject(frame);
 		try {
@@ -118,7 +118,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass {
 					  ((JTextField) getAttrDef("jTUserName")).isEnabled());
 
 			assertTrue("Login Button should be enabled.",
-					  ((JButton) getAttrDef("loadUserInfo")).isEnabled());
+					  ((JButton) getAttrDef("jBActivation")).isEnabled());
 
 			assertFalse("Configure button should not be enabled.",
 					  ((JButton) getAttrDef("jBConfigure")).isEnabled());
@@ -147,7 +147,7 @@ public class ElectronicChequeJFrameTest extends ReflectClass {
 			fail(e.getLocalizedMessage());
 		}
 	}
-*/
+
 	/**
 	 * Test of main method, of class ElectronicChequeJFrame.
 	 */
