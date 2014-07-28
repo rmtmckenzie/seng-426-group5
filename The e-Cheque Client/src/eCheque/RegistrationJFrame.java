@@ -90,6 +90,12 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Bank Name");
 
+        jTBankName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBankNameActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("URL/IP");
 
         jTBankURLIP.setToolTipText("Please enter a Fully Qualified Domain Name, or an IP address.");
@@ -329,6 +335,10 @@ public class RegistrationJFrame extends javax.swing.JFrame {
     private void jCSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSubjectActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCSubjectActionPerformed
+
+    private void jTBankNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBankNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBankNameActionPerformed
 
     private String getWalletLocation(String dialogTitle) {
 
