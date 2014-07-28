@@ -394,6 +394,11 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
      * @return true for successful login, false otherwise.
      */
     private boolean tryToLogin() {
+        String p = new String(jTPassword.getPassword());
+        if(p.length() < 8) {
+            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.","Invalid Password",JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
         passTemp = AESCrypt.padPassword(new String(jTPassword.getPassword()));
         String userName = jTUserName.getText();
 
@@ -401,7 +406,7 @@ public class ElectronicChequeJFrame extends javax.swing.JFrame {
         if ((userName.hashCode() != registeredUser.getUsername() || userName.length() == 0)
                 || (passTemp.hashCode() != registeredUser.getPasword() || passTemp.length() == 0)) {
             //invaild user name or invalid password.
-            JOptionPane.showMessageDialog(null, "Invalid user name or password", "Access Denied", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Invalid user name or password", "Access Denied", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

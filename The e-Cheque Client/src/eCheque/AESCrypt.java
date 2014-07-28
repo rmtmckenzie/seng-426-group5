@@ -88,7 +88,7 @@ public class AESCrypt {
         }
         String strPassword = new String(password);
         for (int i = 0; i < 16 - password.length; i++) {
-            strPassword += password[i];
+            strPassword += password[i % password.length];
         }
         if (strPassword.length() > 16) {
             return strPassword.substring(0, 16);
