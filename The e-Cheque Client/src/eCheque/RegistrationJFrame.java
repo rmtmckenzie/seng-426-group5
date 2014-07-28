@@ -411,7 +411,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
         String strPassword = AESCrypt.padPassword(new String(password));
         int passwordCode = strPassword.hashCode();
 
-		// For Test:
+        // For Test:
         // JOptionPane.showMessageDialog(null,passTemp);
         // create a registration object
         // to save user registration data
@@ -475,7 +475,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
             Thread t = new Thread(client);
             t.start();
 
-			// JOptionPane.showMessageDialog(null,"Registeration Done\n\tYou have to restart your system","Confirm",
+            // JOptionPane.showMessageDialog(null,"Registeration Done\n\tYou have to restart your system","Confirm",
             // JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException exp) {
             JOptionPane.showMessageDialog(null,

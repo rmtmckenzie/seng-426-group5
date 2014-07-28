@@ -126,12 +126,12 @@ public class EChequeServer implements Runnable {
                 depositResult = "Drawer's account balance is not sufficient.";
             } else if (chqDB.runQuery("Select * from cancelledCheque where accountID = ? and chequeID = ?;", receivedCheque.getAccountNumber(), receivedCheque.getChequeNumber())) {
                 depositResult = "This cheque has been cancelled by the drawer.";
-            } else if (chqDB.runQuery("Select * from eChequeOut where chequeID = ? and accountID = ?;",receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber())) {
+            } else if (chqDB.runQuery("Select * from eChequeOut where chequeID = ? and accountID = ?;", receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber())) {
                 depositResult = "This cheque has already been deposited.";
             } else {
-                chqDB.runUpdate("Update accounts set balance = balance - ? where accountID = ?",chequeMoney, receivedCheque.getAccountNumber());
-                chqDB.runUpdate("Update accounts set balance = balance + ? where accountID = ?",chequeMoney, depositAccount);
-                chqDB.runUpdate("Insert into eChequeOut(chequeID, accountID, balance) values( ? , ? , ? );",receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber(), chequeMoney);
+                chqDB.runUpdate("Update accounts set balance = balance - ? where accountID = ?", chequeMoney, receivedCheque.getAccountNumber());
+                chqDB.runUpdate("Update accounts set balance = balance + ? where accountID = ?", chequeMoney, depositAccount);
+                chqDB.runUpdate("Insert into eChequeOut(chequeID, accountID, balance) values( ? , ? , ? );", receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber(), chequeMoney);
                 chqDB.runUpdate("Insert into eChequeIn(chequeID, accountID, balance) values( ? , ? , ? );", receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber(), chequeMoney);
 
                 //report the deposit result

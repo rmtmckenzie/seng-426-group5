@@ -19,14 +19,15 @@ public class SendChequeJFrame extends javax.swing.JFrame {
     private String chequePath;
     private String cipherChequePath;
     private boolean selectChequeFlag;
-    private EChequeRegistration eChequeRegisterdUser;
+    private final EChequeRegistration eChequeRegisterdUser;
 
     /**
      * Creates new form SendChequeJFrame
+     * @param registeredUser
      */
-    public SendChequeJFrame(EChequeRegistration registerdUser) {
+    public SendChequeJFrame(EChequeRegistration registeredUser) {
         initComponents();
-        eChequeRegisterdUser = registerdUser;
+        eChequeRegisterdUser = registeredUser;
     }
 
     private String getFileLocation(String dialogTitle) {
@@ -253,8 +254,8 @@ public class SendChequeJFrame extends javax.swing.JFrame {
                     //Get the sever side digital certificate.
                     DigitalCertificate clientDC = DigitalCertificate.readDigitalCertificate(
                             eChequeRegisterdUser.getEWalletLoaction()
-                                    + File.separator + "Security Tools" + File.separator
-                                    + eChequeRegisterdUser.getClientName() + "DigCert.edc");
+                            + File.separator + "Security Tools" + File.separator
+                            + eChequeRegisterdUser.getClientName() + "DigCert.edc");
 
                     JOptionPane.showMessageDialog(null, "Strating client");
                     //Start Server Thread.
