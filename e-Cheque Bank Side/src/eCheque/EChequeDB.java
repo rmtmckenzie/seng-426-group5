@@ -107,9 +107,7 @@ public class EChequeDB {
             s.executeUpdate();
             result = true;
         } catch (SQLException exp) {
-            //JOptionPane.showMessageDialog(null, exp.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, exp);
-            exp.printStackTrace();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -126,8 +124,7 @@ public class EChequeDB {
             try {
                 obj = resultSet.getObject(userName);
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "DB Error", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
+                Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         return obj;
