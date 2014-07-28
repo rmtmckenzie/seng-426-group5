@@ -49,7 +49,7 @@ public class AESCryptTest {
 		} catch (Exception e) {
 			fail();
 		}
-		//assertNotEquals(key1,key2);
+		assertNotEquals(key1,key2);
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class AESCryptTest {
 		} catch (Exception e) {
 			fail();
 		}
-		//assertNotEquals(key1,key2);
+		assertNotEquals(key1,key2);
 	}
 
 	@Test
@@ -251,5 +251,23 @@ public class AESCryptTest {
 			e.printStackTrace();
 			fail("Exception in AESCrypt.crypt");
 		}
+	}
+	
+	@Test
+	public void testPadPasswordNoPassword(){
+		String password = "";
+		assertEquals(AESCrypt.padPassword(password),"");
+	}
+	
+	@Test
+	public void testPadPasswordLongPassword(){
+		String password = "123456789012345678901234567890";
+		assertEquals(AESCrypt.padPassword(password),"1234567890123456");
+	}
+	
+	@Test
+	public void testPadPasswordRegular(){
+		String password = "12345678";
+		assertEquals(AESCrypt.padPassword(password),"1234567812345678");
 	}
 }
