@@ -1,16 +1,11 @@
 package eCheque;
 
-import static org.junit.Assert.*;
-
-import java.awt.Dimension;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.JOptionPane;
 
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
-import org.fest.swing.fixture.JButtonFixture;
 import org.fest.swing.timing.Timeout;
 import org.junit.After;
 import org.junit.AfterClass;
