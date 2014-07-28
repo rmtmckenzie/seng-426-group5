@@ -6,10 +6,11 @@
  */
 package eCheque;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,7 +45,7 @@ public class BankServer implements Runnable {
         } catch (SocketException exp) {
             // do nothing, this is the expected way we are closing the thread.
         } catch (IOException exp) {
-            JOptionPane.showMessageDialog(null, exp.getMessage(), "Network Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(BankServer.class.getName()).log(Level.SEVERE, null, exp);
         }
     }
 
