@@ -99,6 +99,8 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jBOK = new javax.swing.JButton();
         jBCancel = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
+        jBVariable = new javax.swing.JButton();
+        jBCloseCheque = new javax.swing.JButton();
         jPCheque = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLDrawerName = new javax.swing.JLabel();
@@ -120,8 +122,6 @@ public class ChequeJFrame extends javax.swing.JFrame {
         jTYear = new javax.swing.JTextField();
         jTMonth = new javax.swing.JTextField();
         jTDay = new javax.swing.JTextField();
-        jBVariable = new javax.swing.JButton();
-        jBCloseCheque = new javax.swing.JButton();
 
         jDSignCheque.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jDSignCheque.setTitle("Sign Cheque");
@@ -204,6 +204,20 @@ public class ChequeJFrame extends javax.swing.JFrame {
         });
 
         jPanel7.setLayout(new java.awt.CardLayout());
+
+        jBVariable.setText("SetMe");
+        jBVariable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVariableActionPerformed(evt);
+            }
+        });
+
+        jBCloseCheque.setText("Close");
+        jBCloseCheque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCloseChequeActionPerformed(evt);
+            }
+        });
 
         jPCheque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 51)));
 
@@ -407,49 +421,43 @@ public class ChequeJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel7.add(jPCheque, "card2");
-
-        jBVariable.setText("SetMe");
-        jBVariable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBVariableActionPerformed(evt);
-            }
-        });
-
-        jBCloseCheque.setText("Close");
-        jBCloseCheque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCloseChequeActionPerformed(evt);
-            }
-        });
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jBVariable)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jBCloseCheque)
-                .add(156, 156, 156))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(jPCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(layout.createSequentialGroup()
+                        .add(57, 57, 57)
+                        .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jBVariable, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(18, 18, 18)
+                        .add(jBCloseCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(123, 123, 123))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jBVariable)
-                    .add(jBCloseCheque)))
+                .addContainerGap()
+                .add(jPCheque, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(35, 35, 35))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jBVariable)
+                            .add(jBCloseCheque))
+                        .addContainerGap())))
         );
 
-        setSize(new java.awt.Dimension(434, 323));
+        setSize(new java.awt.Dimension(434, 332));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
