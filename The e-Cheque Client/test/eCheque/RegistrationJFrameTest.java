@@ -25,385 +25,454 @@ public class RegistrationJFrameTest {
     public static void tearDownAfterClass() throws Exception {
     }
 
-    @Before
-    public void setUp() throws Exception {
-        robot = BasicRobot.robotWithNewAwtHierarchy();
-        robot.settings().delayBetweenEvents(1);
-
-        window = new FrameFixture(robot, new RegistrationJFrame());
-        window.show();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        window.cleanUp();
-    }
-
-    /*	
-     @Test
-     public void testMissingEWallet() {
-     window.textBox("jTBankName").enterText("ScotiaBank");
-     window.textBox("jTBankURLIP").enterText("localhost");
-     window.textBox("jTClientName").enterText("Mateus Furquim");
-     window.textBox("jTAccountNo").enterText("123");
-     window.textBox("jTIssuerName").enterText("Issuer");
-     window.textBox("jTDCURLIP").enterText("127.0.0.1");
-     window.textBox("jTUserName").enterText("mfurquim");
-     window.textBox("jTPassword").enterText("Passw0rd");
-     window.textBox("jTPassword2").enterText("Passw0rd");
+	@Before
+	public void setUp() throws Exception {
+		robot = BasicRobot.robotWithNewAwtHierarchy();
+		robot.settings().delayBetweenEvents(1);
 		
-     window.button("jBRFRegister").click();
-     window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
+	    window = new FrameFixture(robot, new RegistrationJFrame());
+	    window.show();
+	}
 
-     try {
-     Thread.sleep(2000);
-     } catch (InterruptedException e) {
-     // TODO Auto-generated catch block
-     e.printStackTrace();
-     }
+	@After
+	public void tearDown() throws Exception {
+	    window.cleanUp();
+	}
 
-     window.optionPane().okButton().click();
-     window.button("jBeWallet").click();
+	@Test
+	public void testRegistrationComplete() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
 		
-     try {
-     Thread.sleep(4000);
-     } catch (InterruptedException e) {
-     // TODO Auto-generated catch block
-     e.printStackTrace();
-     }
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-     window.fileChooser("fileChooser").approveButton().click();
-     eWalletPath.
-     try {
-     Thread.sleep(10000);
-     } catch (InterruptedException e) {
-     // TODO Auto-generated catch block
-     e.printStackTrace();
-     }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Registration complete");
+		window.optionPane().okButton().click();
+	}
 
-     }
-     */
-    @Test
-    public void testMissingEWallet() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+	@Test
+	public void testMissingEWallet() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingBankName() {
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
-        window.optionPane().okButton().click();
-    }
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-    @Test
-    public void testMissingBankName() {
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank Name can not be empty");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingBankURLIP() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
 
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank Name can not be empty");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank URL or IP address can not be empty");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingClientName() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
 
-    @Test
-    public void testMissingBankURLIP() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Client name can not be empty");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingAccountNumber() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank URL or IP address can not be empty");
-        window.optionPane().okButton().click();
-    }
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-    @Test
-    public void testMissingClientName() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Account number can not be empty");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingIssuerName() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
 
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Client name can not be empty");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Certificate issuer can not be empty");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingDigitalCertificateURLIP() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
 
-    @Test
-    public void testMissingAccountNumber() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Certificate issuer URl or IP can not be empty");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingUserName() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Account number can not be empty");
-        window.optionPane().okButton().click();
-    }
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-    @Test
-    public void testMissingIssuerName() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("User name can not be empty");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingPassword() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
 
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Certificate issuer can not be empty");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Password cannot be empty ");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissingPassword2() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-    @Test
-    public void testMissingDigitalCertificateURLIP() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Passwords not match ");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongBankName() {
+		window.textBox("jTBankName").enterText("ScotiaBank1");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank Name cannot contain numbers");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongBankURLIP() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localh0st");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Certificate issuer URl or IP can not be empty");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank URL cannot contain letters");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongClientName() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim 147");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-    @Test
-    public void testMissingUserName() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Client Name cannot contain numbers");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongAccountNumber() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123abc");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Account Number cannot contain letters");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongIssuerName() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer 159");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("User name can not be empty");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Digital Certificate Issuer cannot contain numbers");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongDigitalCertificateURLIP() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.o.o.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-    @Test
-    public void testMissingPassword() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongUserName() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.textBox("jTPassword2").enterText("Passw0rd");
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testWrongPassword() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Passw0rd");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Password cannot be empty ");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
+		window.optionPane().okButton().click();
+	}
+	
+	@Test
+	public void testMissmatchPassword() {
+		window.textBox("jTBankName").enterText("ScotiaBank");
+		window.textBox("jTBankURLIP").enterText("localhost");
+		window.textBox("jTClientName").enterText("Mateus Furquim");
+		window.textBox("jTAccountNo").enterText("123");
+		window.textBox("jTIssuerName").enterText("Issuer");
+		window.textBox("jTDCURLIP").enterText("127.0.0.1");
+		window.textBox("jTUserName").enterText("mfurquim");
+		window.textBox("jTPassword").enterText("Passw0rd");
+		window.textBox("jTPassword2").enterText("Password");
+		
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
 
-    @Test
-    public void testMissingPassword2() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Passwords not match ");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongBankName() {
-        window.textBox("jTBankName").enterText("ScotiaBank1");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank Name cannot contain numbers");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongBankURLIP() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localh0st");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Bank URL cannot contain letters");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongClientName() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim 147");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Client Name cannot contain numbers");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongAccountNumber() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123abc");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Account Number cannot contain letters");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongIssuerName() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer 159");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Digital Certificate Issuer cannot contain numbers");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongDigitalCertificateURLIP() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.o.o.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongUserName() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testWrongPassword() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Passw0rd");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("You have to create your e-wallet");
-        window.optionPane().okButton().click();
-    }
-
-    @Test
-    public void testMissmatchPassword() {
-        window.textBox("jTBankName").enterText("ScotiaBank");
-        window.textBox("jTBankURLIP").enterText("localhost");
-        window.textBox("jTClientName").enterText("Mateus Furquim");
-        window.textBox("jTAccountNo").enterText("123");
-        window.textBox("jTIssuerName").enterText("Issuer");
-        window.textBox("jTDCURLIP").enterText("127.0.0.1");
-        window.textBox("jTUserName").enterText("mfurquim");
-        window.textBox("jTPassword").enterText("Passw0rd");
-        window.textBox("jTPassword2").enterText("Password");
-
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Passwords not match ");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Passwords not match ");
+		window.optionPane().okButton().click();
+	}
 
     @Test
     public void testPasswordSmallerThanSeven() {
@@ -415,10 +484,15 @@ public class RegistrationJFrameTest {
         window.textBox("jTDCURLIP").enterText("127.0.0.1");
         window.textBox("jTUserName").enterText("mfurquim");
         window.textBox("jTPassword").enterText("123456");
-        window.textBox("jTPassword2").enterText("Password");
+        window.textBox("jTPassword2").enterText("123456");
 
-        window.button("jBRFRegister").click();
-        window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Your password should be greater than 7 characters");
-        window.optionPane().okButton().click();
-    }
+		window.button("jBeWallet").click();
+		window.fileChooser("fileChooser").approveButton().click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("E-Wallet already exists!\nDo you want to overwrite it?");
+		window.optionPane().yesButton().click();
+
+		window.button("jBRFRegister").click();
+		window.optionPane(Timeout.timeout(10, TimeUnit.SECONDS)).requireMessage("Your password should be greater than 7 characters");
+		window.optionPane().okButton().click();
+	}
 }
