@@ -51,7 +51,6 @@ public class SendChequeJFrame extends javax.swing.JFrame {
             return "";
         }
         cipherChequePath = fileName.getName();
-        JOptionPane.showMessageDialog(null, cipherChequePath);
         return fileName.getPath();
 
     }
@@ -246,7 +245,6 @@ public class SendChequeJFrame extends javax.swing.JFrame {
                     Cipher aesCipher = AESCrypt.initializeCipher(sessionKey, AESCrypt.cypherType.ENCRYPT);
 
                     InputStream in = new FileInputStream(chequePath);
-                    JOptionPane.showMessageDialog(null, eChequeRegisterdUser.getEWalletLoaction());
                     OutputStream out = new FileOutputStream(eChequeRegisterdUser.getEWalletLoaction()
                             + File.separator + "Out going" + File.separator + cipherChequePath);
                     AESCrypt.crypt(in, out, aesCipher);
@@ -259,8 +257,6 @@ public class SendChequeJFrame extends javax.swing.JFrame {
                             eChequeRegisterdUser.getEWalletLoaction()
                             + File.separator + "Security Tools" + File.separator
                             + eChequeRegisterdUser.getClientName() + "DigCert.edc");
-
-                    JOptionPane.showMessageDialog(null, "Strating client");
                     //Start Server Thread.
                     Runnable threadingClient = new EChequeClient(jTShellWindow, clientDC, sessionKey, eChequeRegisterdUser.getEWalletLoaction(),
                             chequePath, hostName, ReceiveChequeJFrame.SENDRECEIVEPORT);
