@@ -182,26 +182,6 @@ public class EChequeTest {
 		assertEquals(somethingString, eCheque.getEarnday());
 	}
 
-	/**
-	 * Test method for {@link eCheque.ECheque#getBankSignature()}.
-	 * Test method for {@link eCheque.ECheque#setBankSignature(byte[])}.
-	 */
-	@Test
-	public void testGetAndSetbanksignature() {
-		assertNull(eCheque.getBankSignature());
-		
-		eCheque.setBankSignature(nullByte);
-		assertArrayEquals(nullByte, eCheque.getBankSignature());
-
-		eCheque.setBankSignature(zeroByte);
-		assertArrayEquals(zeroByte, eCheque.getBankSignature());
-		
-		eCheque.setBankSignature(maxByte);
-		assertArrayEquals(maxByte, eCheque.getBankSignature());
-
-		eCheque.setBankSignature(zeroAndMaxBytes);
-		assertArrayEquals(zeroAndMaxBytes, eCheque.getBankSignature());
-	}
 
 	/**
 	 * Test method for {@link eCheque.ECheque#getDrawerSignature()}.
