@@ -747,6 +747,7 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 			String clientName, String accountNumber, String digitalCIssuer,
 			String digitalCURL, String userName, char[] password,
 			char[] password2) {
+                Pattern urlPattern = Pattern.compile("((\\d\\d?\\d?\\.\\d\\d?\\d?\\.\\d\\d?\\d?\\.\\d\\d?\\d?)|([A-z]+\\.((com)|(ca)|(org)))|(localhost))");
 		Pattern alphaPattern = Pattern.compile("[a-zA-Z]");
 
 		if (bankName.length() == 0) {
@@ -766,9 +767,9 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 					JOptionPane.ERROR_MESSAGE);
 			return true;
 		}
-		if (alphaPattern.matcher(bankURL).find() && !bankURL.equals("localhost")) {
+		if (!urlPattern.matcher(bankURL).find()) {
 			JOptionPane.showMessageDialog(null,
-					"Bank URL cannot contain letters", "User Error",
+					"Bank URL invalid", "User Error",
 					JOptionPane.ERROR_MESSAGE);
 			return true;
 		}
@@ -809,13 +810,13 @@ public class RegistrationJFrame extends javax.swing.JFrame {
 		}
 		if (digitalCURL.length() == 0) {
 			JOptionPane.showMessageDialog(null,
-					"Certificate issuer URl or IP can not be empty",
+					"Certificate issuer UR: or IP can not be empty",
 					"User Error", JOptionPane.ERROR_MESSAGE);
 			return true;
 		}
-		if (alphaPattern.matcher(digitalCURL).find() && !digitalCURL.equals("localhost")) {
+		if (!urlPattern.matcher(digitalCURL).find()) {
 			JOptionPane.showMessageDialog(null,
-					"Certificate issuer URl or IP cannot contain letters",
+					"Certificate issuer URL or IP invalid",
 					"User Error", JOptionPane.ERROR_MESSAGE);
 			return true;
 		}
