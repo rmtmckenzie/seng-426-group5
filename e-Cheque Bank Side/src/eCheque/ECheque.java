@@ -26,7 +26,6 @@ public class ECheque implements Serializable {
     private String chequeNumber;
     private boolean guaranteed;
     private String earnday;
-    private byte[] bankSignature;
     private byte[] drawerSignature;
 
     /**
@@ -37,7 +36,6 @@ public class ECheque implements Serializable {
 
     public void setAccountHolder(String x) {
         accountHolder = x;
-
     }
 
     public void setAccountNumber(String y) {
@@ -46,12 +44,10 @@ public class ECheque implements Serializable {
 
     public void setBankName(String z) {
         bankName = z;
-
     }
 
     public void setPayToOrderOf(String m) {
         payToOrderOf = m;
-
     }
 
     public void setAmountOfMony(String s) {
@@ -60,7 +56,6 @@ public class ECheque implements Serializable {
 
     public void setCurrencyType(String n) {
         currencyType = n;
-
     }
 
     public void setChequeNumber(String c) {
@@ -69,22 +64,14 @@ public class ECheque implements Serializable {
 
     public void setGuaranteed(boolean s) {
         guaranteed = s;
-
     }
 
     public void setEarnday(String u) {
         earnday = u;
-
-    }
-
-    public void setBankSignature(byte[] y) {
-        bankSignature = y;
-
     }
 
     public void setDrawerSignature(byte[] y) {
         drawerSignature = y;
-
     }
 
     public String getMoney() {
@@ -116,7 +103,6 @@ public class ECheque implements Serializable {
     }
 
     public boolean getGuaranteed() {
-
         return guaranteed;
     }
 
@@ -124,8 +110,9 @@ public class ECheque implements Serializable {
         return earnday;
     }
 
-    public byte[] getBankSignature() {
-        return bankSignature;
+    public String getReferenceString() {
+        return accountNumber + accountHolder + bankName + chequeNumber
+                + amountOfMoney + currencyType + earnday + guaranteed + payToOrderOf;
     }
 
     public byte[] getDrawerSignature() {

@@ -83,6 +83,7 @@ public class EChequeDB {
             }
             resultSet = s.executeQuery();
             result = resultSet.next();
+            
         } catch (SQLException ex) {
             Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -118,13 +119,26 @@ public class EChequeDB {
 
     public Object runReturnQuery(String statement, Object... objects) {
         Object obj = null;
-        boolean flag = runQuery(statement, objects);
-        if (flag) {
-            try {
-                obj = resultSet.getObject(userName);
-            } catch (SQLException e) {
-                Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, e);
+        
+
+        try {
+            connectToDataBase();
+            PreparedStatement s = connection.prepareStatement(statement);
+            for (int i = 0; i < objects.length; i++) {
+                s.setObject(i + 1, objects[i]);
             }
+            resultSet = s.executeQuery();
+            
+            if(resultSet.next()){
+                obj = resultSet.getObject(1);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EChequeDB.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeDataBaseConnection();
         }
         return obj;
     }

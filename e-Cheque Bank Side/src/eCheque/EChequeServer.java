@@ -135,7 +135,7 @@ public class EChequeServer implements Runnable {
                 chqDB.runUpdate("Insert into eChequeIn(chequeID, accountID, balance) values( ? , ? , ? );", receivedCheque.getChequeNumber(), receivedCheque.getAccountNumber(), chequeMoney);
 
                 //report the deposit result
-                depositResult = "The cheque has been deposited in your account.\n" + "Your balance was incremented by" + receivedCheque.getMoney();
+                depositResult = "The cheque has been deposited in your account.\n" + "Your balance was incremented by " + receivedCheque.getMoney();
             }
         } catch (ClassCastException e) {
             depositResult = "Error reading balance.";
@@ -153,8 +153,13 @@ public class EChequeServer implements Runnable {
      */
     private void cancelCheque() throws IOException, ClassNotFoundException {
         ECheque receivedCheque = (ECheque) socketInputObject.readObject();
+        
+        EChequeDB chqDB = new EChequeDB();
 
-        if (new EChequeDB().runUpdate("insert into cancelledCheque (accountID,chequeID) values( ? , ? );",
+        if(chqDB.runQuery("Select * from cancelledCheque where accountID = ? and chequeID = ?;", receivedCheque.getAccountNumber(), receivedCheque.getChequeNumber())) {
+            socketOutputObject.writeObject("This cheque has already been cancelled.");
+            socketOutputObject.flush();
+        } else if (new EChequeDB().runUpdate("insert into cancelledCheque (accountID,chequeID) values( ? , ? );",
                 receivedCheque.getAccountNumber(), receivedCheque.getChequeNumber())) {
             socketOutputObject.writeObject("The cheque has been cancelled.");
             socketOutputObject.flush();

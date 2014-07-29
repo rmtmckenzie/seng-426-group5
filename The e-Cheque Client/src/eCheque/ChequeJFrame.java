@@ -681,7 +681,7 @@ public class ChequeJFrame extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Incorect passowrd", "User Error",
+                JOptionPane.showMessageDialog(null, "Incorrect password", "User Error",
                         JOptionPane.ERROR_MESSAGE);
             }
 

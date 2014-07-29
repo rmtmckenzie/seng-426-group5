@@ -170,6 +170,7 @@ public class EChequeClient implements Runnable {
         SocketOutputObject.flush();
         SocketOutputObject.writeInt(bankMode);
         SocketOutputObject.flush();
+        String confirmstring = "";
 
         switch (bankMode) {
             case MODE_REGISTER:
@@ -182,14 +183,13 @@ public class EChequeClient implements Runnable {
                 outObj.writeObject(registrationData);
                 outObj.close();
 
-                String confirm = "";
                 try {
-                	confirm = (String) SocketInputObject.readObject();
+                	confirmstring = (String) SocketInputObject.readObject();
                 } catch (EOFException exp) {
                 	JOptionPane.showMessageDialog(null, "Failed to read object.");
                 }
 
-                registrationState = confirm.equalsIgnoreCase("registration complete");
+                registrationState = confirmstring.equalsIgnoreCase("registration complete");
                 if (registrationState == false) {
                     // If the registration failed, then delete the config.epc file
                     JOptionPane.showMessageDialog(null, "Registration failed, please contact your bank for troubleshooting information.");
@@ -222,10 +222,17 @@ public class EChequeClient implements Runnable {
                 SocketOutputObject.writeObject(registrationData.getAccountNumber());
                 SocketOutputObject.flush();
                 JOptionPane.showMessageDialog(null, "Deposit information has been sent.");
+                confirmstring = (String)SocketInputObject.readObject();
+                JOptionPane.showMessageDialog(null, confirmstring, 
+                        "Deposit Result", JOptionPane.PLAIN_MESSAGE);
                 break;
             case MODE_CANCEL:
                 SocketOutputObject.writeObject(depositCheque);
                 SocketOutputObject.flush();
+                
+                confirmstring = (String)SocketInputObject.readObject();
+                JOptionPane.showMessageDialog(null, confirmstring,
+                        "Cancel Result", JOptionPane.PLAIN_MESSAGE);
                 break;
         }
     }
