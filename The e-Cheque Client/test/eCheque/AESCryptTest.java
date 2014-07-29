@@ -49,7 +49,7 @@ public class AESCryptTest {
 		} catch (Exception e) {
 			fail();
 		}
-		assertNotEquals(key1,key2);
+		assertNotSame(key1,key2);
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class AESCryptTest {
 		} catch (Exception e) {
 			fail();
 		}
-		assertNotEquals(key1,key2);
+		assertNotSame(key1,key2);
 	}
 
 	@Test

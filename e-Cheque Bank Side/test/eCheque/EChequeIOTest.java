@@ -41,7 +41,6 @@ public class EChequeIOTest {
 		eChequeToSave.setChequeNumber(chequeNumberVariable);
 		eChequeToSave.setGuaranteed(guaranteedVariable);
 		eChequeToSave.setEarnday(earndayVariable);
-		eChequeToSave.setBankSignature(banksignatureVariable);
 		eChequeToSave.setDrawerSignature(drawersiganureVariable);
 
 		eChequeToSave.saveCheque(eChequeFileName);
@@ -68,7 +67,6 @@ public class EChequeIOTest {
 			assertEquals(chequeNumberVariable, eChequeToLoad.getChequeNumber());
 			assertEquals(guaranteedVariable, eChequeToLoad.getGuaranteed());
 			assertEquals(earndayVariable, eChequeToLoad.getEarnday());
-			assertArrayEquals(banksignatureVariable, eChequeToLoad.getBankSignature());
 			assertArrayEquals(drawersiganureVariable, eChequeToLoad.getDrawerSignature());
 		}
 	}
